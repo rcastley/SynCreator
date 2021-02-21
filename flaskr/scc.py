@@ -1,0 +1,32 @@
+from flask import (
+    Blueprint, flash, g, redirect, render_template, request, url_for
+)
+from werkzeug.exceptions import abort
+
+from flaskr.auth import login_required
+from flaskr.db import get_db
+
+bp = Blueprint('scc', __name__)
+
+@bp.route('/')
+def index():
+    if g.user is None:
+        return redirect(url_for('auth.login'))
+#def index():
+#    db = get_db()
+#    condition = db.execute(
+#        'SELECT condition'
+#        ' FROM scc where id = 1'
+#    )
+#    return render_template('scc/index.html', condition=condition)
+
+
+@bp.route('/view/<string:username>')
+def view(username):
+    db = get_db()
+    condition = db.execute(
+        'SELECT condition'
+        ' FROM scc WHERE username = ?', (username, )
+    ).fetchone()
+    print(condition[0])
+    return render_template('scc/' + condition[0] + '.html')

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body class="text-center">   
+
+  <main class="form-signin">
+    <form method="post">
+      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      <label for="username" class="visually-hidden">Username</label>
+      <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
+      <label for="password" class="visually-hidden">Password</label>
+      <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+      <button class="w-100 btn btn-lg btn-primary" type="submit" value="Login">Login</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+    </form>
+  </main>
+{% endblock %}
+
