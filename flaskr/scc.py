@@ -36,4 +36,11 @@ def view(username):
         ' FROM scc WHERE username = ?', (username, )
     ).fetchone()
     print(condition[0])
-    return render_template('scc/' + condition[0] + '.html')
+    if condition[0] == "404":
+        body = render_template('scc/' + condition[0] + '.html')
+        return (body, 404)
+    elif condition[0] == "500":
+        body = render_template('scc/' + condition[0] + '.html')
+        return (body, 500)
+    else:
+        return render_template('scc/' + condition[0] + '.html')
