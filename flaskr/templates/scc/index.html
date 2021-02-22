@@ -25,7 +25,7 @@
         {% set newkey = key|lower|replace(' ', '') %}
         <div class="col">
           <a class="text-decoration-none" href="set/{{ newkey }}">
-          <div class="card shadow-sm {% if condition[0] == newkey %}bg-splunk{% endif %}">
+          <div class="card shadow-sm {% if condition[0] == newkey %}bg-splunk{% else %}bg-splunk-white{% endif %}">
             <div class="card-body">
               <h5 class="card-title"><i class="fas fa-{{ value }}"></i></h5>
               <p class="card-text">{{ key }}</p>
