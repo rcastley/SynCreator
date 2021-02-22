@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% set conditions = {'Default Page': 'check', '404': 'exclamation-circle', '500': 'exclamation-triangle',
+{% set conditions = {'Default': 'check', '404': 'exclamation-circle', '500': 'exclamation-triangle',
                      'Validation Error': 'check', 'CSS Error': 'bug', 'JavaScript Error': 'bug',
                      'Content Delay': 'hourglass-start', 'Timeout': 'hourglass-end', 'Cookies': 'cookie-bite'} %}
 
@@ -22,15 +22,16 @@
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
         {% for key, value in conditions.items() %}
+        {% set newkey = key|lower|replace(' ', '') %}
         <div class="col">
-          <a class="text-decoration-none" href="set/{{ key }}">
-          <div class="card shadow-sm {% if condition[0] == key %}bg-splunk{% endif %}">
+          <a class="text-decoration-none" href="set/{{ newkey }}">
+          <div class="card shadow-sm {% if condition[0] == newkey %}bg-splunk{% endif %}">
             <div class="card-body">
               <h5 class="card-title"><i class="fas fa-{{ value }}"></i></h5>
               <p class="card-text">{{ key }}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm {% if condition[0] != key %}btn-outline-secondary{% elif condition[0] == key%}btn-light{% endif %}">Use Condition</button>
+                  <button type="button" class="btn btn-sm {% if condition[0] != newkey %}btn-outline-secondary{% elif condition[0] == newkey %}btn-light{% endif %}">Use Condition</button>
                 </div>
               </div>
             </div>
