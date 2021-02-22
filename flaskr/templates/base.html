@@ -1,18 +1,18 @@
 <!doctype html>
-<html>
+<html lang="en"> 
   <head>
-    <title>{% block title %}{% endblock %} - Site Condition Creator</title>
+    <title>Site Condition Creator - Splunk</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}"  media="screen"/>
     {% if not g.user %}
     <link href="{{ url_for('static', filename='auth.css') }}" rel="stylesheet">
     {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
-  <body>
+  <body class="text-center">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='splunk_logo.png') }}" height="30" /></a>
+        <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='splunk_logo.png') }}" height="30" alt="Splunk Logo" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,7 +20,6 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             {% if g.user %}
-            <!--<li class="nav-item"><span class="navbar-text">{{ g.user['username'] }}</span></li>-->
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{{ url_for('auth.logout') }}"">Logout</a>
             </li>
@@ -28,11 +27,8 @@
           </ul>
         </div>
       </div>
-    </nav>
-
-      {% block header %}{% endblock %}
-      
-      {% block content %}{% endblock %}
-    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+    </nav>    
+    {% block content %}{% endblock %}
+    <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
   </body>
 </html>

@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<body class="text-center">   
-
+{% block content %} 
   <main class="form-signin">
     <form method="post">
       {% for message in get_flashed_messages() %}
