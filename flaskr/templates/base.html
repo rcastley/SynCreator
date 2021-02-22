@@ -24,13 +24,6 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{{ url_for('auth.logout') }}"">Logout</a>
             </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-            </li>
             {% endif %}
           </ul>
         </div>
@@ -39,9 +32,6 @@
 
       {% block header %}{% endblock %}
       
-      {% for message in get_flashed_messages() %}
-      <div class="flash">{{ message }}</div>
-      {% endfor %}
       {% block content %}{% endblock %}
     <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
   </body>
