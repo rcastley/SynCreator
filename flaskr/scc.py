@@ -6,6 +6,8 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
+import time 
+
 bp = Blueprint('scc', __name__)
 
 @bp.route('/')
@@ -55,6 +57,9 @@ def view(username):
     elif condition[0] == "500":
         body = render_template('scc/' + condition[0] + '.html')
         return (body, 500)
+    elif condition[0] == "timeout":
+        time.sleep(60)
+        return render_template('scc/' + condition[0] + '.html')
     else:
         return render_template('scc/' + condition[0] + '.html')
 
