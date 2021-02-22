@@ -6,8 +6,13 @@
     <p>The test is looking for this phrase: Hello, World!<br/>As long as this is detected then the measurement will complete.</p>
     <hr>
     <h4>Selenium Code</h4>
-    
-    
+
+<div class="panel-body" id="lorem"></div>
+
+<script type="text/javascript">
+    setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#lorem').html(data);}});", 4000);
+</script>
+
     <p class="selenium-code">open('{{ request.url }}')<br/>
     AssertTextPresent('Hello, World!')</p>
 </div>

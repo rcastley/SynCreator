@@ -57,3 +57,8 @@ def view(username):
         return (body, 500)
     else:
         return render_template('scc/' + condition[0] + '.html')
+
+
+@bp.route('/lorem')
+def lorem():
+    return render_template('scc/lorem.html')
