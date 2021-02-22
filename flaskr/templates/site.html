@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>500 Error - Site Condition Creator</title>
+    <title>TestPage - Site Condition Creator</title>
     <!-- Bootstrap core CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}"  media="screen"/>
     <meta name="theme-color" content="#7952b3">
     <style>
       .bd-placeholder-img {
@@ -25,22 +25,22 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='cover.css') }}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='cover.css') }}"  media="screen"/>
   </head>
   <body class="d-flex h-100 text-center text-white bg-dark">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <header class="mb-auto">
         <div>
-          <img src="{{ url_for('static', filename='splunk_logo.png') }}" class="float-md-start mb-0" height="30" />
+          <img src="{{ url_for('static', filename='splunk_logo.png') }}" class="float-md-start mb-0" height="30" alt="Splunk Logo" />
         </div>
       </header>
       <main class="px-3">
       {% block content %}{% endblock %}
       </main>
       <footer class="mt-auto text-white-50">
-        <p>&copy Splunk 2021</p>
+        <p>&copy; Splunk 2021</p>
       </footer>
     </div>
-    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>  
+    <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>  
   </body>
 </html>
