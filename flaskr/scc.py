@@ -16,7 +16,7 @@ def index():
         db = get_db()
         condition = db.execute(
         'SELECT condition'
-        ' FROM scc where username = ?', (g.user['username'], )
+        ' FROM scc WHERE username = ?', (g.user['username'], )
         ).fetchone()
         return render_template('scc/index.html', condition=condition)
 #def index():
@@ -27,7 +27,21 @@ def index():
 #    )
 #    return render_template('scc/index.html', condition=condition)
 
-
+@bp.route('/set/<string:condition>')
+def set(condition):
+    if g.user is None:
+        return redirect(url_for('auth.login'))
+    else:
+        db = get_db()
+        db.execute(
+            'UPDATE scc'
+            ' SET condition = ? WHERE username = ?',
+            (condition, g.user['username'])
+        )
+        db.commit()
+        return redirect(url_for('index'))
+    
+    
 @bp.route('/view/<string:username>')
 def view(username):
     db = get_db()
@@ -35,7 +49,6 @@ def view(username):
         'SELECT condition'
         ' FROM scc WHERE username = ?', (username, )
     ).fetchone()
-    print(condition[0])
     if condition[0] == "404":
         body = render_template('scc/' + condition[0] + '.html')
         return (body, 404)
