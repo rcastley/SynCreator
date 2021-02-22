@@ -12,6 +12,13 @@ bp = Blueprint('scc', __name__)
 def index():
     if g.user is None:
         return redirect(url_for('auth.login'))
+    else:
+        db = get_db()
+        condition = db.execute(
+        'SELECT condition'
+        ' FROM scc where username = ?', (g.user['username'], )
+        ).fetchone()
+        return render_template('scc/index.html', condition=condition)
 #def index():
 #    db = get_db()
 #    condition = db.execute(
