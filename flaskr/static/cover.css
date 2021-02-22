@@ -1,7 +1,10 @@
 /*
  * Globals
  */
-
+p.selenium-code {
+    text-align: left;
+    color:brown;
+}
 
 /* Custom default button */
 .btn-secondary,
