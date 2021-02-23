@@ -1,0 +1,15 @@
+{% extends 'site.html' %}
+
+{% block content %}
+<h1 class="mt-5">Content Error</h1>
+<p class="lead">The test is looking for this phrase: Hello, World!</p>
+<p>As long as this is detected then the measurement will complete.</p>
+<p>Two <code class="small">iframes</code> are embedded in the page, however one is invalid and will generate a content error.</p>
+<hr>
+<h4 class="mt-4">Selenium Code</h4>
+<code class="small">open('{{ request.url }}')<br/>
+AssertTextPresent('Hello, World!')</code>
+<hr>
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/e-ORhEE9VVg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="1280" height="720" src="https://www.youtue.com/embed/fJ9rUzIMc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% endblock %}
