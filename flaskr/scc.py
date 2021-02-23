@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, make_response
 )
 from werkzeug.exceptions import abort
 
@@ -46,14 +46,18 @@ def view(username):
         ' FROM scc WHERE username = ?', (username, )
     ).fetchone()
     if condition[0] == "404":
-        body = render_template('scc/' + condition[0] + '.html', condition=condition)
-        return (body, 404)
+        resp = render_template('scc/' + condition[0] + '.html', condition=condition)
+        return (resp, 404)
     elif condition[0] == "500":
-        body = render_template('scc/' + condition[0] + '.html', condition=condition)
-        return (body, 500)
+        resp = render_template('scc/' + condition[0] + '.html', condition=condition)
+        return (resp, 500)
     elif condition[0] == "timeout":
         time.sleep(60)
         return render_template('scc/' + condition[0] + '.html', condition=condition)
+    elif condition[0] == "cookies":
+        resp = make_response(render_template('scc/' + condition[0] + '.html', condition=condition))
+        resp.set_cookie('SplunkSynthetic', 'abc123')
+        return resp
     else:
         return render_template('scc/' + condition[0] + '.html', condition=condition)
 
