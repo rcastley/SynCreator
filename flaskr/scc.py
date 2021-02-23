@@ -21,13 +21,7 @@ def index():
         ' FROM scc WHERE username = ?', (g.user['username'], )
         ).fetchone()
         return render_template('scc/index.html', condition=condition)
-#def index():
-#    db = get_db()
-#    condition = db.execute(
-#        'SELECT condition'
-#        ' FROM scc where id = 1'
-#    )
-#    return render_template('scc/index.html', condition=condition)
+
 
 @bp.route('/set/<string:condition>')
 def set(condition):
@@ -52,16 +46,16 @@ def view(username):
         ' FROM scc WHERE username = ?', (username, )
     ).fetchone()
     if condition[0] == "404":
-        body = render_template('scc/' + condition[0] + '.html')
+        body = render_template('scc/' + condition[0] + '.html', condition=condition)
         return (body, 404)
     elif condition[0] == "500":
-        body = render_template('scc/' + condition[0] + '.html')
+        body = render_template('scc/' + condition[0] + '.html', condition=condition)
         return (body, 500)
     elif condition[0] == "timeout":
         time.sleep(60)
-        return render_template('scc/' + condition[0] + '.html')
+        return render_template('scc/' + condition[0] + '.html', condition=condition)
     else:
-        return render_template('scc/' + condition[0] + '.html')
+        return render_template('scc/' + condition[0] + '.html', condition=condition)
 
 
 @bp.route('/lorem')

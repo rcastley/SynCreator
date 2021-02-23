@@ -1,19 +1,17 @@
 {% extends 'site.html' %}
 
 {% block content %}
-<div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">Content Delay</h4>
-    <p>The test is looking for this phrase: Hello, World!<br/>As long as this is detected then the measurement will complete.</p>
-    <hr>
-    <h4>Selenium Code</h4>
+<h1 class="mt-5">Default Page</h1>
+<p class="lead">The test is looking for this phrase: <b>Lorem ipsum</b></p>
+<p>There is a content loading delay and when detected the measurement will complete.</p>
+<hr>
+<h4 class="mt-4">Selenium Code</h4>
+<code class="small">open('{{ request.url }}')<br/>
+AssertTextPresent('Lorem ipsum')</code>
+<hr/>
+<div id="lorem"></div>
 
-<div class="panel-body" id="lorem"></div>
-
-<script type="text/javascript">
-    setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#lorem').html(data);}});", 4000);
+<script>
+    setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#lorem').html(data);}});", 5000);
 </script>
-
-    <p class="selenium-code">open('{{ request.url }}')<br/>
-    AssertTextPresent('Hello, World!')</p>
-</div>
 {% endblock %}

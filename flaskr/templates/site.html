@@ -25,20 +25,38 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/cover.css') }}"  media="screen"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}"  media="screen"/>
   </head>
-  <body class="d-flex h-100 text-center text-white bg-dark">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <header class="mb-auto">
-        <div>
-          <img src="{{ url_for('static', filename='img/splunk_logo.png') }}" class="float-md-start mb-0" height="30" alt="Splunk Logo" />
-        </div>
+  <body class="d-flex flex-column h-100">
+      <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img src="{{ url_for('static', filename='img/splunk_logo.png') }}" class="float-md-start mb-0" height="30" alt="Splunk Logo" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Condition: {{ condition[0]|upper }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
       </header>
-      <main class="px-3">
-      {% block content %}{% endblock %}
+      <main class="flex-shrink-0">
+        <div class="container">
+          {% block content %}{% endblock %}
+        </div>
       </main>
-      <footer class="mt-auto text-white-50">
-        <p>&copy; Splunk 2021</p>
+      <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+          <span class="text-muted">&copy; Splunk 2021</span>
+        </div>
       </footer>
     </div>
     <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>

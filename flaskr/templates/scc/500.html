@@ -1,18 +1,10 @@
 {% extends 'site.html' %}
 
 {% block content %}
-<div class="alert alert-danger" role="alert">
-    <h4 class="alert-heading">#500 Error</h4>
-    <h1>Application Error</h1>
-		<p>The server encountered an internal error or misconfiguration and
-			was unable to complete your request.</p>
-		<p>Please contact the server administrator, admin@example.com and
-			inform them of the time the error occurred, and anything you might
-			have done that may have caused the error.</p>
-		<p>More information about this error may be available in the server
-			error log.</p>
-    <hr>
-    <p>Additionally, a 500 Internal Server Error error was encountered
-			while trying to use an ErrorDocument to handle the request.</p>
-  </div>
+<h1 class="mt-5">#500 Error</h1>
+<h2 class="mt-2">Application Error</h2>
+<p class="lead">The server encountered an internal error or misconfiguration and was unable to complete your request.</p>
+<p>Please contact the server administrator, admin@example.com and inform them of the time the error occurred, and anything you might have done that may have caused the error.</p>
+<p>More information about this error may be available in the server error log.</p>
+<p>Additionally, a 500 Internal Server Error error was encountered while trying to use an ErrorDocument to handle the request.</p>
 {% endblock %}

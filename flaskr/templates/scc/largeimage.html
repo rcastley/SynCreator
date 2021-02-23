@@ -1,15 +1,13 @@
 {% extends 'site.html' %}
 
 {% block content %}
-<div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">Large Image</h4>
-    <img src="{{ url_for('static', filename='img/world.jpg') }}" width="540" alt="World" />
-    <p>The test is looking for this phrase: Hello, World!<br/>As long as this is detected then the measurement will complete.</p>
-    <hr>
-    <h4>Selenium Code</h4>
-    
-    
-    <p class="selenium-code">open('{{ request.url }}')<br/>
-    AssertTextPresent('Hello, World!')</p>
-</div>
+<h1 class="mt-5">Large Image</h1>
+<p class="lead">The test is looking for this phrase: Hello, World!</p>
+<p>As long as this is detected then the measurement will complete.</p>
+<hr>
+<h4 class="mt-4">Selenium Code</h4>
+<code class="small">open('{{ request.url }}')<br/>
+AssertTextPresent('Hello, World!')</code>
+<hr/>
+<img src="{{ url_for('static', filename='img/world.jpg') }}" width="540" alt="World" />
 {% endblock %}
