@@ -4,12 +4,12 @@
 <h1 class="mt-5">Content Error</h1>
 <p class="lead">The test is looking for this phrase: Hello, World!</p>
 <p>As long as this is detected then the measurement will complete.</p>
-<p>Two <code class="small">iframes</code> are embedded in the page, however one is invalid and will generate a content error.</p>
+<p>A <code class="small">img</code> tag is embedded in the page, however the URL is invalid and will generate a content error.</p>
 <hr>
 <h4 class="mt-4">Selenium Code</h4>
 <code class="small">open('{{ request.url }}')<br/>
 AssertTextPresent('Hello, World!')</code>
 <hr>
 <iframe width="1280" height="720" src="https://www.youtube.com/embed/e-ORhEE9VVg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<iframe width="1280" height="720" src="https://www.youtue.com/embed/fJ9rUzIMc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<img src="https://media.wired.com/photos/5a93a7ff11e325008172bc2/master/w_2560%2Cc_limit/pulsar.jpg" width="1280" height="720" />
 {% endblock %}
