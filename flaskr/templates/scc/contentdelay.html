@@ -1,17 +1,59 @@
 {% extends 'site.html' %}
-
+{% set url_split = request.url.split('/') %}
 {% block content %}
 <h1 class="mt-5">Content Delay</h1>
 <p class="lead">The test is looking for this phrase: <b>Lorem ipsum</b></p>
 <p>There is a content loading delay of 5 seconds the measurement will complete when the phrase is detected</p>
+<hr/>
+<div id="lorem"><i>Waiting for text ...</i></div>
 <hr>
 <h4 class="mt-4">Selenium Code</h4>
-<code class="small">open('{{ request.url }}')<br/>
-AssertTextPresent('Lorem ipsum')</code>
-<hr/>
-<div id="lorem"></div>
-
+<pre id="selenium_json"></pre>
 <script>
-    setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#lorem').html(data);}});", 5000);
+data = {
+   "version":"1.1",
+   "name":"SynCreator",
+   "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
+   "urls":[
+      "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/"
+   ],
+   "tests":[
+      {
+         "name":"SynCreator",
+         "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
+         "commands":[
+            {
+               "command":"open",
+               "target":"/{{ url_split[3] }}/{{ url_split[4] }}",
+               "value":"",
+               "comment":""
+            },
+            {
+               "command":"setWindowSize",
+               "target":"1366x768",
+               "value":"",
+               "comment":""
+            },
+            {
+               "comment":"Phrase Check",
+               "command":"executeScript",
+               "target":"var searchText = 'Lorem ipsum'; var isTextPresent = document.documentElement.innerHTML.includes(searchText); if (isTextPresent != true) { var message = 'Assert text present failed: ' + searchText; throw(new Error(message)); }",
+               "value":"10000"
+            }
+         ]
+      }
+   ],
+   "suites":[
+      {
+         "name":"SynCreator",
+         "tests":[
+         ]         
+      }
+   ]
+}
+
+document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
+
+setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#lorem').html(data);}});", 5000);
 </script>
 {% endblock %}
