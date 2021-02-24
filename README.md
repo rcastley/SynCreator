@@ -27,6 +27,8 @@ Open http://localhost:8080 in a browser.
 $ ssh ubuntu@<insertyourip>
 $ sudo apt update
 $ sudo apt-get install python3-venv
+$ git clone https://github.com/rcastley/SynCreator.git
+$ cd SynCreator
 $ python3 -m venv venv
 $ . venv/bin/activate
 $ pip3 install -e .
