@@ -11,7 +11,7 @@ $ export FLASK_ENV=development
 $ flask init-db
 $ flask run -h 0.0.0.0 -p 8080
 ```
-Open http://localhost:8080 in a browser.
+Open `http://localhost:8080` in a browser.
 
 # Installation on AWS Free Tier
 ```
@@ -27,7 +27,7 @@ Open http://localhost:8080 in a browser.
 $ ssh ubuntu@<insertyourip>
 $ sudo apt update
 $ sudo apt-get install python3-venv
-$ git clone https://github.com/rcastley/SynCreator.git
+$ git clone https://github.com/rcastley/SynCreator
 $ cd SynCreator
 $ python3 -m venv venv
 $ . venv/bin/activate
@@ -37,4 +37,4 @@ $ export FLASK_ENV=development
 $ flask init-db
 $ flask run -h 0.0.0.0 -p 8080
 ```
-Open http://<insertyourip>:8080 in a browser.
+Open `http://<insertyourip>:8080` in a browser.
