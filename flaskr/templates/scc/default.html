@@ -10,14 +10,14 @@
 <script>
 data = {
    "version":"1.1",
-   "name":"SynCreator",
+   "name":"SCC - Default Page",
    "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
    "urls":[
       "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/"
    ],
    "tests":[
       {
-         "name":"SynCreator",
+         "name":"SCC - Default Page",
          "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
          "commands":[
             {
@@ -43,12 +43,13 @@ data = {
    ],
    "suites":[
       {
-         "name":"SynCreator",
+         "name":"SCC - Default Page",
          "tests":[
          ]         
       }
    ]
 }
 
-document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);</script>
+document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
+</script>
 {% endblock %}
