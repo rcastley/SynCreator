@@ -5,9 +5,21 @@
 <p class="lead">The test is looking for this phrase: Hello, World!</p>
 <p>There is a very large image being loaded on this page and the measurement will complete when the phrase is detected</p>
 <hr>
-<h4 class="mt-4">Selenium Code</h4>
-<pre id="selenium_json"></pre>
-<hr/>
+<div class="accordion" id="accordionExample">
+   <div class="accordion-item">
+       <h2 class="accordion-header" id="headingTwo">
+           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+           Selenium Script
+           </button>
+       </h2>
+       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+           <div class="accordion-body">
+               <pre id="selenium_json"></pre>
+           </div>
+       </div>
+   </div>
+</div>
+<br/>
 <img src="{{ url_for('static', filename='img/world.jpg') }}" width="540" alt="World" />
 <script>
 data = {

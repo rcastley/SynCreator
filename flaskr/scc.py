@@ -52,7 +52,7 @@ def view(username):
         resp = render_template('scc/' + condition[0] + '.html', condition=condition)
         return (resp, 500)
     elif condition[0] == "timeout":
-        time.sleep(60)
+        time.sleep(62)
         return render_template('scc/' + condition[0] + '.html', condition=condition)
     elif condition[0] == "cookies":
         resp = make_response(render_template('scc/' + condition[0] + '.html', condition=condition))

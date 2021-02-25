@@ -5,21 +5,33 @@
 <p class="lead">The test is looking for this phrase: <b>Lorem ipsum</b></p>
 <p>There is a content loading delay of 5 seconds the measurement will complete when the phrase is detected</p>
 <hr/>
+<div class="accordion" id="accordionExample">
+   <div class="accordion-item">
+       <h2 class="accordion-header" id="headingTwo">
+           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+           Selenium Script
+           </button>
+       </h2>
+       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+           <div class="accordion-body">
+               <pre id="selenium_json"></pre>
+           </div>
+       </div>
+   </div>
+</div>
+<br/>
 <div id="lorem"><i>Waiting for text ...</i></div>
-<hr>
-<h4 class="mt-4">Selenium Code</h4>
-<pre id="selenium_json"></pre>
 <script>
 data = {
    "version":"1.1",
-   "name":"SynCreator",
+   "name":"SCC - Content Delay",
    "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
    "urls":[
       "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/"
    ],
    "tests":[
       {
-         "name":"SynCreator",
+         "name":"SCC - Content Delay",
          "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
          "commands":[
             {
@@ -45,7 +57,7 @@ data = {
    ],
    "suites":[
       {
-         "name":"SynCreator",
+         "name":"SCC - Content Delay",
          "tests":[
          ]         
       }

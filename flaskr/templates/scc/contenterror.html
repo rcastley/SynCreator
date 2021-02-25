@@ -1,15 +1,71 @@
 {% extends 'site.html' %}
-
+{% set url_split = request.url.split('/') %}
 {% block content %}
 <h1 class="mt-5">Content Error</h1>
 <p class="lead">The test is looking for this phrase: Hello, World!</p>
 <p>As long as this is detected then the measurement will complete.</p>
-<p>A <code class="small">img</code> tag is embedded in the page, however the URL is invalid and will generate a content error.</p>
+<p>A <code class="small">img</code> tag is embedded in the page, however the URL is invalid and will generate a 404 in the waterfall.</p>
 <hr>
-<h4 class="mt-4">Selenium Code</h4>
-<code class="small">open('{{ request.url }}')<br/>
-AssertTextPresent('Hello, World!')</code>
-<hr>
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Selenium Script
+            </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <pre id="selenium_json"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
 <iframe width="1280" height="720" src="https://www.youtube.com/embed/e-ORhEE9VVg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <img src="https://media.wired.com/photos/5a93a7ff11e325008172bc2/master/w_2560%2Cc_limit/pulsar.jpg" width="1280" height="720" alt="Pulsar" />
+<script>
+    data = {
+       "version":"1.1",
+       "name":"SCC - Content Error",
+       "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
+       "urls":[
+          "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/"
+       ],
+       "tests":[
+          {
+             "name":"SCC - Content Error",
+             "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
+             "commands":[
+                {
+                   "command":"open",
+                   "target":"/{{ url_split[3] }}/{{ url_split[4] }}",
+                   "value":"",
+                   "comment":""
+                },
+                {
+                   "command":"setWindowSize",
+                   "target":"1366x768",
+                   "value":"",
+                   "comment":""
+                },
+                {
+                   "comment":"Phrase Check",
+                   "command":"executeScript",
+                   "target":"var searchText = 'Hello, World!'; var isTextPresent = document.documentElement.innerHTML.includes(searchText); if (isTextPresent != true) { var message = 'Assert text present failed: ' + searchText; throw(new Error(message)); }",
+                   "value":"10000"
+                }
+             ]
+          }
+       ],
+       "suites":[
+          {
+             "name":"SCC - Content Error",
+             "tests":[
+             ]         
+          }
+       ]
+    }
+    
+    document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
+</script>
 {% endblock %}
