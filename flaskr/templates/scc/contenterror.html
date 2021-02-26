@@ -24,48 +24,42 @@
 <iframe width="1280" height="720" src="https://www.youtube.com/embed/e-ORhEE9VVg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <img src="https://media.wired.com/photos/5a93a7ff11e325008172bc2/master/w_2560%2Cc_limit/pulsar.jpg" width="1280" height="720" alt="Pulsar" />
 <script>
-    data = {
-       "version":"1.1",
-       "name":"SCC - Content Error",
-       "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
-       "urls":[
-          "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/"
-       ],
-       "tests":[
-          {
-             "name":"SCC - Content Error",
-             "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
-             "commands":[
-                {
-                   "command":"open",
-                   "target":"/{{ url_split[3] }}/{{ url_split[4] }}",
-                   "value":"",
-                   "comment":""
-                },
-                {
-                   "command":"setWindowSize",
-                   "target":"1366x768",
-                   "value":"",
-                   "comment":""
-                },
-                {
-                   "comment":"Phrase Check",
-                   "command":"executeScript",
-                   "target":"var searchText = 'Hello, World!'; var isTextPresent = document.documentElement.innerHTML.includes(searchText); if (isTextPresent != true) { var message = 'Assert text present failed: ' + searchText; throw(new Error(message)); }",
-                   "value":"10000"
-                }
-             ]
-          }
-       ],
-       "suites":[
-          {
-             "name":"SCC - Content Error",
-             "tests":[
-             ]         
-          }
-       ]
-    }
-    
-    document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
+data = {
+   "version":"1.1",
+   "name":"SCC - Content Error",
+   "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
+   "urls":[
+      "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/"
+   ],
+   "tests":[
+      {
+         "name":"SCC - Content Error",
+         "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
+         "commands":[
+            {
+               "command":"open",
+               "target":"/{{ url_split[3] }}/{{ url_split[4] }}",
+               "value":"",
+               "comment":""
+            },
+            {
+               "comment":"Phrase Check",
+               "command":"executeScript",
+               "target":"var searchText = 'Hello, World!'; var isTextPresent = document.documentElement.innerHTML.includes(searchText); if (isTextPresent != true) { var message = 'Assert text present failed: ' + searchText; throw(new Error(message)); }",
+               "value":"10000"
+            }
+         ]
+      }
+   ],
+   "suites":[
+      {
+         "name":"SCC - Content Error",
+         "tests":[
+         ]         
+      }
+   ]
+}
+
+document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
 </script>
 {% endblock %}

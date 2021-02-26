@@ -2,7 +2,7 @@
 {% set url_split = request.url.split('/') %}
 {% block content %}
 <h1 class="mt-5">Default Page</h1>
-<p class="lead">The test is looking for this phrase: Hello, World!</p>
+<p class="lead">The test is looking for this DOM ID <b>lorem</b></p>
 <p>As long as this is detected then the measurement will complete.</p>
 <hr>
 <div class="accordion" id="accordionExample">
@@ -19,6 +19,8 @@
         </div>
     </div>
 </div>
+<br/>
+<div id="lorem"></div>
 <script>
 data = {
    "version":"1.1",
@@ -39,15 +41,9 @@ data = {
                "comment":""
             },
             {
-               "command":"setWindowSize",
-               "target":"1366x768",
-               "value":"",
-               "comment":""
-            },
-            {
-               "comment":"Phrase Check",
-               "command":"executeScript",
-               "target":"var searchText = 'Hello, World!'; var isTextPresent = document.documentElement.innerHTML.includes(searchText); if (isTextPresent != true) { var message = 'Assert text present failed: ' + searchText; throw(new Error(message)); }",
+               "comment":"Check Phrase",
+               "command":"waitForElementPresent",
+               "target":"id=lorem",
                "value":"10000"
             }
          ]
@@ -63,5 +59,7 @@ data = {
 }
 
 document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
+
+setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#lorem').html(data);}});", 0);
 </script>
 {% endblock %}

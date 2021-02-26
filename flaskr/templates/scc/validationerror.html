@@ -2,22 +2,36 @@
 {% set url_split = request.url.split('/') %}
 {% block content %}
 <h1 class="mt-5">Validation Error</h1>
-<p class="lead">The AssertTextPresent phrase is missing from this page.</p>
+<p class="lead">The Wait for element present DOM ID is missing from this page.</p>
 <p>This will generate an error and the measurement will fail.</p>
 <hr>
-<h4 class="mt-4">Selenium Code</h4>
-<pre id="selenium_json"></pre>
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Selenium Script
+            </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <pre id="selenium_json"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div id="missing"></div>
 <script>
 data = {
    "version":"1.1",
-   "name":"SynCreator",
+   "name":"SCC - Validation Error",
    "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
    "urls":[
       "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/"
    ],
    "tests":[
       {
-         "name":"SynCreator",
+         "name":"SCC - Validation Error",
          "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
          "commands":[
             {
@@ -27,15 +41,9 @@ data = {
                "comment":""
             },
             {
-               "command":"setWindowSize",
-               "target":"1366x768",
-               "value":"",
-               "comment":""
-            },
-            {
-               "comment":"Phrase Check",
-               "command":"executeScript",
-               "target":"var searchText = 'Lorem ipsum'; var isTextPresent = document.documentElement.innerHTML.includes(searchText); if (isTextPresent != true) { var message = 'Assert text present failed: ' + searchText; throw(new Error(message)); }",
+               "comment":"Check Phrase",
+               "command":"waitForElementPresent",
+               "target":"id=lorem",
                "value":"10000"
             }
          ]
@@ -43,12 +51,15 @@ data = {
    ],
    "suites":[
       {
-         "name":"SynCreator",
+         "name":"SCC - Validation Error",
          "tests":[
          ]         
       }
    ]
 }
 
-document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);</script>
+document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
+
+setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#missing').html(data);}});", 0);
+</script>
 {% endblock %}

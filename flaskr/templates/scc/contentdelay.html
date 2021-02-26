@@ -2,8 +2,8 @@
 {% set url_split = request.url.split('/') %}
 {% block content %}
 <h1 class="mt-5">Content Delay</h1>
-<p class="lead">The test is looking for this phrase: <b>Lorem ipsum</b></p>
-<p>There is a content loading delay of 5 seconds the measurement will complete when the phrase is detected</p>
+<p class="lead">The test is looking for this DOM ID <b>lorem</b></p>
+<p>There is a content loading delay of 5 seconds the measurement will complete when the ID is detected</p>
 <hr/>
 <div class="accordion" id="accordionExample">
    <div class="accordion-item">
@@ -41,15 +41,9 @@ data = {
                "comment":""
             },
             {
-               "command":"setWindowSize",
-               "target":"1366x768",
-               "value":"",
-               "comment":""
-            },
-            {
-               "comment":"Phrase Check",
-               "command":"executeScript",
-               "target":"var searchText = 'Lorem ipsum'; var isTextPresent = document.documentElement.innerHTML.includes(searchText); if (isTextPresent != true) { var message = 'Assert text present failed: ' + searchText; throw(new Error(message)); }",
+               "comment":"Check Phrase",
+               "command":"waitForElementPresent",
+               "target":"id=lorem",
                "value":"10000"
             }
          ]
