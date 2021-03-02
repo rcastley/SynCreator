@@ -2,8 +2,8 @@
 {% set url_split = request.url.split('/') %}
 {% block content %}
 <h1 class="mt-5">Large Image</h1>
-<p class="lead">The test is looking for this phrase: Hello, World!</p>
-<p>There is a very large image being loaded on this page and the measurement will complete when the phrase is detected</p>
+<p class="lead">The test is looking for this DOM ID <b>ajax-div</b></p>
+<p>There is a very large image being loaded on this page and the measurement will complete when the DOM ID is detected</p>
 <hr>
 <div class="accordion" id="accordionExample">
    <div class="accordion-item">
@@ -20,7 +20,9 @@
    </div>
 </div>
 <br/>
-<img src="{{ url_for('static', filename='img/world.jpg') }}" width="540" alt="World" />
+<div id="ajax-div">
+   <img src="{{ url_for('static', filename='img/world.jpg') }}" width="540" alt="World" />
+</div>
 <script>
 data = {
    "version":"1.1",
@@ -47,9 +49,9 @@ data = {
                "comment":""
             },
             {
-               "comment":"Phrase Check",
-               "command":"executeScript",
-               "target":"var searchText = 'Hello, World!'; var isTextPresent = document.documentElement.innerHTML.includes(searchText); if (isTextPresent != true) { var message = 'Assert text present failed: ' + searchText; throw(new Error(message)); }",
+               "comment":"Check Phrase",
+               "command":"waitForElementPresent",
+               "target":"id=ajax-div",
                "value":"10000"
             }
          ]
@@ -63,7 +65,5 @@ data = {
       }
    ]
 }
-
-document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
 </script>
 {% endblock %}
