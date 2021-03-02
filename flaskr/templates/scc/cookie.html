@@ -39,12 +39,6 @@ data = {
                "comment":""
             },
             {
-               "command":"setWindowSize",
-               "target":"1366x768",
-               "value":"",
-               "comment":""
-            },
-            {
                "comment":"Phrase Check",
                "command":"executeScript",
                "target":"var searchText = 'Hello, World!'; var isTextPresent = document.documentElement.innerHTML.includes(searchText); if (isTextPresent != true) { var message = 'Assert text present failed: ' + searchText; throw(new Error(message)); }",
