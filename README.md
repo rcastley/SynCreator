@@ -15,7 +15,9 @@ $ flask init-db
 $ nohup flask run -h 0.0.0.0 -p 8080 > log.txt 2>&1 &
 ```
 Open http://localhost:8080 in a browser to use the SynCreator app to simulate conditions.
+
 To stop the app press `ctrl+c` in your terminal to quit or just close the terminal.
+
 The `venv` environment will persist at rest until you delete the venv file.
 
 ## Installation on AWS Free Tier
@@ -43,5 +45,7 @@ $ flask init-db
 $ nohup flask run -h 0.0.0.0 -p 8080 > log.txt 2>&1 &
 ```
 Open `http://\<insertyourip\>:8080` in a browser.
+
 To stop the app press `ctrl-c` in your terminal to quit or just close the terminal.
+
 The `venv` environment will persist at rest until you delete the venv file.
