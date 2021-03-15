@@ -7,7 +7,7 @@ $ git clone https://github.com/rcastley/SynCreator
 $ cd SynCreator
 $ python3 -m venv venv
 # On a Raspberry Pi run pip3 install wheel
-$ . venv/bin/activatepip3
+$ . venv/bin/activate
 $ pip3 install -e .
 $ export FLASK_APP=flaskr
 $ export FLASK_ENV=development
