@@ -6,17 +6,15 @@
 $ git clone https://github.com/rcastley/SynCreator
 $ cd SynCreator
 $ python3 -m venv venv
+$ . venv/bin/activate
 # On a Raspberry Pi run pip3 install wheel
-$ . venv/bin/activatepip3
 $ pip3 install -e .
+$ pip3 install waitress
 $ export FLASK_APP=flaskr
-$ export FLASK_ENV=development
 $ flask init-db
-$ nohup flask run -h 0.0.0.0 -p 8080 > log.txt 2>&1 &
+$ nohup waitress-serve --call 'flaskr:create_app' > log.txt 2>&1 &
 ```
 Open http://localhost:8080 in a browser to use the SynCreator app to simulate conditions.
-
-To stop the app press `ctrl+c` in your terminal to quit or just close the terminal.
 
 The `venv` environment will persist at rest until you delete the venv file.
 
@@ -30,6 +28,7 @@ The `venv` environment will persist at rest until you delete the venv file.
   - It takes a few minutes for AWS to provision the host
   - Note the IP address you are given and use below in <insertyourip>
   - Then at a terminal (answer y when prompted):
+
 ``` 
 $ ssh ubuntu@<insertyourip>
 $ sudo apt update
@@ -39,13 +38,11 @@ $ cd SynCreator
 $ python3 -m venv venv
 $ . venv/bin/activate
 $ pip3 install -e .
+$ pip3 install waitress
 $ export FLASK_APP=flaskr
-$ export FLASK_ENV=development
 $ flask init-db
-$ nohup flask run -h 0.0.0.0 -p 8080 > log.txt 2>&1 &
+$ nohup waitress-serve --call 'flaskr:create_app' > log.txt 2>&1 &
 ```
 Open `http://\<insertyourip\>:8080` in a browser.
-
-To stop the app press `ctrl-c` in your terminal to quit or just close the terminal.
 
 The `venv` environment will persist at rest until you delete the venv file.
