@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for, make_response, jsonify, abort
+    Blueprint, flash, g, redirect, render_template, request, url_for, make_response, jsonify, abort, request
 )
 from werkzeug.exceptions import abort
 
@@ -107,8 +107,22 @@ def api_id(username):
 
     if len(results) == 0:
         abort(404)
-        
+
     return jsonify(results)
+
+
+@bp.route('/api/v1/<string:username>/books', methods=['POST'])
+def create_task(username):
+    if not request.json or not 'title' in request.json:
+        abort(400)
+    book = {
+        'id': books[-1]['id'] + 1,
+        'title': request.json['title'],
+        'author': request.json.get('author', "Not set"),
+        'first_sentence': request.json.get('first_sentence', "Not set"),
+        'year_published': request.json.get('year_published', "Not set")
+    }
+    return jsonify({'book': book}), 201
 
 
 @bp.errorhandler(404)
