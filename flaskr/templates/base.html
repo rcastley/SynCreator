@@ -29,6 +29,7 @@
             </li>
             {% endif %}
           </ul>
+          {% if g.user %}      
           <div class="btn-group">
             <button class="btn btn-splunk dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
               Configure Control Groups
@@ -47,8 +48,7 @@
               </form>
             </div>
           </div>
-          <div class="text-end">
-            {% if g.user %}            
+          <div class="text-end">      
               <a class="nav-link active" aria-current="page" href="{{ url_for('auth.logout') }}""><button type="button" class="btn btn-splunk btn-sm">Logout {{ g.user['username'] }}</button></a>
             {% endif %}
           </div>
