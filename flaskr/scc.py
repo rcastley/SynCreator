@@ -6,7 +6,13 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
-import time 
+import time
+import yaml
+import requests
+
+# Load configuration file
+with open('config.yaml', 'r') as ymlfile:
+    cfg = yaml.safe_load(ymlfile)
 
 books = [
     {'id': 0,
@@ -46,6 +52,14 @@ def set(condition):
     if g.user is None:
         return redirect(url_for('auth.login'))
     else:
+        if cfg['synthetics']['enabled'] == True:
+            data = {
+                'post_token' : cfg['synthetics']['post_token'],
+                'command' : 'annotate',
+                'title' : 'Condition changed',
+                'message' : 'Using condition: ' + condition
+            }
+            req = requests.post('https://monitoring.rigor.com/control_groups/' + cfg['synthetics']['control_group'], data = data)
         db = get_db()
         db.execute(
             'UPDATE scc'
