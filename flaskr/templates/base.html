@@ -19,9 +19,19 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
+          {% if g.user %}  
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a href="{{ request.url }}view/{{ g.user['username'] }}" class="nav-link px-2 text-white" target="_blank">Open Real Browser Link</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ request.url }}api/v1/{{ g.user['username'] }}/books/all" class="nav-link px-2 text-white" target="_blank">Open API Link</a>
+            </li>
+            {% endif %}
+          </ul>
           <div class="btn-group">
-            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Control Groups
+            <button class="btn btn-splunk dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Configure Control Groups
             </button>
             <div class="dropdown-menu" style="width: 300px">
               <form class="px-4 py-3" method="post" action="/controlgroups">
@@ -37,21 +47,9 @@
               </form>
             </div>
           </div>
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            {% if g.user %}  
-            <li class="nav-item">
-              <a href="{{ request.url }}view/{{ g.user['username'] }}" class="nav-link px-2 text-white" target="_blank">Real Browser</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ request.url }}api/v1/{{ g.user['username'] }}/books/all" class="nav-link px-2 text-white" target="_blank">API</a>
-            </li>
-            {% endif %}
-          </ul>
           <div class="text-end">
             {% if g.user %}            
-              <a class="nav-link active" aria-current="page" href="{{ url_for('auth.logout') }}""><button type="button" class="btn btn-splunk btn-sm">Logout</button></a>
-            {% else %}
-              <a class="nav-link active" aria-current="page" href="{{ url_for('auth.register') }}""><button type="button" class="btn btn-splunk btn-sm">Register</button></a>
+              <a class="nav-link active" aria-current="page" href="{{ url_for('auth.logout') }}""><button type="button" class="btn btn-splunk btn-sm">Logout {{ g.user['username'] }}</button></a>
             {% endif %}
           </div>
         </div>
