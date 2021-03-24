@@ -7,12 +7,7 @@ from flaskr.auth import login_required
 from flaskr.db import get_db
 
 import time
-import yaml
 import requests
-
-# Load configuration file
-with open('config.yaml', 'r') as ymlfile:
-    cfg = yaml.safe_load(ymlfile)
 
 books = [
     {'id': 0,
