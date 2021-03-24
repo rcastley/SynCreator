@@ -9,7 +9,6 @@ $ python3 -m venv venv
 $ . venv/bin/activate
 # On a Raspberry Pi run pip3 install wheel
 $ pip3 install -e .
-$ pip3 install waitress
 $ export FLASK_APP=flaskr
 $ flask init-db
 $ nohup waitress-serve --call 'flaskr:create_app' > log.txt 2>&1 &
@@ -40,7 +39,6 @@ $ cd SynCreator
 $ python3 -m venv venv
 $ . venv/bin/activate
 $ pip3 install -e .
-$ pip3 install waitress
 $ export FLASK_APP=flaskr
 $ flask init-db
 $ nohup waitress-serve --call 'flaskr:create_app' > log.txt 2>&1 &
