@@ -19,6 +19,24 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="btn-group">
+            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Control Groups
+            </button>
+            <div class="dropdown-menu" style="width: 300px">
+              <form class="px-4 py-3" method="post" action="/controlgroups">
+                <div class="mb-3">
+                  <label for="controlgroup" class="form-label">Control Group ID</label>
+                  <input type="text" class="form-control" name="controlgroup" placeholder="{{ g.user['control_group'] }}">
+                </div>
+                <div class="mb-3">
+                  <label for="posttoken" class="form-label">Post Token</label>
+                  <input type="password" class="form-control" name="posttoken" value="{%if g.user['post_token'] %} {{ g.user['post_token'] }}{% endif %}">
+                </div>
+                <button type="submit" class="btn btn-splunk btn-sm">Save</button>
+              </form>
+            </div>
+          </div>
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             {% if g.user %}  
             <li class="nav-item">
