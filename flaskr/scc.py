@@ -73,7 +73,7 @@ def set(condition):
                 'title' : 'Condition changed',
                 'message' : 'Using condition: ' + condition
             }
-            req = requests.post('https://monitoring.rigor.com/control_groups/' + g.user['control_group'], data = data)
+            requests.post('https://monitoring.rigor.com/control_groups/' + g.user['control_group'], data = data)
         db = get_db()
         db.execute(
             'UPDATE scc'
