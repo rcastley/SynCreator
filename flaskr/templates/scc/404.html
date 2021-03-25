@@ -1,9 +1,33 @@
-{% extends 'site.html' %}
-{% block content %}
-<div class="bg-light p-5 rounded mt-3">
-  <h1>#404</h1>
-  <p class="lead">We couldn't find what you were looking for.</p>
-  <p>Unfortunately the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exist.</p>
-  <p>Check the URL you entered for any mistakes and try again. Alternatively, search for whatever is missing or take a look around the rest of our site.</p>
-</div>
-{% endblock %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>404 | Page not found!</title>
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/error.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="page vertical-align text-center">
+            <div class="page-content vertical-align-middle">
+                <header>
+                    <h1 class="animation-slide-top">404</h1>
+                    <p>Page Not Found !</p>
+                </header>
+                <p class="error-advise">The page you were looking for could not be found.</p>
+                <a class="btn btn-splunk btn-round mb-5" href="/">GO TO HOME PAGE</a>
+                <footer class="page-copyright">
+                    <p>&copy; Splunk 2021</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+</body>
+
+</html>

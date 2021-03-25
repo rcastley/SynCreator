@@ -1,11 +1,33 @@
-{% extends 'site.html' %}
-{% block content %}
-<div class="bg-light p-5 rounded mt-3">
-  <h1>#500</h1>
-  <p class="lead">Application Error</p>
-  <p>The server encountered an internal error or misconfiguration and was unable to complete your request.</p>
-  <p>Please contact the server administrator, admin@example.com and inform them of the time the error occurred, and anything you might have done that may have caused the error.</p>
-  <p>More information about this error may be available in the server error log.</p>
-  <p>Additionally, a 500 Internal Server Error error was encountered while trying to use an ErrorDocument to handle the request.</p>
-</div>
-{% endblock %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>500 | Internal Server Error!</title>
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/error.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="page vertical-align text-center">
+            <div class="page-content vertical-align-middle">
+                <header>
+                    <h1 class="animation-slide-top">500</h1>
+                    <p>Internal Server Error !</p>
+                </header>
+                <p class="error-advise">Whoopps, something went wrong.</p>
+                <a class="btn btn-splunk btn-round mb-5" href="/">GO TO HOME PAGE</a>
+                <footer class="page-copyright">
+                    <p>&copy; Splunk 2021</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+</body>
+
+</html>

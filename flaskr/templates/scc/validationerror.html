@@ -1,61 +1,103 @@
 {% extends 'site.html' %}
 {% set url_split = request.url.split('/') %}
 {% block content %}
-<h1 class="mt-5">Validation Error</h1>
-<p class="lead">The Wait for element present DOM ID is missing from this page.</p>
-<p>This will generate an error and the measurement will fail.</p>
-<hr>
-<div class="accordion" id="accordionExample">
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Selenium Script
-            </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                <pre id="selenium_json"></pre>
+<div class="wrapper">
+    <nav id="sidebar" class="inactive">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='img/splunk-logo-black-small.png') }}" alt="bootraper logo" class="app-logo">
+        </div>
+        <ul class="list-unstyled components text-secondary">
+            <li>
+                <a href="/"><i class="fas fa-home"></i> Home</a>
+            </li>
+        </ul>
+    </nav>
+    <div id="body" class="active">
+        <nav class="navbar navbar-expand-lg navbar-white bg-white">
+            <button type="button" id="sidebarCollapse" class="btn btn-light"><i class="fas fa-bars"></i><span></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <div class="nav-dropdown">
+                            <span>Condition: {{ condition[0]|upper }}</span>
+                            <div class="dropdown-menu dropdown-menu-right nav-link-menu">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="content">
+            <div class="container">
+                <div class="page-title">
+                    <h3>Validation Error Condition</h3>
+                </div>
+                <div class="box box-primary">
+                    <div class="box-body">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Test Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="script-tab" data-toggle="tab" href="#script" role="tab" aria-controls="script" aria-selected="false">Selenium Script</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade active show" id="description" role="tabpanel" aria-labelledby="description-tab">
+                                <div class="col-md-12">
+                                    <p class="text-muted">The test is looking for a DOM ID</p>
+                                    <p class="text-muted">As long as this is detected then the measurement will complete.</p>
+                                    <br/>
+                                    <div id="missing">Content will never load due to DOM ID not existing ...</div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="script" role="tabpanel" aria-labelledby="script-tab">
+                                <div class="col-md-12">
+                                    <pre id="selenium_json"></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<br/>
-<div id="missing"></div>
 <script>
 data = {
-   "version":"1.1",
-   "name":"SCC - Validation Error",
-   "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
-   "urls":[
-      "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/"
-   ],
-   "tests":[
-      {
-         "name":"SCC - Validation Error",
-         "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
-         "commands":[
+    "version":"1.1",
+    "name":"SynCreator",
+    "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
+    "urls":[
+        "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/"
+    ],
+    "tests":[
+        {
+            "name":"SynCreator",
+            "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
+            "commands":[
             {
-               "command":"open",
-               "target":"/{{ url_split[3] }}/{{ url_split[4] }}",
-               "value":"",
-               "comment":""
+                "command":"open",
+                "target":"/{{ url_split[3] }}/{{ url_split[4] }}",
+                "value":"",
+                "comment":""
             },
             {
-               "comment":"Check Phrase",
-               "command":"waitForElementPresent",
-               "target":"id=ajax-div",
-               "value":"10000"
+                "comment":"Check Phrase",
+                "command":"waitForElementPresent",
+                "target":"id=ajax-div",
+                "value":"10000"
             }
-         ]
-      }
-   ],
-   "suites":[
-      {
-         "name":"SCC - Validation Error",
-         "tests":[
-         ]         
-      }
-   ]
+            ]
+        }
+    ],
+    "suites":[
+        {
+            "name":"SynCreator",
+            "tests":[
+            ]         
+        }
+    ]
 }
 
 document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
