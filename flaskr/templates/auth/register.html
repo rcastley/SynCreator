@@ -1,17 +1,28 @@
 {% extends 'base.html' %}
-
-{% block content %}
-  <main class="form-signin">
-    <form method="post">
-      <h1 class="h3 mb-3 fw-normal">Please register</h1>
-      <label for="username" class="visually-hidden">Username</label>
-      <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
-      <label for="password" class="visually-hidden">Password</label>
-      <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
-      <button class="w-100 btn btn-lg btn-splunk" type="submit" value="Register">Register</button>
-      <hr/>
-      <p>Already Registered? <a href="{{ url_for('auth.login') }}"> Log in here!</a></p>
-      <p class="mt-5 mb-3 text-muted">&copy; Splunk 2021</p>
-    </form>
-  </main>
+{% block content %} 
+    <div class="wrapper">
+        <div class="auth-content">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <img class="brand" src="{{ url_for('static', filename='img/splunk-logo-black.png') }}" alt="Splunk logo">
+                    </div>
+                    <h6 class="mb-4 text-muted">Create a new SynCreator account</h6>
+                    <form action="" method="post">
+                        <div class="form-group text-left">
+                            <label for="username">Username</label>
+                            <input type="username" name="username" class="form-control" placeholder="Username" required>
+                        </div>
+                        <div class="form-group text-left">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <button class="btn btn-splunk shadow-2 mb-4">Register</button>
+                    </form>
+                    <p class="mb-0 text-muted">Allready have an account? <a href="{{ url_for('auth.login') }}">Log in</a></p>
+                    <p class="mt-5 mb-3 text-muted">&copy; Splunk 2021</p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

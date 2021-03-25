@@ -1,64 +1,21 @@
-
 <!doctype html>
-<html lang="en" class="h-100">
-  <head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TestPage - Site Condition Creator</title>
-    <!-- Bootstrap core CSS -->
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"  media="screen"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Splunk | SynCreator Condition Page</title>
+    <link href="{{ url_for('static', filename='vendor/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/fontawesome/css/solid.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/fontawesome/css/brands.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/master.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-    <meta name="theme-color" content="#7952b3">
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-    <!-- Custom styles for this template -->
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}"  media="screen"/>
-  </head>
-  <body class="d-flex flex-column h-100">
-      <header>
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-              <img src="{{ url_for('static', filename='img/splunk_logo.png') }}" class="float-md-start mb-0" height="30" alt="Splunk Logo" />
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-              <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Condition: {{ condition[0]|upper }}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </header>
-      <main class="flex-shrink-0">
-        <div class="container">
-          {% block content %}{% endblock %}
-        </div>
-      </main>
-      <footer class="footer mt-auto py-3 bg-light">
-        <div class="container">
-          <span class="text-muted">&copy; Splunk 2021</span>
-        </div>
-      </footer>
-    <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>  
-  </body>
+</head>
+<body>
+    {% block content %}{% endblock %}
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
 </html>

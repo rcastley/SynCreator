@@ -1,61 +1,38 @@
 <!doctype html>
-<html lang="en"> 
-  <head>
-    <title>Site Condition Creator - Splunk</title>
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"  media="screen"/>
+<!-- 
+* Bootstrap Simple Admin Template
+* Version: 2.1
+* Author: Alexis Luna
+* Website: https://github.com/alexis-luna/bootstrap-simple-admin-template
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Splunk | SynCreator</title>
+    {% if g.user %}
+    <link href="{{ url_for('static', filename='vendor/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/fontawesome/css/solid.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/fontawesome/css/brands.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/master.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/chartsjs/Chart.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/flagiconcss/css/flag-icon.min.css') }}" rel="stylesheet">
+    {% endif %}
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     {% if not g.user %}
     <link href="{{ url_for('static', filename='css/auth.css') }}" rel="stylesheet">
     {% endif %}
-    <link href="{{ url_for('static', filename='css/site.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/all.min.css') }}" rel="stylesheet">
-    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-  <body class="text-center">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='img/splunk_logo.png') }}" height="30" alt="Splunk Logo" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          {% if g.user %}  
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a href="{{ request.url }}view/{{ g.user['username'] }}" class="nav-link px-2 text-white" target="_blank">Open Real Browser Link</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ request.url }}api/v1/{{ g.user['username'] }}/books/all" class="nav-link px-2 text-white" target="_blank">Open API Link</a>
-            </li>
-            {% endif %}
-          </ul>
-          {% if g.user %}      
-          <div class="btn-group">
-            <button class="btn btn-splunk dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Configure Control Groups
-            </button>
-            <div class="dropdown-menu" style="width: 300px">
-              <form class="px-4 py-3" method="post" action="/controlgroups">
-                <div class="mb-3">
-                  <label for="controlgroup" class="form-label">Control Group ID</label>
-                  <input type="text" class="form-control" name="controlgroup" placeholder="{{ g.user['control_group'] }}">
-                </div>
-                <div class="mb-3">
-                  <label for="posttoken" class="form-label">Post Token</label>
-                  <input type="password" class="form-control" name="posttoken" value="{%if g.user['post_token'] %} {{ g.user['post_token'] }}{% endif %}">
-                </div>
-                <button type="submit" class="btn btn-splunk btn-sm">Save</button>
-              </form>
-            </div>
-          </div>
-          <div class="text-end">      
-              <a class="nav-link active" aria-current="page" href="{{ url_for('auth.logout') }}"><button type="button" class="btn btn-splunk btn-sm">Logout {{ g.user['username'] }}</button></a>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </nav>
+
+</head>
+
+<body>
     {% block content %}{% endblock %}
-    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-  </body>
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
 </html>
