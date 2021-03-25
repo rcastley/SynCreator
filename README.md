@@ -15,7 +15,7 @@ $ nohup waitress-serve --call 'flaskr:create_app' > log.txt 2>&1 &
 ```
 Open http://localhost:8080 in a browser to use the SynCreator app to simulate conditions. You will need to initially register a username & password.
 
-To use the API test functionality click on **API** on menu bar to get your unique URL e.g. http://localhost:8080/api/v1/{username}/books/all. You can run both GET & POST test types. The POST test requires a JSON payload containing `{"title":"Read a book"}` to the endpoint http://localhost:8080/api/v1/{username}/books. You can GET individual ID's my using http://localhost:8080/api/v1/*{username}*/books?id=0. ID's 0-2 are supported, anything else will 404.
+To use the API test functionality click on **API** on menu bar to get your unique URL e.g. http://localhost:8080/api/v1/{username}/books/all. You can run both GET & POST test types. The POST test requires a JSON payload containing `{"title":"Read a book"}` to the endpoint http://localhost:8080/api/v1/{username}/books. You can GET individual ID's my using http://localhost:8080/api/v1/{username}/books?id=0. ID's 0-2 are supported, anything else will 404.
 
 **NEW:** Support for Control Groups - https://help.rigor.com/hc/en-us/articles/115004817328-How-to-Create-an-Event-Annotation-. In the UI, under Control Groups dropdown, enter Control Group ID and post token. When you change condition an Event Annotation will fire and be visible on the scatter plot.
 
