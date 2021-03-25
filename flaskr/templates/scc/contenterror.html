@@ -2,7 +2,7 @@
 {% set url_split = request.url.split('/') %}
 {% block content %}
 <h1 class="mt-5">Content Error</h1>
-<p class="lead">The test is looking for this phrase: Hello, World!</p>
+<p class="lead">The test is looking for a DOM ID</p>
 <p>As long as this is detected then the measurement will complete.</p>
 <p>A <code class="small">img</code> tag is embedded in the page, however the URL is invalid and will generate a 404 in the waterfall.</p>
 <hr>
@@ -21,6 +21,7 @@
     </div>
 </div>
 <br/>
+<div id="lorem"></div>
 <iframe width="1280" height="720" src="https://www.youtube.com/embed/e-ORhEE9VVg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <img src="https://media.wired.com/photos/5a93a7ff11e325008172bc2/master/w_2560%2Cc_limit/pulsar.jpg" width="1280" height="720" alt="Pulsar" />
 <script>
@@ -43,9 +44,9 @@ data = {
                "comment":""
             },
             {
-               "comment":"Phrase Check",
-               "command":"executeScript",
-               "target":"var searchText = 'Hello, World!'; var isTextPresent = document.documentElement.innerHTML.includes(searchText); if (isTextPresent != true) { var message = 'Assert text present failed: ' + searchText; throw(new Error(message)); }",
+               "comment":"Check Phrase",
+               "command":"waitForElementPresent",
+               "target":"id=ajax-div",
                "value":"10000"
             }
          ]
@@ -61,5 +62,7 @@ data = {
 }
 
 document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
+
+setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#lorem').html(data);}});", 0);
 </script>
 {% endblock %}

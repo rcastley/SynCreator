@@ -2,7 +2,7 @@
 {% set url_split = request.url.split('/') %}
 {% block content %}
 <h1 class="mt-5">Timeout</h1>
-<p class="lead">The test is looking for this phrase: Hello, World!</p>
+<p class="lead">The test is looking for a DOM ID</p>
 <p>This page is delayed from loading by 62 seconds and will be marked as a failure</p>
 <hr>
 <div class="accordion" id="accordionExample">
@@ -19,6 +19,8 @@
         </div>
     </div>
 </div>
+<br/>
+<div id="lorem"></div>
 <script>
 data = {
    "version":"1.1",
@@ -37,6 +39,12 @@ data = {
                "target":"/{{ url_split[3] }}/{{ url_split[4] }}",
                "value":"",
                "comment":""
+            },
+            {
+               "comment":"Check Phrase",
+               "command":"waitForElementPresent",
+               "target":"id=ajax-div",
+               "value":"10000"
             }
          ]
       }
@@ -51,5 +59,7 @@ data = {
 }
 
 document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
+
+setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#lorem').html(data);}});", 0);
 </script>
 {% endblock %}

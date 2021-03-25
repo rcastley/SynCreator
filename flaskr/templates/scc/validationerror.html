@@ -43,7 +43,7 @@ data = {
             {
                "comment":"Check Phrase",
                "command":"waitForElementPresent",
-               "target":"id=lorem",
+               "target":"id=ajax-div",
                "value":"10000"
             }
          ]
@@ -60,6 +60,6 @@ data = {
 
 document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
 
-setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#missing').html(data);}});", 0);
+setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#lorem').html(data);}});", 0);
 </script>
 {% endblock %}
