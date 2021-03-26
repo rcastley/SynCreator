@@ -82,6 +82,30 @@ def set(condition):
         )
         db.commit()
         return redirect(url_for('index'))
+
+@bp.route('/controlgroup/<string:condition>', methods=('GET', 'POST'))
+def controlgroup(condition):
+    print(condition)
+    if g.user is None:
+        return redirect(url_for('auth.login'))
+    else:
+        if g.user['control_group'] != 'None':
+            if condition == 'depoy':
+                data = {
+                    'post_token' : g.user['post_token'],
+                    'command' : 'annotate',
+                    'title' : 'Deployment',
+                    'message' : 'Front end deployed'
+                }
+            else:
+                data = {
+                    'post_token' : g.user['post_token'],
+                    'command' : 'annotate',
+                    'title' : 'Fix',
+                    'message' : 'Fix for front end bug deployed'
+                }
+            requests.post('https://monitoring.rigor.com/control_groups/' + g.user['control_group'], data = data)
+        return redirect(url_for('index'))
     
     
 @bp.route('/view/<string:username>')

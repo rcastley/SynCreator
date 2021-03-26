@@ -42,6 +42,7 @@
                                           <label for="posttoken" class="form-label">Post Token</label>
                                           <input type="password" class="form-control" name="posttoken" value="{%if g.user['post_token'] %} {{ g.user['post_token'] }}{% endif %}">
                                         </div>
+                                        <button type="submit" class="btn btn-splunk btn-sm">Save</button>
                                       </form>
                                 </div>
                             </div>
@@ -96,6 +97,60 @@
                             </div>
                         </div>
                         {% endfor %}
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="icon-big text-center">
+                                                <i class="splunk fas fa-comment-alt"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div class="detail">
+                                                <p class="detail-subtitle">Control Group Message</p>
+                                                <span class="number">Front end deployment</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer">
+                                        <hr />
+                                        <a class="text-decoration-none" href="controlgroup/deploy">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Send Message</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="icon-big text-center">
+                                                <i class="splunk fas fa-comment-alt"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div class="detail">
+                                                <p class="detail-subtitle">Control Group Message</p>
+                                                <span class="number">Fix for front end bug</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer">
+                                        <hr />
+                                        <a class="text-decoration-none" href="controlgroup/fix">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Send Message</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
