@@ -1,101 +1,158 @@
 {% extends 'base.html' %}
 
-{% set conditions = {'Default': 'check', '404': 'exclamation-circle', '500': 'exclamation-triangle',
+{% set conditions = {'Default': 'smile', '404': 'exclamation-circle', '500': 'exclamation-triangle',
                      'Validation Error': 'check', 'Content Error': 'bug', 'Large Image': 'image',
                      'Content Delay': 'hourglass-start', 'Timeout': 'hourglass-end', 'Cookie': 'cookie-bite'} %}
 
-{% block content %} 
-            <div class="content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 page-header">
-                            <div class="page-pretitle">SynCreator</div>
-                            <h2 class="page-title">Dashboard</h2>
+{% block content %}
+<div class="wrapper">
+    <nav id="sidebar" class="inactive">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='img/splunk-logo-black-small.png') }}" alt="Splunk logo" class="app-logo">
+        </div>
+        <ul class="list-unstyled components text-secondary">
+            <li>
+                <a href="#authmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-home"></i> Test Type URLs</a>
+                <ul class="collapse list-unstyled" id="authmenu">
+                    <li>
+                        <a href="{{ request.url }}view/{{ g.user['username'] }}" target="_blank"><i class="fas fa-globe"></i> Real Browser</a>
+                    </li>
+                    <li>
+                        <a href="{{ request.url }}api/v1/{{ g.user['username'] }}/books/all" target="_blank"><i class="fas fa-box-open"></i> API</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="body" class="active">
+        <nav class="navbar navbar-expand-lg navbar-white bg-white">
+            <button type="button" id="sidebarCollapse" class="btn btn-light"><i class="fas fa-bars"></i><span></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <div class="nav-dropdown">
+                            <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="splunk fas fa-cog"></i> <span>Configure Control Group</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right nav-link-menu">
+                                <form class="px-4 py-3" method="post" action="/controlgroups">
+                                    <div class="mb-3">
+                                      <label for="controlgroup" class="form-label">Control Group ID</label>
+                                      <input type="text" class="form-control" id="controlgroup" name="controlgroup" placeholder="{{ g.user['control_group'] }}">
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="posttoken" class="form-label">Post Token</label>
+                                      <input type="password" class="form-control" id="posttoken" name="posttoken" value="{%if g.user['post_token'] %} {{ g.user['post_token'] }}{% endif %}">
+                                    </div>
+                                    <button type="submit" class="btn btn-splunk btn-sm">Save</button>
+                                  </form>
+                            </div>
                         </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <div class="nav-dropdown">
+                            <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="splunk fas fa-user"></i> <span>{{ g.user['username'] }}</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right nav-link-menu">
+                                <ul class="nav-list">
+                                    <li><a href="{{ url_for('auth.logout') }}" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 page-header">
+                        <div class="page-pretitle">SynCreator</div>
+                        <h2 class="page-title">Dashboard</h2>
                     </div>
-                    <div class="row">
-                        {% for key, value in conditions.items() %}
-                        {% set newkey = key|lower|replace(' ', '') %}
-                        <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
-                            <div class="card">
-                                <div class="content">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="icon-big text-center">
-                                                <i class="splunk fas fa-{{ value }}"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div class="detail">
-                                                <p class="detail-subtitle">Condition</p>
-                                                <span class="number">{{ key }}</span>
-                                            </div>
+                </div>
+                <div class="row">
+                    {% for key, value in conditions.items() %}
+                    {% set newkey = key|lower|replace(' ', '') %}
+                    <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="icon-big text-center">
+                                            <i class="splunk fas fa-{{ value }}"></i>
                                         </div>
                                     </div>
-                                    <div class="footer">
-                                        <hr />
-                                        <a class="text-decoration-none" href="set/{{ newkey }}">
-                                        <button type="button" class="btn btn-sm {% if condition[0] != newkey %}btn-outline-secondary{% else %}btn-splunk{% endif %}">{% if condition[0] == newkey %}Active{% else %}Set Condition{% endif %}</button>
-                                        </a>
+                                    <div class="col-sm-8">
+                                        <div class="detail">
+                                            <p class="detail-subtitle">Condition</p>
+                                            <span class="number">{{ key }}</span>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <a class="text-decoration-none" href="set/{{ newkey }}">
+                                    <button type="button" class="btn btn-sm {% if condition[0] != newkey %}btn-outline-secondary{% else %}btn-splunk{% endif %}">{% if condition[0] == newkey %}Active{% else %}Set Condition{% endif %}</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
-                    <hr/>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
-                            <div class="card">
-                                <div class="content">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="icon-big text-center">
-                                                <i class="splunk fas fa-comment-alt"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div class="detail">
-                                                <p class="detail-subtitle">Control Group Message</p>
-                                                <span class="number">Front end deployment</span>
-                                            </div>
+                    {% endfor %}
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="icon-big text-center">
+                                            <i class="splunk fas fa-comment-alt"></i>
                                         </div>
                                     </div>
-                                    <div class="footer">
-                                        <hr />
-                                        <a class="text-decoration-none" href="controlgroup/deploy">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Send Message</button>
-                                        </a>
+                                    <div class="col-sm-8">
+                                        <div class="detail">
+                                            <p class="detail-subtitle">Control Group Message</p>
+                                            <span class="number">Front end deployment</span>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <a class="text-decoration-none" href="controlgroup/deploy">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Send Message</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
-                            <div class="card">
-                                <div class="content">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="icon-big text-center">
-                                                <i class="splunk fas fa-comment-alt"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div class="detail">
-                                                <p class="detail-subtitle">Control Group Message</p>
-                                                <span class="number">Fix for front end bug</span>
-                                            </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="icon-big text-center">
+                                            <i class="splunk fas fa-comment-alt"></i>
                                         </div>
                                     </div>
-                                    <div class="footer">
-                                        <hr />
-                                        <a class="text-decoration-none" href="controlgroup/fix">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Send Message</button>
-                                        </a>
+                                    <div class="col-sm-8">
+                                        <div class="detail">
+                                            <p class="detail-subtitle">Control Group Message</p>
+                                            <span class="number">Fix for front end bug</span>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <a class="text-decoration-none" href="controlgroup/fix">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Send Message</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
