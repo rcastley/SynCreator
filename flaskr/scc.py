@@ -61,7 +61,7 @@ def controlgroups():
         return redirect(url_for('index'))
 
 
-@bp.route('/set/<string:condition>')
+@bp.route('/set/<string:condition>', methods=('GET', 'POST'))
 def set(condition):
     if g.user is None:
         return redirect(url_for('auth.login'))
