@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-
 {% set conditions = {'Default': 'smile', '404': 'exclamation-circle', '500': 'exclamation-triangle',
                      'Validation Error': 'check', 'Content Error': 'bug', 'Large Image': 'image',
                      'Content Delay': 'hourglass-start', 'Timeout': 'hourglass-end', 'Cookie': 'cookie-bite'} %}
-
 {% block content %}
 <div class="wrapper">
     <nav id="sidebar" class="inactive">
@@ -18,7 +16,8 @@
                         <a href="{{ request.url }}view/{{ g.user['username'] }}" target="_blank"><i class="fas fa-globe"></i> Real Browser</a>
                     </li>
                     <li>
-                        <a href="{{ request.url }}api/v1/{{ g.user['username'] }}/books/all" target="_blank"><i class="fas fa-box-open"></i> API</a>
+                        <a href="{{ request.url }}api/v1/{{ g.user['username'] }}/books/all" target="_blank"><i class="fas fa-box-open"></i> API GET all books</a>
+                        <a href="{{ request.url }}api/v1/{{ g.user['username'] }}/books?id=1" target="_blank"><i class="fas fa-box-open"></i> API GET by id (0-2)</a>
                     </li>
                 </ul>
             </li>
