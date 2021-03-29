@@ -131,7 +131,7 @@ def controlgroup(condition):
 def view(username):
     db = get_db()
     settings = db.execute(
-        'SELECT username, condition, realm, access_token'
+        'SELECT condition, realm, access_token, username as u'
         ' FROM scc WHERE username = ?', (username, )
     ).fetchone()
     print(settings[0])
