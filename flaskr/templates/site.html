@@ -13,7 +13,7 @@
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     {% if g.user['condition'] == 'rum' %}
     <script src="https://cdn.signalfx.com/o11y-gdi-rum/latest/splunk-otel-web.js" type="text/javascript"></script>
-    <script>window.SplunkRum && window.SplunkRum.init({beaconUrl: "https://rum-ingest.{{ g.user['realm'] }}.signalfx.com/v1/rum", rumAuth: "{{ g.user['access_token'] }}", app: "SynCreator-Demo", environment: "syncreator"});</script>
+    <script>window.SplunkRum && window.SplunkRum.init({beaconUrl: "https://rum-ingest.{{ g.user['realm'] }}.signalfx.com/v1/rum", rumAuth: "{{ g.user['access_token'] }}", app: "{{ g.user['username'] }}-SynCreator-Demo", environment: "{{ g.user['username'] }}-syncreator"});</script>
     {% endif %}
 </head>
 <body>
