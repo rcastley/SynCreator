@@ -66,7 +66,7 @@ def set(condition):
     if g.user is None:
         return redirect(url_for('auth.login'))
     else:
-        if g.user['control_group'] != 'None':
+        if g.user['control_group'] is not None:
             data = {
                 'post_token' : g.user['post_token'],
                 'command' : 'annotate',
