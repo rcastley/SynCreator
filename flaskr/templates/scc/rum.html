@@ -1,9 +1,6 @@
 {% extends 'site.html' %}
 {% set url_split = request.url.split('/') %}
 {% block content %}
-<script src="https://cdn.signalfx.com/o11y-gdi-rum/latest/splunk-otel-web.js" type="text/javascript"></script>
-<script>window.SplunkRum && window.SplunkRum.init({beaconUrl: "https://rum-ingest.{{ settings[1] }}.signalfx.com/v1/rum", rumAuth: "{{ settings[2] }}", app: "{{ settings[3] }}-SynCreator-Demo", environment: "{{ settings[3] }}-syncreator"});</script>
-
 <div class="wrapper">
     <nav id="sidebar" class="inactive">
         <div class="sidebar-header">

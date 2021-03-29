@@ -134,7 +134,6 @@ def view(username):
         'SELECT condition, realm, access_token, username as u'
         ' FROM scc WHERE username = ?', (username, )
     ).fetchone()
-    print(settings[0])
     if settings[0] == "404":
         resp = render_template('scc/' + settings[0] + '.html')
         return (resp, 404)
