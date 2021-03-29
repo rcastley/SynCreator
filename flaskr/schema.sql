@@ -6,5 +6,7 @@ CREATE TABLE scc (
   password TEXT NOT NULL,
   condition TEXT NOT NULL,
   control_group TEXT,
-  post_token TEXT
+  post_token TEXT,
+  realm TEXT,
+  access_token TEXT
 );

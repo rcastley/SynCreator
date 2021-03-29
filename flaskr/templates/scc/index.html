@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% set conditions = {'Default': 'smile', '404': 'exclamation-circle', '500': 'exclamation-triangle',
                      'Validation Error': 'check', 'Content Error': 'bug', 'Large Image': 'image',
-                     'Content Delay': 'hourglass-start', 'Timeout': 'hourglass-end', 'Cookie': 'cookie-bite'} %}
+                     'Content Delay': 'hourglass-start', 'Timeout': 'hourglass-end', 'Cookie': 'cookie-bite', 'RUM': 'users'} %}
 {% block content %}
 <div class="wrapper">
     <nav id="sidebar" class="inactive">
@@ -40,6 +40,24 @@
                                     <div class="mb-3">
                                       <label for="posttoken" class="form-label">Post Token</label>
                                       <input type="password" class="form-control" id="posttoken" name="posttoken" value="{%if g.user['post_token'] %} {{ g.user['post_token'] }}{% endif %}">
+                                    </div>
+                                    <button type="submit" class="btn btn-splunk btn-sm">Save</button>
+                                  </form>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <div class="nav-dropdown">
+                            <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="splunk fas fa-cog"></i> <span>Splunk RUM</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right nav-link-menu">
+                                <form class="px-4 py-3" method="post" action="/rum">
+                                    <div class="mb-3">
+                                      <label for="realm" class="form-label">Realm</label>
+                                      <input type="text" class="form-control" id="realm" name="realm" placeholder="{{ g.user['realm'] }}">
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="accesstoken" class="form-label">RUM Access Token</label>
+                                      <input type="password" class="form-control" id="accesstoken" name="accesstoken" value="{%if g.user['access_token'] %} {{ g.user['access_token'] }}{% endif %}">
                                     </div>
                                     <button type="submit" class="btn btn-splunk btn-sm">Save</button>
                                   </form>

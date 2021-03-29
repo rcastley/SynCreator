@@ -61,6 +61,25 @@ def controlgroups():
         return redirect(url_for('index'))
 
 
+@bp.route('/rum', methods=('GET', 'POST'))
+def rum():
+    if g.user is None:
+        return redirect(url_for('auth.login'))
+    else:
+        if request.method == 'POST':
+            realm = request.form['realm']
+            accesstoken = request.form['accesstoken']
+        
+        db = get_db()
+        db.execute(
+            'UPDATE scc'
+            ' SET realm = ?, access_token = ? WHERE username = ?',
+            (realm, accesstoken, g.user['username'])
+        )
+        db.commit()
+        return redirect(url_for('index'))
+
+
 @bp.route('/set/<string:condition>', methods=('GET', 'POST'))
 def set(condition):
     if g.user is None:
