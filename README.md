@@ -19,6 +19,8 @@ To use the API test functionality click on **API** on menu bar to get your uniqu
 
 **NEW:** Support for Control Groups - https://help.rigor.com/hc/en-us/articles/115004817328-How-to-Create-an-Event-Annotation-. In the UI, under Control Groups dropdown, enter Control Group ID and post token. When you change condition an Event Annotation will fire and be visible on the scatter plot.
 
+**NEW:** Support for Splunk RUM. Enter your realm and RUM token in the UI and set the condition to RUM and watch the metrics flow in from the Rigor test you have configured.
+
 The `venv` environment will persist at rest until you delete the venv file.
 
 ## Installation on AWS Free Tier
