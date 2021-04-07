@@ -25,15 +25,7 @@ The `venv` environment will persist at rest until you delete the venv file.
 
 ## Docker
 ```
-$ git clone https://github.com/rcastley/SynCreator
-$ cd SynCreator
-$ python3 -m venv venv
-$ . venv/bin/activate
-$ pip3 install -e .
-$ export FLASK_APP=flaskr
-$ flask init-db
-$ docker build -t syncreator .
-$ docker run -d -p 8080:8080 syncreator
+$ docker run -d -p 8080:8080 rcastley/syncreator:1.0
 ```
 ## Installation on AWS Free Tier
 
