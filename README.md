@@ -23,6 +23,16 @@ To use the API test functionality click on **API** on menu bar to get your uniqu
 
 The `venv` environment will persist at rest until you delete the venv file.
 
+## Docker
+```
+# clone the repository
+$ git clone https://github.com/rcastley/SynCreator
+$ cd SynCreator
+$ export FLASK_APP=flaskr
+$ flask init-db
+$ docker build -t syncreator .
+$ docker run -d -p 8080:8080 syncreator
+```
 ## Installation on AWS Free Tier
 
 - Create a new Ubuntu 20.04 instance
