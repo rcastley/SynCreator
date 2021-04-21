@@ -15,3 +15,4 @@ build/
 *.egg-info/
 
 log.txt
+nohup.out
