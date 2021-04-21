@@ -23,6 +23,10 @@ To use the API test functionality click on **API** on menu bar to get your uniqu
 
 The `venv` environment will persist at rest until you delete the venv file.
 
+## Docker
+```
+$ docker run -d -p 8080:8080 rcastley/syncreator:1.0
+```
 ## Installation on AWS Free Tier
 
 - Create a new Ubuntu 20.04 instance
