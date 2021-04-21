@@ -46,8 +46,10 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+
         db = get_db()
         error = None
+        
         user = db.execute(
             'SELECT * FROM scc WHERE username = ?', (username,)
         ).fetchone()

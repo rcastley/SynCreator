@@ -104,7 +104,6 @@ def set(condition):
 
 @bp.route('/controlgroup/<string:condition>', methods=('GET', 'POST'))
 def controlgroup(condition):
-    print(condition)
     if g.user is None:
         return redirect(url_for('auth.login'))
     else:
@@ -135,10 +134,10 @@ def view(username):
         ' FROM scc WHERE username = ?', (username, )
     ).fetchone()
     if settings[0] == "404":
-        resp = render_template('scc/' + settings[0] + '.html')
+        resp = render_template('scc/' + settings[0] + '.html', settings = settings)
         return (resp, 404)
     elif settings[0] == "500":
-        resp = render_template('scc/' + settings[0] + '.html')
+        resp = render_template('scc/' + settings[0] + '.html', settings = settings)
         return (resp, 500)
     elif settings[0] == "timeout":
         time.sleep(62)
