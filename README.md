@@ -25,7 +25,7 @@ The `venv` environment will persist at rest until you delete the venv file.
 
 ## Docker
 ```
-$ docker run -d -p 8080:8080 rcastley/syncreator:1.0
+$ docker run -d -p 8080:8080 rcastley/syncreator:1.1
 ```
 ## Installation on AWS Free Tier
 
