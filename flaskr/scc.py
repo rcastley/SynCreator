@@ -150,9 +150,9 @@ def view(username):
         return render_template('scc/' + settings[0] + '.html', settings = settings)
 
 
-@bp.route('/lorem')
-def lorem():
-    return render_template('scc/lorem.html')
+@bp.route('/air-plant')
+def airplant():
+    return render_template('scc/air-plant.html')
 
 
 @bp.route('/api/v1/<string:username>/books/all', methods=['GET'])

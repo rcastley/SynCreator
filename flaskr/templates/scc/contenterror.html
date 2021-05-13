@@ -1,71 +1,240 @@
 {% extends 'site.html' %}
 {% set url_split = request.url.split('/') %}
 {% block content %}
-<div class="wrapper">
-    <nav id="sidebar" class="inactive">
-        <div class="sidebar-header">
-            <img src="{{ url_for('static', filename='img/splunk-logo-black-small.png') }}" alt="bootraper logo" class="app-logo">
-        </div>
-        <ul class="list-unstyled components text-secondary">
-            <li>
-                <a href="/"><i class="fas fa-home"></i> Home</a>
-            </li>
-        </ul>
-    </nav>
-    <div id="body" class="active">
-        <nav class="navbar navbar-expand-lg navbar-white bg-white">
-            <button type="button" id="sidebarCollapse" class="btn btn-light"><i class="fas fa-bars"></i><span></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <div class="nav-dropdown">
-                            <span>Condition: {{ settings[0]|upper }}</span>
-                            <div class="dropdown-menu dropdown-menu-right nav-link-menu">
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class="content">
-            <div class="container">
-                <div class="page-title">
-                    <h3>Content Error Condition</h3>
-                </div>
-                <div class="box box-primary">
-                    <div class="box-body">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Test Description</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="script-tab" data-toggle="tab" href="#script" role="tab" aria-controls="script" aria-selected="false">Selenium Script</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade active show" id="description" role="tabpanel" aria-labelledby="description-tab">
-                                <div class="col-md-12">
-                                    <p class="text-muted">The test is looking for a DOM ID</p>
-                                    <p class="text-muted">As long as this is detected then the measurement will complete.</p>
-                                    <br/>
-                                    <div id="lorem"></div>
-                                    <iframe width="50%" height="640" src="https://www.youtube.com/embed/e-ORhEE9VVg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <hr/>
-                                    <img src="https://media.wired.com/photos/5a93a7ff11e325008172bc2/master/w_2560%2Cc_limit/pulsar.jpg" width="100%" alt="Pulsar" />
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="script" role="tabpanel" aria-labelledby="script-tab">
-                                <div class="col-md-12">
-                                    <pre id="selenium_json"></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<header>
+    <div class="navbar">
+        <div class="container d-flex justify-content-between">
+            <div class="h-free-shipping">Splunk SynCreator - Current Condition: {{ settings[0]|upper }}</div>
+            <div class="h-controls">
+                <div class="h-control">
+                    <img src="/static/icons/Hipster_CurrencyIcon.svg" alt="icon" class="icon" />
+                    <form method="POST" class="controls-form" action="/setCurrency" id="currency_form" >
+                        <select name="currency_code" onchange="document.getElementById('currency_form').submit();">
+                                
+                            <option value="EUR" >EUR</option>
+                            
+                            <option value="USD" selected="selected">USD</option>
+                            
+                            <option value="JPY" >JPY</option>
+                            
+                            <option value="GBP" >GBP</option>
+                            
+                            <option value="TRY" >TRY</option>
+                            
+                            <option value="CAD" >CAD</option>
+                            
+                        </select>
+                    </form>
+                    <img src="/static/icons/Hipster_DownArrow.svg" alt="icon" class="icon arrow" />
                 </div>
             </div>
         </div>
     </div>
+    <div class="navbar sub-navbar">
+        <div class="container d-flex justify-content-between">
+            <a href="/" class="navbar-brand d-flex align-items-center">
+                <img src="/static/icons/Hipster_NavLogo.svg" alt="logo" class="logo" />
+            </a>
+            <div class="controls">
+                <a href="/cart">
+                    <img src="/static/icons/Hipster_CartIcon.svg" alt="cart-icon" class="logo" />
+                    <span>Cart
+                        
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main role="main" class="home">
+<section class="jumbotron text-center mb-0 h-jumbotron">
+<div class="container">
+  <img src="/static/icons/Hipster_HeroLogo.svg" alt="icon" class="icon search-icon" />
 </div>
+</section>
+
+<div class="h-grid py-5 bg-light">
+<div class="container">
+  <div class="row h-row">
+    <img src="/static/icons/Hipster_HotProducts.svg" alt="icon" class="icon search-icon" />
+  </div>
+  <div class="row">
+    
+    <div class="col-md-4">
+      <div class="h-card card mb-4 box-shadow">
+        <a href="/product/OLJCESPC7Z">
+          <img alt="" style="width: 100%; height: auto;" src="/static/img/products/typewriter1.jpg">
+          <div class="card-hover"></div>
+        </a>
+        <div class="card-body h-card-body">
+          <h5 class="card-title h-card-title">
+            Vintage Typewriter
+          </h5>
+          <div class="d-flex justify-content-center align-items-center">
+            <small class="text-muted">
+              USD 67.98
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="h-card card mb-4 box-shadow">
+        <a href="/product/66VCHSJNUP">
+          <img alt="" style="width: 100%; height: auto;" src="/static/img/products/camera-lens2.jpg">
+          <div class="card-hover"></div>
+        </a>
+        <div class="card-body h-card-body">
+          <h5 class="card-title h-card-title">
+            Vintage Camera Lens
+          </h5>
+          <div class="d-flex justify-content-center align-items-center">
+            <small class="text-muted">
+              USD 12.48
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="h-card card mb-4 box-shadow">
+        <a href="/product/1YMWWN1N4O">
+          <img alt="" style="width: 100%; height: auto;" src="/static/img/products/barista-kit3.jpg">
+          <div class="card-hover"></div>
+        </a>
+        <div class="card-body h-card-body">
+          <h5 class="card-title h-card-title">
+            Home Barista Kit
+          </h5>
+          <div class="d-flex justify-content-center align-items-center">
+            <small class="text-muted">
+              USD 123.99
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="h-card card mb-4 box-shadow">
+        <a href="/product/L9ECAV7KIM">
+          <img alt="" style="width: 100%; height: auto;" src="/static/img/products/terrarium4.jpg">
+          <div class="card-hover"></div>
+        </a>
+        <div class="card-body h-card-body">
+          <h5 class="card-title h-card-title">
+            Terrarium
+          </h5>
+          <div class="d-flex justify-content-center align-items-center">
+            <small class="text-muted">
+              USD 36.44
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="h-card card mb-4 box-shadow">
+        <a href="/product/2ZYFJ3GM2N">
+          <img alt="" style="width: 100%; height: auto;" src="/static/img/products/film-camera5.jpg">
+          <div class="card-hover"></div>
+        </a>
+        <div class="card-body h-card-body">
+          <h5 class="card-title h-card-title">
+            Film Camera
+          </h5>
+          <div class="d-flex justify-content-center align-items-center">
+            <small class="text-muted">
+              USD 2244.99
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="h-card card mb-4 box-shadow">
+        <a href="/product/0PUK6V6EV0">
+          <img alt="" style="width: 100%; height: auto;" src="/static/img/products/record-player6.jpg">
+          <div class="card-hover"></div>
+        </a>
+        <div class="card-body h-card-body">
+          <h5 class="card-title h-card-title">
+            Vintage Record Player
+          </h5>
+          <div class="d-flex justify-content-center align-items-center">
+            <small class="text-muted">
+              USD 65.50
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="h-card card mb-4 box-shadow">
+        <a href="/product/LS4PSXUNUM">
+          <img alt="" style="width: 100%; height: auto;" src="/static/img/products/camp-mug7.jpg">
+          <div class="card-hover"></div>
+        </a>
+        <div class="card-body h-card-body">
+          <h5 class="card-title h-card-title">
+            Metal Camping Mug
+          </h5>
+          <div class="d-flex justify-content-center align-items-center">
+            <small class="text-muted">
+              USD 24.33
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="h-card card mb-4 box-shadow">
+        <a href="/product/9SIQT8TOJO">
+          <img alt="" style="width: 100%; height: auto;" src="/static/img/products/city-bike8.jpg">
+          <div class="card-hover"></div>
+        </a>
+        <div class="card-body h-card-body">
+          <h5 class="card-title h-card-title">
+            City Bike
+          </h5>
+          <div class="d-flex justify-content-center align-items-center">
+            <small class="text-muted">
+              USD 789.50
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="h-card card mb-4 box-shadow" id="ajax-content">
+
+      </div>
+    </div>
+    
+  </div>
+</div>
+</div>
+</main>
+
+
+
+<footer class="py-5">
+<div class="footer-top">
+    <div class="container footer-social">
+            <p class="footer-text">© 2020 Google Inc (<a href="https://github.com/signalfx/microservices-demo">Source Code</a>) — </p>
+            <p class="footer-text">  This website is hosted for demo purposes only. It is not an actual shop. This is not a Google product.</p>
+    </div>
+    <pre id="selenium_json"></pre>
+</div>
+</footer>
 <script>
 data = {
     "version":"1.1",
@@ -88,7 +257,7 @@ data = {
             {
                 "comment":"Check Phrase",
                 "command":"waitForElementPresent",
-                "target":"id=ajax-div",
+                "target":"id=ajax-content",
                 "value":"10000"
             }
             ]
@@ -105,6 +274,6 @@ data = {
 
 document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
 
-setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#lorem').html(data);}});", 0);
+setTimeout("$.ajax({ url: '/air-plant', success: function(data) { $('#ajax-content').html(data);}});", 0);
 </script>
 {% endblock %}
