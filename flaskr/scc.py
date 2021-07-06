@@ -149,6 +149,15 @@ def view(username):
     else:
         return render_template('scc/' + settings[0] + '.html', settings = settings)
 
+@bp.route('/view/<string:username>/product/<string:productid>')
+def product(username, productid):
+    db = get_db()
+    settings = db.execute(
+        'SELECT condition, realm, access_token, username as u'
+        ' FROM scc WHERE username = ?', (username, )
+    ).fetchone()
+    return render_template('product/' + productid + '', settings = settings)
+
 
 @bp.route('/air-plant')
 def airplant():
