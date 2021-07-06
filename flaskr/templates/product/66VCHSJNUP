@@ -1,0 +1,209 @@
+{% extends 'site.html' %}
+{% block content %}
+    <header>
+        <div class="navbar">
+            <div class="container d-flex justify-content-between">
+                <div class="h-free-shipping">Free shipping with $75 purchase! &nbsp;&nbsp;</div>
+                <div class="h-controls">
+                    <div class="h-control">
+                        <img src="/static/icons/Hipster_CurrencyIcon.svg" alt="icon" class="icon" />
+                        <form method="POST" class="controls-form" action="/setCurrency" id="currency_form" >
+                            <select name="currency_code" onchange="document.getElementById('currency_form').submit();">
+                                    
+                                <option value="EUR" >EUR</option>
+                                
+                                <option value="USD" selected="selected">USD</option>
+                                
+                                <option value="JPY" >JPY</option>
+                                
+                                <option value="GBP" >GBP</option>
+                                
+                                <option value="TRY" >TRY</option>
+                                
+                                <option value="CAD" >CAD</option>
+                                
+                            </select>
+                        </form>
+                        <img src="/static/icons/Hipster_DownArrow.svg" alt="icon" class="icon arrow" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar sub-navbar">
+            <div class="container d-flex justify-content-between">
+                <a href="/view/{{ settings[3] }}" class="navbar-brand d-flex align-items-center">
+                    <img src="/static/icons/Hipster_NavLogo.svg" alt="logo" class="logo" />
+                </a>
+                <div class="controls">
+                    <a href="/cart">
+                        <img src="/static/icons/Hipster_CartIcon.svg" alt="cart-icon" class="logo" />
+                        <span>Cart
+                            
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+<script>
+  function docReady(fn) {
+    
+    if (
+      document.readyState === "complete" ||
+      document.readyState === "interactive"
+    ) {
+      
+      setTimeout(fn, 1);
+    } else {
+      document.addEventListener("DOMContentLoaded", fn);
+    }
+  }
+
+  docReady(() => {
+    const formElem = document.getElementsByTagName("form")[1];
+    formElem.onsubmit = (e) => {
+      e.preventDefault();
+      fetch("/cart", {
+        method: "POST",
+        body: new FormData(formElem),
+      }).then(() => (window.location.href = "/cart"));
+    };
+  });
+</script>
+<main role="main">
+  <div class="h-product">
+    <div class="row">
+      <div class="col">
+        <img src="/static/img/products/camera-lens.jpg" />
+      </div>
+      <div class="product-info col">
+        <div class="product-wrapper">
+          <h2>Vintage Camera Lens</h2>
+
+          <p class="text-muted">
+            USD 12.48
+          </p>
+          <div>
+            <h6>Product Description:</h6>
+            You won&#39;t have a camera to use it and it probably doesn&#39;t work anyway.
+          </div>
+
+          <form method="POST" action="/cart" class="form-inline">
+            <input type="hidden" name="product_id" value="66VCHSJNUP" />
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="quantity">Quantity</label>
+              </div>
+              <select name="quantity" id="quantity" class="custom-select form-control form-control-lg">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>10</option>
+              </select>
+              <button type="submit" class="btn btn-info btn-lg ml-3">Add to Cart</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container py-3 px-lg-5 py-lg-5">
+    
+      
+<section class="recommendations">
+    <div class="container">
+      <div class="image">
+        <img src="/static/icons/Hipster_OtherProducts.svg" alt="icon" />
+      </div>
+      <div class="row prods">
+          
+          <div class="col-md-3">
+            <div class="h-card card mb-3 box-shadow">
+              <a href="1YMWWN1N4O">
+                <img alt="" style="width: 100%; height: auto;" src="/static/img/products/barista-kit.jpg">
+                <div class="card-hover"></div>
+              </a>
+              <div class="card-body text-center py-2">
+                <h5 class="card-title h-card-title">
+                  Home Barista Kit
+                </h5>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3">
+            <div class="h-card card mb-3 box-shadow">
+              <a href="9SIQT8TOJO">
+                <img alt="" style="width: 100%; height: auto;" src="/static/img/products/city-bike.jpg">
+                <div class="card-hover"></div>
+              </a>
+              <div class="card-body text-center py-2">
+                <h5 class="card-title h-card-title">
+                  City Bike
+                </h5>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3">
+            <div class="h-card card mb-3 box-shadow">
+              <a href="6E92ZMYYFZ">
+                <img alt="" style="width: 100%; height: auto;" src="/static/img/products/air-plant.jpg">
+                <div class="card-hover"></div>
+              </a>
+              <div class="card-body text-center py-2">
+                <h5 class="card-title h-card-title">
+                  Air Plant
+                </h5>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3">
+            <div class="h-card card mb-3 box-shadow">
+              <a href="LS4PSXUNUM">
+                <img alt="" style="width: 100%; height: auto;" src="/static/img/products/camp-mug.jpg">
+                <div class="card-hover"></div>
+              </a>
+              <div class="card-body text-center py-2">
+                <h5 class="card-title h-card-title">
+                  Metal Camping Mug
+                </h5>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+    </div>
+</section>
+
+    
+
+   
+<div class="container">
+    <div class="alert alert-dark" role="alert">
+        <strong>Advertisement:</strong>
+        <a href="0PUK6V6EV0" rel="nofollow" target="_blank" class="alert-link">
+            Vintage record player for sale. 30% off.
+        </a>
+    </div>
+</div>
+
+
+  </div>
+</main>
+
+
+<footer class="py-5">
+    <div class="footer-top">
+        <div class="container footer-social">
+                <p class="footer-text">© 2020 Google Inc (<a href="https://github.com/signalfx/microservices-demo">Source Code</a>) — </p>
+                <p class="footer-text">  This website is hosted for demo purposes only. It is not an actual shop. This is not a Google product.</p>
+        </div>
+
+    </div>
+</footer>
+{% endblock %}
