@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/cart.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/order.css') }}">
-    <link rel='shortcut icon' type='image/x-icon' href='{{ url_for('static', filename='favicon.ico') }}' />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     {% if settings[1] %}
     {% include 'header.html' %}
     {% endif %}
