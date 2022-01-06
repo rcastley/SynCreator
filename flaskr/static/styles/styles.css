@@ -343,13 +343,13 @@ main {
 main.home {
   background-color: white;
 }
-
+/*
 .h-jumbotron {
   border-radius: 0;
   background: url(/static/images/HeroBannerImage2.png) no-repeat top center;
   background-size: cover;
 }
-
+*/
 .h-jumbotron .container img {
   width: 280px;
   height: 210px;

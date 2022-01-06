@@ -15,6 +15,13 @@
     {% if settings[1] %}
     {% include 'header.html' %}
     {% endif %}
+    <style>
+    .h-jumbotron {
+        border-radius: 0;
+        background: url("{{ url_for('static', filename='images/HeroBannerImage2.png') }}") no-repeat top center;
+        background-size: cover;
+    }
+    </style>
 </head>
 <body>
     {% block content %}{% endblock %}
