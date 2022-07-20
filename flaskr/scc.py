@@ -58,7 +58,7 @@ def index():
         return render_template("scc/index.html", condition=condition)
 
 
-@bp.route("/controlgroups", methods=("GET", "POST"))
+@bp.route("/controlgroups/", methods=("GET", "POST"))
 def controlgroups():
     if g.user is None:
         return redirect(url_for("auth.login"))
@@ -76,7 +76,7 @@ def controlgroups():
         return redirect(url_for("index"))
 
 
-@bp.route("/rum", methods=("GET", "POST"))
+@bp.route("/rum/", methods=("GET", "POST"))
 def rum():
     if g.user is None:
         return redirect(url_for("auth.login"))

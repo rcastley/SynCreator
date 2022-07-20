@@ -32,7 +32,7 @@
                         <div class="nav-dropdown">
                             <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="splunk fas fa-cog"></i> <span>Configure Control Group</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-right nav-link-menu">
-                                <form class="px-4 py-3" method="post" action="/controlgroups">
+                                <form class="px-4 py-3" method="post" action="controlgroups">
                                     <div class="mb-3">
                                       <label for="controlgroup" class="form-label">Control Group ID</label>
                                       <input type="text" class="form-control" id="controlgroup" name="controlgroup" placeholder="{{ g.user['control_group'] }}">
@@ -50,7 +50,7 @@
                         <div class="nav-dropdown">
                             <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="splunk fas fa-cog"></i> <span>Splunk RUM</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-right nav-link-menu">
-                                <form class="px-4 py-3" method="post" action="/rum">
+                                <form class="px-4 py-3" method="post" action="rum">
                                     <div class="mb-3">
                                       <label for="realm" class="form-label">Realm</label>
                                       <input type="text" class="form-control" id="realm" name="realm" placeholder="{{ g.user['realm'] }}">
