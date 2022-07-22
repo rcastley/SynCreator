@@ -6,13 +6,9 @@
 <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-text mx-3"><img src="{{ url_for('static', filename='img/splunk_logo_white.png') }}" width="180px"></div>
             </a>
-
-            <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Divider -->
@@ -44,61 +40,6 @@
         <!-- End of Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
 
-        <!--
-        <nav class="navbar navbar-expand-lg navbar-white bg-white">
-            <button type="button" id="sidebarCollapse" class="btn btn-light"><i class="fas fa-bars"></i><span></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <div class="nav-dropdown">
-                            <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="splunk fas fa-cog"></i> <span>Configure Control Group</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right nav-link-menu">
-                                <form class="px-4 py-3" method="post" action="controlgroups">
-                                    <div class="mb-3">
-                                      <label for="controlgroup" class="form-label">Control Group ID</label>
-                                      <input type="text" class="form-control" id="controlgroup" name="controlgroup" placeholder="{{ g.user['control_group'] }}">
-                                    </div>
-                                    <div class="mb-3">
-                                      <label for="posttoken" class="form-label">Post Token</label>
-                                      <input type="password" class="form-control" id="posttoken" name="posttoken" value="{%if g.user['post_token'] %}{{ g.user['post_token'] }}{% endif %}">
-                                    </div>
-                                    <button type="submit" class="btn btn-splunk btn-sm">Save</button>
-                                  </form>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <div class="nav-dropdown">
-                            <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="splunk fas fa-cog"></i> <span>Splunk RUM</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right nav-link-menu">
-                                <form class="px-4 py-3" method="post" action="rum">
-                                    <div class="mb-3">
-                                      <label for="realm" class="form-label">Realm</label>
-                                      <input type="text" class="form-control" id="realm" name="realm" placeholder="{{ g.user['realm'] }}">
-                                    </div>
-                                    <div class="mb-3">
-                                      <label for="accesstoken" class="form-label">RUM Access Token</label>
-                                      <input type="password" class="form-control" id="accesstoken" name="accesstoken" value="{%if g.user['access_token'] %}{{ g.user['access_token'] }}{% endif %}">
-                                    </div>
-                                    <button type="submit" class="btn btn-splunk btn-sm">Save</button>
-                                  </form>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <div class="nav-dropdown">
-                            <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="splunk fas fa-user"></i> <span>{{ g.user['username'] }}</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right nav-link-menu">
-                                <ul class="nav-list">
-                                    <li><a href="{{ url_for('auth.logout') }}" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        -->
         <div id="content">
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -110,38 +51,14 @@
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
 
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                            aria-labelledby="rumDropdown">
-                            <form class="form-inline mr-auto w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                        placeholder="Search for..." aria-label="Search"
-                                        aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-
-                    <!-- Nav Item - Alerts -->
+                    <!-- Nav Item - Control Group -->
                     <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="splunk fas fa-cog"></i>
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">&nbsp;Enable Control Group</span>
                         </a>
-                        <!-- Dropdown - Alerts -->
+                        <!-- Dropdown - Control Group -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="controlGroupDropdown">
                             <h6 class="dropdown-header">Control Group ID & Token</h6>
                             <form class="px-4 py-3" method="post" action="controlgroups">
@@ -158,14 +75,14 @@
                         </div>
                     </li>
 
-                    <!-- Nav Item - Messages -->
+                    <!-- Nav Item - RUM -->
                     <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="splunk fas fa-cog"></i>
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">&nbsp;Enable RUM</span>
                         </a>
-                        <!-- Dropdown - Messages -->
+                        <!-- Dropdown - RUM -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                             <h6 class="dropdown-header">RUM Realm & Token</h6>
                             <form class="px-4 py-3" method="post" action="rum">
@@ -237,34 +154,6 @@
                     </div>
                     {% endfor %}
                 </div>
-                <!--
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="icon-big text-center">
-                                            <i class="splunk fas fa-comment-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="detail">
-                                            <p class="detail-subtitle">Control Group Message</p>
-                                            <span class="number">Front end deployment</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <a class="text-decoration-none" href="controlgroup/deploy">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Send Message</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    -->
                 <div class="row">
                     <div class="col-xl-3 col-md-6 mb-4">
                         <div class="card border-left-info shadow h-100 py-2">
@@ -311,34 +200,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    <!--
-                    <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="icon-big text-center">
-                                            <i class="splunk fas fa-comment-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="detail">
-                                            <p class="detail-subtitle">Control Group Message</p>
-                                            <span class="number">Fix for front end bug</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <a class="text-decoration-none" href="controlgroup/fix">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Send Message</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    -->                    
+                    </div>            
                 </div>
             </div>
         </div>
