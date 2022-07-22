@@ -1,29 +1,50 @@
 {% extends 'base.html' %}
-{% set conditions = {'Default': 'smile', '404': 'exclamation-circle', '500': 'exclamation-triangle',
+{% set conditions = {'Default': 'smile', '404 Error': 'exclamation-circle', '500 Error': 'exclamation-triangle',
                      'Validation Error': 'check', 'Content Error': 'bug', 'Large Image': 'image',
                      'Content Delay': 'hourglass-start', 'Timeout': 'hourglass-end'} %}
 {% block content %}
-<div class="wrapper">
-    <nav id="sidebar" class="inactive">
-        <div class="sidebar-header">
-            <img src="{{ url_for('static', filename='img/splunk-logo-black-small.png') }}" alt="Splunk logo" class="app-logo">
-        </div>
-        <ul class="list-unstyled components text-secondary">
-            <li>
-                <a href="#authmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-home"></i> Test Type URLs</a>
-                <ul class="collapse list-unstyled" id="authmenu">
-                    <li>
-                        <a href="{{ request.url }}view/{{ g.user['username'] }}" target="_blank"><i class="fas fa-globe"></i> Real Browser</a>
-                    </li>
-                    <li>
-                        <a href="{{ request.url }}api/v1/{{ g.user['username'] }}/books/all" target="_blank"><i class="fas fa-box-open"></i> API GET all books</a>
-                        <a href="{{ request.url }}api/v1/{{ g.user['username'] }}/books?id=1" target="_blank"><i class="fas fa-box-open"></i> API GET by id (0-2)</a>
-                    </li>
-                </ul>
+<div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+                <div class="sidebar-brand-text mx-3"><img src="{{ url_for('static', filename='img/splunk_logo_white.png') }}" width="180px"></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                SynCreator
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Test Type URLs</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Real Browser</h6>
+                        <a class="collapse-item" href="{{ request.url }}view/{{ g.user['username'] }}" target="_blank">Real Browser</a>
+                        <h6 class="collapse-header">API</h6>
+                        <a class="collapse-item" href="{{ request.url }}api/v1/{{ g.user['username'] }}/books/all" target="_blank">API GET all books</a>
+                        <a class="collapse-item" href="{{ request.url }}api/v1/{{ g.user['username'] }}/books?id=1" target="_blank">API GET by id (0-2)</a>
+                    </div>
+                </div>
             </li>
         </ul>
-    </nav>
-    <div id="body" class="active">
+        <!-- End of Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!--
         <nav class="navbar navbar-expand-lg navbar-white bg-white">
             <button type="button" id="sidebarCollapse" class="btn btn-light"><i class="fas fa-bars"></i><span></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -77,45 +98,146 @@
                 </ul>
             </div>
         </nav>
-        <div class="content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 page-header">
-                        <div class="page-pretitle">SynCreator</div>
-                        <h2 class="page-title">Dashboard</h2>
-                    </div>
+        -->
+        <div id="content">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                            aria-labelledby="rumDropdown">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-0 small"
+                                        placeholder="Search for..." aria-label="Search"
+                                        aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Alerts -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="splunk fas fa-cog"></i>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">&nbsp;Enable Control Group</span>
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="controlGroupDropdown">
+                            <h6 class="dropdown-header">Control Group ID & Token</h6>
+                            <form class="px-4 py-3" method="post" action="controlgroups">
+                                <div class="mb-3">
+                                    <label for="controlgroup" class="form-label">Control Group ID</label>
+                                    <input type="text" class="form-control" id="controlgroup" name="controlgroup" placeholder="{{ g.user['control_group'] }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="posttoken" class="form-label">Post Token</label>
+                                    <input type="password" class="form-control" id="posttoken" name="posttoken" value="{%if g.user['post_token'] %}{{ g.user['post_token'] }}{% endif %}">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                            </form>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Messages -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="splunk fas fa-cog"></i>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">&nbsp;Enable RUM</span>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                            <h6 class="dropdown-header">RUM Realm & Token</h6>
+                            <form class="px-4 py-3" method="post" action="rum">
+                                <div class="mb-3">
+                                  <label for="realm" class="form-label">Realm</label>
+                                  <input type="text" class="form-control" id="realm" name="realm" placeholder="{{ g.user['realm'] }}">
+                                </div>
+                                <div class="mb-3">
+                                  <label for="accesstoken" class="form-label">RUM Access Token</label>
+                                  <input type="password" class="form-control" id="accesstoken" name="accesstoken" value="{%if g.user['access_token'] %}{{ g.user['access_token'] }}{% endif %}">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                            </form>
+                        </div>
+                    </li>
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="splunk fas fa-user"></i>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">&nbsp;{{ g.user['username'] }}</span>
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="{{ url_for('auth.logout') }}">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+            <div class="container-fluid">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                 </div>
                 <div class="row">
                     {% for key, value in conditions.items() %}
                     {% set newkey = key|lower|replace(' ', '') %}
-                    <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="icon-big text-center">
-                                            <i class="splunk fas fa-{{ value }}"></i>
-                                        </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Condition</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ key }}</div>
                                     </div>
-                                    <div class="col-sm-8">
-                                        <div class="detail">
-                                            <p class="detail-subtitle">Condition</p>
-                                            <span class="number">{{ key }}</span>
-                                        </div>
+                                    <div class="col-auto">
+                                        <i class="splunk fas fa-{{ value }} fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
-                                <div class="footer">
-                                    <hr />
-                                    <a class="text-decoration-none" href="set/{{ newkey }}">
-                                    <button type="button" class="btn btn-sm {% if condition[0] != newkey %}btn-outline-secondary{% else %}btn-splunk{% endif %}">{% if condition[0] == newkey %}Active{% else %}Set Condition{% endif %}</button>
-                                    </a>
-                                </div>
+                                <hr>
+                                <a href="set/{{ newkey }}" class="btn {% if condition[0] != newkey %}btn-secondary{% else %}btn-success{% endif %} btn-icon-split btn-sm">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                    <span class="text">{% if condition[0] == newkey %}Active{% else %}Set Condition{% endif %}</span>
+                                </a>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
-                <hr/>
+                <!--
                 <div class="row">
                     <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
                         <div class="card">
@@ -142,6 +264,55 @@
                             </div>
                         </div>
                     </div>
+                    -->
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Control Group Message</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Front end deployment</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="splunk fas fa-comment-alt fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <hr>
+                                <a href="controlgroup/deploy" class="btn btn-info btn-icon-split btn-sm">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                    <span class="text">Send Message</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Control Group Message</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Fix for front end bug</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="splunk fas fa-comment-alt fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                                <hr>
+                                <a href="controlgroup/fix" class="btn btn-info btn-icon-split btn-sm">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                    <span class="text">Send Message</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
                     <div class="col-sm-6 col-md-6 col-lg-4 mt-3">
                         <div class="card">
                             <div class="content">
@@ -167,6 +338,7 @@
                             </div>
                         </div>
                     </div>
+                    -->                    
                 </div>
             </div>
         </div>

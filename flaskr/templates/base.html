@@ -5,22 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Splunk | SynCreator</title>
-    {% if g.user %}
     <link href="{{ url_for('static', filename='vendor/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='vendor/fontawesome/css/solid.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='vendor/fontawesome/css/brands.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/master.css') }}" rel="stylesheet">
-    {% endif %}
-    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!--<link href="{{ url_for('static', filename='css/master.css') }}" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <!--<link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">-->
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-    {% if not g.user %}
-    <link href="{{ url_for('static', filename='css/auth.css') }}" rel="stylesheet">
-    {% endif %}
 </head>
-<body>
+<body {% if request.path == '/auth/login' %}class="bg-gradient-primary"{% endif %}>
     {% block content %}{% endblock %}
     <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!--<script src="{{ url_for('static', filename='js/script.js') }}"></script>-->
+    <script src="{{ url_for('static', filename='js/sb-admin-2.min.js') }}"></script>
 </body>
 </html>

@@ -156,10 +156,10 @@ def view(username):
         " FROM scc WHERE username = ?",
         (username,),
     ).fetchone()
-    if settings[0] == "404":
+    if settings[0] == "404error":
         resp = render_template("scc/" + settings[0] + ".html", settings=settings)
         return (resp, 404)
-    elif settings[0] == "500":
+    elif settings[0] == "500error":
         resp = render_template("scc/" + settings[0] + ".html", settings=settings)
         return (resp, 500)
     elif settings[0] == "timeout":
