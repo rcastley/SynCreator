@@ -13,5 +13,5 @@ enabled = true
   
 exclude_patterns = [
     "flaskr/static/vendor/**",
-    "*flaskr/static/vendor/**"
+    "*/flaskr/static/vendor/**"
 ]
