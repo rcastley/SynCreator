@@ -12,5 +12,6 @@ enabled = true
   runtime_version = "3.x.x"
   
 exclude_patterns = [
-    "flaskr/static/vendor/**"
+    "flaskr/static/vendor/**",
+    "*flaskr/static/vendor/**"
 ]
