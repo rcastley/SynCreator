@@ -186,6 +186,26 @@ def product(username, productid):
     return render_template("product/" + productid + "", settings=settings)
 
 
+@bp.route("/view/<string:username>/cart")
+def cart(username):
+    db = get_db()
+    settings = db.execute(
+        "SELECT condition, realm, access_token, username as u"
+        " FROM scc WHERE username = ?",
+        (username,),
+    ).fetchone()
+    return render_template("cart/index.html", settings=settings)
+
+@bp.route("/view/<string:username>/cart/checkout")
+def checkout(username):
+    db = get_db()
+    settings = db.execute(
+        "SELECT condition, realm, access_token, username as u"
+        " FROM scc WHERE username = ?",
+        (username,),
+    ).fetchone()
+    return render_template("cart/checkout/index.html", settings=settings)
+
 @bp.route("/air-plant")
 def airplant():
     return render_template("scc/air-plant.html")

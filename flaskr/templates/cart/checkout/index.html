@@ -6,7 +6,7 @@
                 <div class="h-free-shipping">Free shipping with $75 purchase! &nbsp;&nbsp;</div>
                 <div class="h-controls">
                     <div class="h-control">
-                        <img src="{{ url_for('static', filename='icons/Hipster_CurrencyIcon.svg') }}" alt="icon" class="icon" />
+                        <img src="/static/icons/Hipster_CurrencyIcon.svg" alt="icon" class="icon" />
                         <form method="POST" class="controls-form" action="/setCurrency" id="currency_form" >
                             <select name="currency_code" onchange="document.getElementById('currency_form').submit();">
                                     
@@ -24,19 +24,19 @@
                                 
                             </select>
                         </form>
-                        <img src="{{ url_for('static', filename='icons/Hipster_DownArrow.svg') }}" alt="icon" class="icon arrow" />
+                        <img src="/static/icons/Hipster_DownArrow.svg" alt="icon" class="icon arrow" />
                     </div>
                 </div>
             </div>
         </div>
         <div class="navbar sub-navbar">
             <div class="container d-flex justify-content-between">
-                <a href="{{ url_for('scc.view', username=settings[3] )}}" class="navbar-brand d-flex align-items-center">
-                    <img src="{{ url_for('static', filename='icons/Hipster_NavLogo.svg') }}" alt="logo" class="logo" />
+                <a href="/" class="navbar-brand d-flex align-items-center">
+                    <img src="/static/icons/Hipster_NavLogo.svg" alt="logo" class="logo" />
                 </a>
                 <div class="controls">
                     <a href="/cart">
-                        <img src="{{ url_for('static', filename='icons/Hipster_CartIcon.svg') }}" alt="cart-icon" class="logo" />
+                        <img src="/static/icons/Hipster_CartIcon.svg" alt="cart-icon" class="logo" />
                         <span>Cart
                             
                         </span>
@@ -46,84 +46,59 @@
         </div>
     </header>
 
-<script>
-  function docReady(fn) {
-    
-    if (
-      document.readyState === "complete" ||
-      document.readyState === "interactive"
-    ) {
-      
-      setTimeout(fn, 1);
-    } else {
-      document.addEventListener("DOMContentLoaded", fn);
-    }
-  }
+    <main role="main" class="order">
+        <div class="py-5">
+            <div class="container py-3 px-lg-5">
+                <div class="row mt-5 py-2">
+                    <div class="col text-center">
+                        <img class="order-logo" src="/static/icons/Hipster_HeroLogoCyan.svg" alt="icon" />
+                        <h3>
+                            Your order is complete!
+                        </h3>
+                        <p>Order Confirmation ID</p>
+                        <p class="mg-bt"><strong>a9fcc465-b6ba-11ed-9f56-6a9a250abbb4</strong></p>
+                        <p>Shipping Tracking ID</p>
+                        <p class="mg-bt"><strong>TH-44537-225907116</strong></p>
+                        <p>Shipping Cost</p>
+                        <p class="mg-bt"><strong>USD 0.00</strong></p>
+                        <p>Total Paid</p>
+                        <p class="mg-bt"><strong>USD 0.00</strong></p>
+                    </div>
+                </div>
 
-  docReady(() => {
-    const formElem = document.getElementsByTagName("form")[1];
-    formElem.onsubmit = (e) => {
-      e.preventDefault();
-      fetch("/cart", {
-        method: "POST",
-        body: new FormData(formElem),
-      }).then(() => (window.location.href = "/cart"));
-    };
-  });
-</script>
-<main role="main">
-  <div class="h-product">
-    <div class="row">
-      <div class="col">
-        <img src="{{ url_for('static', filename='img/products/typewriter.jpg') }}" />
-      </div>
-      <div class="product-info col">
-        <div class="product-wrapper">
-          <h2>Vintage Typewriter</h2>
-
-          <p class="text-muted">
-            USD 67.98
-          </p>
-          <div>
-            <h6>Product Description:</h6>
-            This typewriter looks good in your living room.
-          </div>
-
-          <form method="GET" action="{{ settings[3]}}/cart" class="form-inline">
-            <input type="hidden" name="product_id" value="OLJCESPC7Z" />
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="quantity">Quantity</label>
-              </div>
-              <select name="quantity" id="quantity" class="custom-select form-control form-control-lg">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>10</option>
-              </select>
-              <a href="/view/{{ settings[3]}}/cart" class="btn btn-info btn-lg ml-3">Add to Cart</a>
             </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container py-3 px-lg-5 py-lg-5">
-    
-      
+            <div class="container py-3 px-lg-5">
+                <div class="row py-2 text-center">
+                    <a class="btn btn-info" href="/" role="button" style="margin-top: 40px; margin-bottom: 40px;">Keep Browsing</a>
+                </div>
+            </div>
+            
+                
 <section class="recommendations">
     <div class="container">
       <div class="image">
-        <img src="{{ url_for('static', filename='icons/Hipster_OtherProducts.svg') }}" alt="icon" />
+        <img src="/static/icons/Hipster_OtherProducts.svg" alt="icon" />
       </div>
       <div class="row prods">
           
           <div class="col-md-3">
             <div class="h-card card mb-3 box-shadow">
-              <a href="LS4PSXUNUM">
-                <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/camp-mug.jpg') }}">
+              <a href="/product/L9ECAV7KIM">
+                <img alt="" style="width: 100%; height: auto;" src="/static/img/products/terrarium.jpg">
+                <div class="card-hover"></div>
+              </a>
+              <div class="card-body text-center py-2">
+                <h5 class="card-title h-card-title">
+                  Terrarium
+                </h5>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3">
+            <div class="h-card card mb-3 box-shadow">
+              <a href="/product/LS4PSXUNUM">
+                <img alt="" style="width: 100%; height: auto;" src="/static/img/products/camp-mug.jpg">
                 <div class="card-hover"></div>
               </a>
               <div class="card-body text-center py-2">
@@ -136,13 +111,13 @@
           
           <div class="col-md-3">
             <div class="h-card card mb-3 box-shadow">
-              <a href="6E92ZMYYFZ">
-                <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/air-plant.jpg') }}">
+              <a href="/product/OLJCESPC7Z">
+                <img alt="" style="width: 100%; height: auto;" src="/static/img/products/typewriter.jpg">
                 <div class="card-hover"></div>
               </a>
               <div class="card-body text-center py-2">
                 <h5 class="card-title h-card-title">
-                  Air Plant
+                  Vintage Typewriter
                 </h5>
               </div>
             </div>
@@ -150,22 +125,8 @@
           
           <div class="col-md-3">
             <div class="h-card card mb-3 box-shadow">
-              <a href="0PUK6V6EV0">
-                <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/record-player.jpg') }}">
-                <div class="card-hover"></div>
-              </a>
-              <div class="card-body text-center py-2">
-                <h5 class="card-title h-card-title">
-                  Vintage Record Player
-                </h5>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-md-3">
-            <div class="h-card card mb-3 box-shadow">
-              <a href="9SIQT8TOJO">
-                <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/city-bike.jpg') }}">
+              <a href="/product/9SIQT8TOJO">
+                <img alt="" style="width: 100%; height: auto;" src="/static/img/products/city-bike.jpg">
                 <div class="card-hover"></div>
               </a>
               <div class="card-body text-center py-2">
@@ -180,22 +141,11 @@
     </div>
 </section>
 
+            
+        </div>
+    </main>
+
     
-
-   
-<div class="container">
-    <div class="alert alert-dark" role="alert">
-        <strong>Advertisement:</strong>
-        <a href="0PUK6V6EV0" rel="nofollow" target="_blank" class="alert-link">
-            Vintage record player for sale. 30% off.
-        </a>
-    </div>
-</div>
-
-
-  </div>
-</main>
-
 
 <footer class="py-5">
     <div class="footer-top">
@@ -207,3 +157,5 @@
     </div>
 </footer>
 {% endblock %}
+
+    
