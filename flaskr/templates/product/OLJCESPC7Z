@@ -103,7 +103,7 @@
                 <option>5</option>
                 <option>10</option>
               </select>
-              <a href="/{{ settings[3]}}/cart" class="btn btn-info btn-lg ml-3">Add to Cart</a>
+              <a href="/synthetics/view/{{ settings[3]}}/cart" class="btn btn-info btn-lg ml-3">Add to Cart</a>
             </div>
           </form>
         </div>
