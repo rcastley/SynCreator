@@ -51,7 +51,7 @@
             <div class="container py-3 px-lg-5">
                 <div class="row mt-5 py-2">
                     <div class="col text-center">
-                        <img class="order-logo" src="/static/icons/Hipster_HeroLogoCyan.svg" alt="icon" />
+                        <img class="order-logo" src="{{ url_for('static', filename='icons/Hipster_HeroLogoCyan.svg') }} alt="icon" />
                         <h3>
                             Your order is complete!
                         </h3>
@@ -77,14 +77,14 @@
 <section class="recommendations">
     <div class="container">
       <div class="image">
-        <img src="/static/icons/Hipster_OtherProducts.svg" alt="icon" />
+        <img src="{{ url_for('static', filename='icons/Hipster_OtherProducts.svg') }} alt="icon" />
       </div>
       <div class="row prods">
           
           <div class="col-md-3">
             <div class="h-card card mb-3 box-shadow">
               <a href="/product/L9ECAV7KIM">
-                <img alt="" style="width: 100%; height: auto;" src="/static/img/products/terrarium.jpg">
+                <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/products/terrarium.jpg') }}>
                 <div class="card-hover"></div>
               </a>
               <div class="card-body text-center py-2">
@@ -98,7 +98,7 @@
           <div class="col-md-3">
             <div class="h-card card mb-3 box-shadow">
               <a href="/product/LS4PSXUNUM">
-                <img alt="" style="width: 100%; height: auto;" src="/static/img/products/camp-mug.jpg">
+                <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/products/camp-mug.jpg') }}>
                 <div class="card-hover"></div>
               </a>
               <div class="card-body text-center py-2">
@@ -112,7 +112,7 @@
           <div class="col-md-3">
             <div class="h-card card mb-3 box-shadow">
               <a href="/product/OLJCESPC7Z">
-                <img alt="" style="width: 100%; height: auto;" src="/static/img/products/typewriter.jpg">
+                <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/products/typewriter.jpg') }}>
                 <div class="card-hover"></div>
               </a>
               <div class="card-body text-center py-2">
@@ -126,7 +126,7 @@
           <div class="col-md-3">
             <div class="h-card card mb-3 box-shadow">
               <a href="/product/9SIQT8TOJO">
-                <img alt="" style="width: 100%; height: auto;" src="/static/img/products/city-bike.jpg">
+                <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/products/city-bike.jpg') }}>
                 <div class="card-hover"></div>
               </a>
               <div class="card-body text-center py-2">
