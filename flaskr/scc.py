@@ -1,23 +1,11 @@
-from flask import (
-    Blueprint,
-    flash,
-    g,
-    redirect,
-    render_template,
-    request,
-    url_for,
-    make_response,
-    jsonify,
-    abort,
-    request,
-)
-from werkzeug.exceptions import abort
+import time
+
+import requests
+from flask import (Blueprint, abort, flash, g, jsonify, make_response, redirect, render_template, request, url_for)  # type: ignore
+from werkzeug.exceptions import abort  # type: ignore
 
 from flaskr.auth import login_required
 from flaskr.db import get_db
-
-import time
-import requests
 
 books = [
     {

@@ -15,6 +15,7 @@
     {% if settings[1] %}
     {% include 'header.html' %}
     {% endif %}
+    {% if settings[0] != "heroimage" %}
     <style>
     .h-jumbotron {
         border-radius: 0;
@@ -22,6 +23,15 @@
         background-size: cover;
     }
     </style>
+    {% else %}
+    <style>
+        .h-jumbotron {
+            border-radius: 0;
+            background: url("{{ url_for('static', filename='images/HeroBannerImage1.jpg') }}") no-repeat top center;
+            background-size: cover;
+        }
+    </style>
+    {% endif %}
 </head>
 <body>
     {% block content %}{% endblock %}

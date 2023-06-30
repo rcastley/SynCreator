@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask  # type: ignore
 
 
 def create_app(test_config=None):

@@ -1,8 +1,8 @@
 import sqlite3
 
 import click
-from flask import current_app, g
-from flask.cli import with_appcontext
+from flask import current_app, g  # type: ignore
+from flask.cli import with_appcontext  # type: ignore
 
 
 def get_db():
