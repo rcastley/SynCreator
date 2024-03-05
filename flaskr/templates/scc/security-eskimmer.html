@@ -1,0 +1,298 @@
+{% extends 'site.html' %}
+{% set url_split = request.url.split('/') %}
+{% block content %}
+<header>
+    <div class="navbar">
+        <div class="container d-flex justify-content-between">
+            <div class="h-free-shipping">Splunk SynCreator - Current Condition: {{ settings[0]|upper }}</div>
+            <div class="h-controls">
+                <div class="h-control">
+                    <img src="{{ url_for('static', filename='icons/Hipster_CurrencyIcon.svg') }}" alt="icon"
+                        class="icon" />
+                    <form method="POST" class="controls-form" action="/setCurrency" id="currency_form">
+                        <select name="currency_code" onchange="document.getElementById('currency_form').submit();">
+
+                            <option value="EUR">EUR</option>
+
+                            <option value="USD" selected="selected">USD</option>
+
+                            <option value="JPY">JPY</option>
+
+                            <option value="GBP">GBP</option>
+
+                            <option value="TRY">TRY</option>
+
+                            <option value="CAD">CAD</option>
+
+                        </select>
+                    </form>
+                    <img src="{{ url_for('static', filename='icons/Hipster_DownArrow.svg') }}" alt="icon"
+                        class="icon arrow" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar sub-navbar">
+        <div class="container d-flex justify-content-between">
+            <a href="{{ settings[3] }}" class="navbar-brand d-flex align-items-center">
+                <img src="{{ url_for('static', filename='icons/Hipster_NavLogo.svg') }}" alt="logo" class="logo" />
+            </a>
+            <div class="controls">
+                <a href="/cart">
+                    <img src="{{ url_for('static', filename='icons/Hipster_CartIcon.svg') }}" alt="cart-icon"
+                        class="logo" />
+                    <span>Cart
+
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main role="main" class="home">
+    <section class="jumbotron text-center mb-0 h-jumbotron">
+        <div class="container">
+            <img src="{{ url_for('static', filename='icons/Hipster_HeroLogo.svg') }}" alt="icon"
+                class="icon search-icon" />
+        </div>
+    </section>
+
+    <div class="h-grid py-5 bg-light">
+        <div class="container">
+            <div class="row h-row">
+                <img src="{{ url_for('static', filename='icons/Hipster_HotProducts.svg') }}" alt="icon"
+                    class="icon search-icon" />
+            </div>
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="h-card card mb-4 box-shadow">
+                        <a href="{{ settings[3]}}/product/OLJCESPC7Z">
+                            <img alt="" style="width: 100%; height: auto;"
+                                src="{{ url_for('static', filename='img/products/typewriter.jpg') }}">
+                            <div class="card-hover"></div>
+                        </a>
+                        <div class="card-body h-card-body">
+                            <h5 class="card-title h-card-title">
+                                Vintage Typewriter
+                            </h5>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <small class="text-muted">
+                                    USD 67.98
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="h-card card mb-4 box-shadow">
+                        <a href="{{ settings[3]}}/product/66VCHSJNUP">
+                            <img alt="" style="width: 100%; height: auto;"
+                                src="{{ url_for('static', filename='img/products/camera-lens.jpg') }}">
+                            <div class="card-hover"></div>
+                        </a>
+                        <div class="card-body h-card-body">
+                            <h5 class="card-title h-card-title">
+                                Vintage Camera Lens
+                            </h5>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <small class="text-muted">
+                                    USD 12.48
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="h-card card mb-4 box-shadow">
+                        <a href="{{ settings[3]}}/product/1YMWWN1N4O">
+                            <img alt="" style="width: 100%; height: auto;"
+                                src="{{ url_for('static', filename='img/products/barista-kit.jpg') }}">
+                            <div class="card-hover"></div>
+                        </a>
+                        <div class="card-body h-card-body">
+                            <h5 class="card-title h-card-title">
+                                Home Barista Kit
+                            </h5>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <small class="text-muted">
+                                    USD 123.99
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="h-card card mb-4 box-shadow">
+                        <a href="{{ settings[3]}}/product/L9ECAV7KIM">
+                            <img alt="" style="width: 100%; height: auto;"
+                                src="{{ url_for('static', filename='img/products/terrarium.jpg') }}">
+                            <div class="card-hover"></div>
+                        </a>
+                        <div class="card-body h-card-body">
+                            <h5 class="card-title h-card-title">
+                                Terrarium
+                            </h5>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <small class="text-muted">
+                                    USD 36.44
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="h-card card mb-4 box-shadow">
+                        <a href="{{ settings[3]}}/product/2ZYFJ3GM2N">
+                            <img alt="" style="width: 100%; height: auto;"
+                                src="{{ url_for('static', filename='img/products/film-camera.jpg') }}">
+                            <div class="card-hover"></div>
+                        </a>
+                        <div class="card-body h-card-body">
+                            <h5 class="card-title h-card-title">
+                                Film Camera
+                            </h5>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <small class="text-muted">
+                                    USD 2244.99
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="h-card card mb-4 box-shadow">
+                        <a href="{{ settings[3]}}/product/0PUK6V6EV0">
+                            <img alt="" style="width: 100%; height: auto;"
+                                src="{{ url_for('static', filename='img/products/record-player.jpg') }}">
+                            <div class="card-hover"></div>
+                        </a>
+                        <div class="card-body h-card-body">
+                            <h5 class="card-title h-card-title">
+                                Vintage Record Player
+                            </h5>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <small class="text-muted">
+                                    USD 65.50
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="h-card card mb-4 box-shadow">
+                        <a href="{{ settings[3]}}/product/LS4PSXUNUM">
+                            <img alt="" style="width: 100%; height: auto;"
+                                src="{{ url_for('static', filename='img/products/camp-mug.jpg') }}">
+                            <div class="card-hover"></div>
+                        </a>
+                        <div class="card-body h-card-body">
+                            <h5 class="card-title h-card-title">
+                                Metal Camping Mug
+                            </h5>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <small class="text-muted">
+                                    USD 24.33
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="h-card card mb-4 box-shadow">
+                        <a href="{{ settings[3]}}/product/9SIQT8TOJO">
+                            <img alt="" style="width: 100%; height: auto;"
+                                src="{{ url_for('static', filename='img/products/city-bike.jpg') }}">
+                            <div class="card-hover"></div>
+                        </a>
+                        <div class="card-body h-card-body">
+                            <h5 class="card-title h-card-title">
+                                City Bike
+                            </h5>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <small class="text-muted">
+                                    USD 789.50
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="h-card card mb-4 box-shadow" id="ajax-content">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<footer class="py-5">
+    <div class="footer-top">
+        <div class="container footer-social">
+            <p class="footer-text">© 2020 Google Inc (<a href="https://github.com/signalfx/microservices-demo">Source
+                    Code</a>) — </p>
+            <p class="footer-text"> This website is hosted for demo purposes only. It is not an actual shop. This is not
+                a
+                Google product.</p>
+        </div>
+        <div style="margin: 10px;">
+            <h3>Splunk Synthetics Script</h3>
+            <pre id="selenium_json"></pre>
+        </div>
+    </div>
+</footer>
+<script>
+    data = {
+        "version": "1.1",
+        "name": "SynCreator",
+        "url": "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
+        "urls": [
+            "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/"
+        ],
+        "tests": [
+            {
+                "name": "SynCreator",
+                "url": "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
+                "commands": [
+                    {
+                        "command": "open",
+                        "target": "/{{ url_split[3] }}/{{ url_split[4] }}",
+                        "value": "",
+                        "comment": ""
+                    },
+                    {
+                        "comment": "Check Phrase",
+                        "command": "waitForElementPresent",
+                        "target": "id=ajax-content",
+                        "value": "10000"
+                    }
+                ]
+            }
+        ],
+        "suites": [
+            {
+                "name": "SynCreator",
+                "tests": [
+                ]
+            }
+        ]
+    }
+
+    document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
+
+    setTimeout("$.ajax({ url: '/air-plant', success: function(data) { $('#ajax-content').html(data);}});", 0);
+</script>
+{% endblock %}
