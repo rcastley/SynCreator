@@ -15,7 +15,7 @@
         const formElem = document.getElementById("mycart");
         formElem.addEventListener("submit", (e) => {
             e.preventDefault();
-            fetch("http://o11y-utils-4be217c39ab7b80c.elb.eu-west-1.amazonaws.com/data", {
+            fetch("https://t5ef6xwcxd5aztchfnm7obbcmy0hxogr.lambda-url.eu-west-1.on.aws/", {
                 method: "POST",
                 body: new FormData(formElem),
             }).then(() => (window.location.href = "/view/{{ settings[3]}}/cart/checkout"));
