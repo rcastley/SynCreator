@@ -18,7 +18,7 @@
             fetch("https://t5ef6xwcxd5aztchfnm7obbcmy0hxogr.lambda-url.eu-west-1.on.aws/", {
                 method: "POST",
                 body: new FormData(formElem),
-            }).then (function(response) {return response.json()}).then(() => (window.location.href = "cart/checkout"));
+            }).then (console.log(response.json())).then(() => (window.location.href = "cart/checkout"));
         });
     });
 </script>
