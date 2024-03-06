@@ -18,7 +18,11 @@
             fetch("https://t5ef6xwcxd5aztchfnm7obbcmy0hxogr.lambda-url.eu-west-1.on.aws/", {
                 method: "POST",
                 body: new FormData(formElem),
-            }).then (console.log(response.json())).then(() => (window.location.href = "cart/checkout"));
+            })
+            .then(response => response.json())
+            .then(value => {
+                console.log(value);
+                setTimeout(function(){ window.location.href = value.url; }, 3000)});
         });
     });
 </script>
