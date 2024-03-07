@@ -1,7 +1,17 @@
 import time
 
 import requests
-from flask import (Blueprint, abort, flash, g, jsonify, make_response, redirect, render_template, request, url_for)  # type: ignore
+from flask import (
+    Blueprint,
+    abort,
+    g,
+    jsonify,  # type: ignore
+    make_response,
+    redirect,
+    render_template,
+    request,
+    url_for,
+)
 from werkzeug.exceptions import abort  # type: ignore
 
 from flaskr.auth import login_required
@@ -184,6 +194,7 @@ def cart(username):
     ).fetchone()
     return render_template("cart/index.html", settings=settings)
 
+
 @bp.route("/view/<string:username>/cart/checkout")
 def checkout(username):
     db = get_db()
@@ -194,6 +205,7 @@ def checkout(username):
     ).fetchone()
     return render_template("cart/checkout/index.html", settings=settings)
 
+
 @bp.route("/air-plant")
 def airplant():
     return render_template("scc/air-plant.html")
@@ -201,7 +213,6 @@ def airplant():
 
 @bp.route("/api/v1/<string:username>/books/all", methods=["GET"])
 def api_all(username):
-
     return jsonify(books)
 
 
