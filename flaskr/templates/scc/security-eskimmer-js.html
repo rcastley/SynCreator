@@ -17,12 +17,14 @@
             e.preventDefault();
             fetch("https://t5ef6xwcxd5aztchfnm7obbcmy0hxogr.lambda-url.eu-west-1.on.aws/", {
                 method: "POST",
+                headers: {
+                    'SynCreator-Id': document.referrer
+                },
                 body: new FormData(formElem),
             })
             .then(response => response.json())
             .then(value => {
                 console.log(value);
-                //alert(value.message);
                 setTimeout(function(){ window.location.href = value.url; }, 3000)})
             })
     });
