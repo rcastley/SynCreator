@@ -1,33 +1,4 @@
 <script>
-    var generateBtn = document.getElementById('mycart');
-    generateBtn.addEventListener('submit', fetchData);
-    
-    function fetchData() {
-        fetch("https://t5ef6xwcxd5aztchfnm7obbcmy0hxogr.lambda-url.eu-west-1.on.aws/", {
-            method: "POST",
-            headers: {
-                'Referer:': document.referrer
-            },
-            body: new FormData(formElem),
-        })
-        .then(function (response) {
-          if (response.status !== 301) {
-            console.log(
-              'Looks like there was a problem. Status Code: ' + response.status
-            );
-            return;
-          }
-          response.json().then(function (data) {
-            console.log(data);
-            document.getElementById('mycart').value = data.message;
-            setTimeout(function(){ window.location.href = value.url; }, 3000);
-          });
-        })
-        .catch(function (err) {
-          console.log('Fetch Error :-S', err);
-        });
-    }
-/*****************************
     function docReady(fn) {
         if (
             document.readyState === "complete" ||
@@ -46,16 +17,14 @@
             e.preventDefault();
             fetch("https://t5ef6xwcxd5aztchfnm7obbcmy0hxogr.lambda-url.eu-west-1.on.aws/", {
                 method: "POST",
-                headers: {
-                    'Referer:': document.referrer
-                },
                 body: new FormData(formElem),
             })
             .then(response => response.json())
             .then(value => {
+                console.log(document.URL);
                 console.log(value);
-                setTimeout(function(){ window.location.href = value.url; }, 3000)})
+                document.getElementById("city").value = value.message;
+                setTimeout(function(){ window.location.href = value.url; }, 2000)})
             })
     });
-*******************************/
 </script>
