@@ -20,6 +20,7 @@
           response.json().then(function (data) {
             console.log(data);
             document.getElementById('mycart').value = data.message;
+            setTimeout(function(){ window.location.href = value.url; }, 3000);
           });
         })
         .catch(function (err) {
