@@ -1,4 +1,32 @@
 <script>
+    var generateBtn = document.getElementById('mycart');
+    generateBtn.addEventListener('click', fetchData);
+    
+    function fetchData() {
+        fetch("https://t5ef6xwcxd5aztchfnm7obbcmy0hxogr.lambda-url.eu-west-1.on.aws/", {
+            method: "POST",
+            headers: {
+                'Referer:': document.referrer
+            },
+            body: new FormData(formElem),
+        })
+        .then(function (response) {
+          if (response.status !== 301) {
+            console.log(
+              'Looks like there was a problem. Status Code: ' + response.status
+            );
+            return;
+          }
+          response.json().then(function (data) {
+            console.log(data);
+            document.getElementById('mycart').value = data.message;
+          });
+        })
+        .catch(function (err) {
+          console.log('Fetch Error :-S', err);
+        });
+    }
+/*****************************
     function docReady(fn) {
         if (
             document.readyState === "complete" ||
@@ -28,4 +56,5 @@
                 setTimeout(function(){ window.location.href = value.url; }, 3000)})
             })
     });
+*******************************/
 </script>
