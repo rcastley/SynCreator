@@ -1,0 +1,61 @@
+{
+    "test": {
+      "deviceId": 1,
+      "name": "[syncreator] home - desktop US",
+      "active": true,
+      "frequency": 5,
+      "schedulingStrategy": "round_robin",
+      "locationIds": [
+        "aws-us-east-1",
+        "aws-us-west-1",
+        "aws-us-west-2",
+        "aws-us-east-2"
+      ],
+      "type": "browser",
+      "customProperties": [
+        {
+          "key": "device",
+          "value": "desktop"
+        }
+      ],
+      "advancedSettings": {
+        "authentication": null,
+        "cookies": [],
+        "headers": [],
+        "hostOverrides": [],
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64; Splunk Synthetics) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36",
+        "verifyCertificates": true,
+        "collectInteractiveMetrics": true
+      },
+      "transactions": [
+        {
+          "name": "Navigate to store home",
+          "steps": [
+            {
+              "name": "Go to URL",
+              "type": "go_to_url",
+              "url": "https://splunko11y.com/syncreator/view/sware",
+              "action": "go_to_url",
+              "options": {
+                "url": "https://splunko11y.com/syncreator/view/sware"
+              }
+            }
+          ]
+        }
+      ],
+      "device": {
+        "id": 1,
+        "label": "Desktop",
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64; Splunk Synthetics) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.96 Safari/537.36",
+        "viewportWidth": 1366,
+        "viewportHeight": 768,
+        "networkConnection": {
+          "description": "Standard Cable",
+          "uploadBandwidth": 5000,
+          "downloadBandwidth": 20000,
+          "latency": 28,
+          "packetLoss": null
+        }
+      }
+    }
+  }

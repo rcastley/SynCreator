@@ -56,47 +56,17 @@
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
 
-                    <!-- Nav Item - Control Group -->
-                    <!--
-                    <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="splunk fas fa-cog"></i>
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">&nbsp;Enable Control Group</span>
-                        </a>
-                    -->
-                        <!-- Dropdown - Control Group -->
-                        <!--
-                        <div class="dropdown-list dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                            aria-labelledby="controlGroupDropdown">
-                            <h6 class="dropdown-header">Control Group ID & Token</h6>
-                            <form class="px-4 py-3" method="post" action="controlgroups">
-                                <div class="mb-3">
-                                    <label for="controlgroup" class="form-label">Control Group ID</label>
-                                    <input type="text" class="form-control" id="controlgroup" name="controlgroup"
-                                        placeholder="{{ g.user['control_group'] }}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="posttoken" class="form-label">Post Token</label>
-                                    <input type="password" class="form-control" id="posttoken" name="posttoken"
-                                        value="{%if g.user['post_token'] %}{{ g.user['post_token'] }}{% endif %}">
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-sm">Save</button>
-                            </form>
-                        </div>
-                    </li>
-                    -->
-                    <!-- Nav Item - RUM -->
+                    <!-- Nav Item - Config -->
                     <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="splunk fas fa-cog"></i>
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">&nbsp;Enable RUM</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">&nbsp;Configure</span>
                         </a>
-                        <!-- Dropdown - RUM -->
+                        <!-- Dropdown - Config -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="messagesDropdown">
-                            <h6 class="dropdown-header">RUM Realm & Token</h6>
+                            <h6 class="dropdown-header">Observability Cloud Configuration</h6>
                             <form class="px-4 py-3" method="post" action="rum">
                                 <div class="mb-3">
                                     <label for="realm" class="form-label">Realm</label>
@@ -104,9 +74,15 @@
                                         placeholder="{{ g.user['realm'] }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="accesstoken" class="form-label">RUM Access Token</label>
-                                    <input type="password" class="form-control" id="accesstoken" name="accesstoken"
-                                        value="{%if g.user['access_token'] %}{{ g.user['access_token'] }}{% endif %}">
+                                    <label for="ingesttoken" class="form-label">Ingest/API Token</label>
+                                    <input type="password" class="form-control" id="ingesttoken" name="ingesttoken"
+                                        value="{%if g.user['ingest_token'] %}{{ g.user['ingest_token'] }}{% endif %}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="rumtoken" class="form-label">RUM Token</label>
+                                    <input type="password" class="form-control" id="rumtoken" name="rumtoken"
+                                        value="{%if g.user['rum_token'] %}{{ g.user['rum_token'] }}{% endif %}">
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-sm">Save</button>
                             </form>
@@ -126,6 +102,10 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="{{ url_for('scc.create_browser_test') }}">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Deploy Synthetics Test
+                            </a>
                             <a class="dropdown-item" href="{{ url_for('auth.logout') }}">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout

@@ -1,17 +1,11 @@
+import json
+import os
 import time
 
 import requests
-from flask import (
-    Blueprint,
-    abort,
-    g,
-    jsonify,  # type: ignore
-    make_response,
-    redirect,
-    render_template,
-    request,
-    url_for,
-)
+from flask import jsonify  # type: ignore
+from flask import (Blueprint, abort, g, make_response, redirect,
+                   render_template, request, url_for)
 from werkzeug.exceptions import abort  # type: ignore
 
 from flaskr.auth import login_required
@@ -56,24 +50,6 @@ def index():
         return render_template("scc/index.html", condition=condition)
 
 
-@bp.route("/controlgroups/", methods=("GET", "POST"))
-def controlgroups():
-    if g.user is None:
-        return redirect(url_for("auth.login"))
-    else:
-        if request.method == "POST":
-            controlgroup = request.form["controlgroup"]
-            posttoken = request.form["posttoken"]
-
-        db = get_db()
-        db.execute(
-            "UPDATE scc" " SET control_group = ?, post_token = ? WHERE username = ?",
-            (controlgroup, posttoken, g.user["username"]),
-        )
-        db.commit()
-        return redirect(url_for("index"))
-
-
 @bp.route("/rum/", methods=("GET", "POST"))
 def rum():
     if g.user is None:
@@ -81,12 +57,13 @@ def rum():
     else:
         if request.method == "POST":
             realm = request.form["realm"]
-            accesstoken = request.form["accesstoken"]
+            ingesttoken = request.form["ingesttoken"]
+            rumtoken = request.form["rumtoken"]
 
         db = get_db()
         db.execute(
-            "UPDATE scc" " SET realm = ?, access_token = ? WHERE username = ?",
-            (realm, accesstoken, g.user["username"]),
+            "UPDATE scc" " SET realm = ?, rum_token = ?, ingest_token = ? WHERE username = ?",
+            (realm, rumtoken, ingesttoken, g.user["username"]),
         )
         db.commit()
         return redirect(url_for("index"))
@@ -97,17 +74,20 @@ def set(condition):
     if g.user is None:
         return redirect(url_for("auth.login"))
     else:
-        if g.user["control_group"] is not None:
-            data = {
-                "post_token": g.user["post_token"],
-                "command": "annotate",
-                "title": "Condition changed",
-                "message": "Using condition: " + condition,
-            }
+        if g.user["ingest_token"] is not None:
+            data = [{
+                "category": "USER_DEFINED",
+                "eventType": "condition_changed",
+                "dimensions": {
+                    "condition": condition,
+                    "source": "syncreator",
+                    "user": g.user["username"]
+                    }
+            }]
             requests.post(
-                "https://monitoring.rigor.com/control_groups/"
-                + g.user["control_group"],
-                data=data,
+                f"https://ingest.{g.user['realm']}.signalfx.com/v2/event",
+                headers={"X-SF-TOKEN": g.user["ingest_token"]},
+                json=data,
             )
         db = get_db()
         db.execute(
@@ -118,39 +98,11 @@ def set(condition):
         return redirect(url_for("index"))
 
 
-@bp.route("/controlgroup/<string:condition>", methods=("GET", "POST"))
-def controlgroup(condition):
-    if g.user is None:
-        return redirect(url_for("auth.login"))
-    else:
-        if g.user["control_group"] != "None":
-            if condition == "depoy":
-                data = {
-                    "post_token": g.user["post_token"],
-                    "command": "annotate",
-                    "title": "Deployment",
-                    "message": "Front end deployed",
-                }
-            else:
-                data = {
-                    "post_token": g.user["post_token"],
-                    "command": "annotate",
-                    "title": "Fix",
-                    "message": "Fix for front end bug deployed",
-                }
-            requests.post(
-                "https://monitoring.rigor.com/control_groups/"
-                + g.user["control_group"],
-                data=data,
-            )
-        return redirect(url_for("index"))
-
-
 @bp.route("/view/<string:username>")
 def view(username):
     db = get_db()
     settings = db.execute(
-        "SELECT condition, realm, access_token, username as u"
+        "SELECT condition, realm, rum_token, ingest_token, username as u"
         " FROM scc WHERE username = ?",
         (username,),
     ).fetchone()
@@ -249,6 +201,28 @@ def create_task(username):
     }
     return jsonify({"book": book}), 201
 
+
+@bp.route("/create_browser_test")
+def create_browser_test():
+    if g.user is None:
+        return redirect(url_for("auth.login"))
+    else:
+        document_path = os.path.dirname(os.path.abspath(__file__)) + "/synthetic_tests/homepage-us.json"
+        
+        with open(document_path, "r") as f:
+            data = json.load(f)
+            data['test']['transactions'][0]['steps'][0]['url'] = "https://splunko11y.com/syncreator/view/" + g.user["username"]
+            data['test']['transactions'][0]['steps'][0]['options']['url'] = "https://splunko11y.com/syncreator/view/" + g.user["username"]
+
+        response = requests.post(f"https://api.{g.user['realm']}.signalfx.com/v2/synthetics/tests/browser",
+                                 headers={"X-SF-TOKEN": g.user["ingest_token"]},
+                                 json=data
+                                 )
+
+        if not response.ok:
+            return f"Error: **{response.status_code}** {response.reason}"
+        else:
+            return redirect(url_for("index"))
 
 @bp.errorhandler(404)
 def not_found(error):
