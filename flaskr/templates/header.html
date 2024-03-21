@@ -13,3 +13,7 @@
         rumAccessToken: "{{ settings[2] }}"
     });
 </script>
+<script>
+    const Provider = SplunkRum.provider; 
+    var tracer=Provider.getTracer('appModuleLoader');
+</script>
