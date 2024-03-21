@@ -31,7 +31,7 @@
         </div>
         <div class="navbar sub-navbar">
             <div class="container d-flex justify-content-between">
-                <a href="{{ url_for('scc.view', username=settings[3] )}}" class="navbar-brand d-flex align-items-center">
+                <a href="{{ url_for('scc.view', username=settings[4] )}}" class="navbar-brand d-flex align-items-center">
                     <img src="{{ url_for('static', filename='icons/Hipster_NavLogo.svg') }}" alt="logo" class="logo" />
                 </a>
                 <div class="controls">

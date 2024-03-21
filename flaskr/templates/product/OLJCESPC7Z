@@ -31,7 +31,7 @@
   </div>
   <div class="navbar sub-navbar">
     <div class="container d-flex justify-content-between">
-      <a href="{{ url_for('scc.view', username=settings[3] )}}" class="navbar-brand d-flex align-items-center">
+      <a href="{{ url_for('scc.view', username=settings[4] )}}" class="navbar-brand d-flex align-items-center">
         <img src="{{ url_for('static', filename='icons/Hipster_NavLogo.svg') }}" alt="logo" class="logo" />
       </a>
       <div class="controls">
@@ -89,7 +89,7 @@
             This typewriter looks good in your living room.
           </div>
 
-          <form method="GET" action="{{ settings[3]}}/cart" class="form-inline">
+          <form method="GET" action="{{ settings[4]}}/cart" class="form-inline">
             <input type="hidden" name="product_id" value="OLJCESPC7Z" />
             <div class="input-group">
               <div class="input-group-prepend">
@@ -103,7 +103,7 @@
                 <option>5</option>
                 <option>10</option>
               </select>
-              <a href="{{ url_for('scc.cart', username=settings[3])}}" class="btn btn-info btn-lg ml-3">Add to Cart</a>
+              <a href="{{ url_for('scc.cart', username=settings[4])}}" class="btn btn-info btn-lg ml-3">Add to Cart</a>
             </div>
           </form>
         </div>

@@ -106,6 +106,13 @@ def view(username):
         " FROM scc WHERE username = ?",
         (username,),
     ).fetchone()
+    
+    #print(settings[0])
+    #print(settings[1])
+    #print(settings[3])
+    #print(settings[2])
+    #print(settings[4])
+
     if settings[0] == "404error":
         resp = render_template("scc/" + settings[0] + ".html", settings=settings)
         return (resp, 404)
@@ -129,7 +136,7 @@ def view(username):
 def product(username, productid):
     db = get_db()
     settings = db.execute(
-        "SELECT condition, realm, access_token, username as u"
+        "SELECT condition, realm, rum_token, ingest_token, username as u"
         " FROM scc WHERE username = ?",
         (username,),
     ).fetchone()
@@ -140,7 +147,7 @@ def product(username, productid):
 def cart(username):
     db = get_db()
     settings = db.execute(
-        "SELECT condition, realm, access_token, username as u"
+        "SELECT condition, realm, rum_token, ingest_token, username as u"
         " FROM scc WHERE username = ?",
         (username,),
     ).fetchone()
@@ -151,7 +158,7 @@ def cart(username):
 def checkout(username):
     db = get_db()
     settings = db.execute(
-        "SELECT condition, realm, access_token, username as u"
+        "SELECT condition, realm, rum_token, ingest_token, username as u"
         " FROM scc WHERE username = ?",
         (username,),
     ).fetchone()
@@ -211,6 +218,7 @@ def create_browser_test():
         
         with open(document_path, "r") as f:
             data = json.load(f)
+            data['test']['name'] = f"[syncreator - {g.user['username']}] Home - Desktop US"
             data['test']['transactions'][0]['steps'][0]['url'] = "https://splunko11y.com/syncreator/view/" + g.user["username"]
             data['test']['transactions'][0]['steps'][0]['options']['url'] = "https://splunko11y.com/syncreator/view/" + g.user["username"]
 
