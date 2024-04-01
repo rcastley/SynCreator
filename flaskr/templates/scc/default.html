@@ -243,10 +243,12 @@
       <p class="footer-text"> This website is hosted for demo purposes only. It is not an actual shop. This is not a
         Google product.</p>
     </div>
+    <!--
     <div style="margin: 10px;">
       <h3>Splunk Synthetics Script</h3>
       <pre id="selenium_json"></pre>
     </div>
+    -->
   </div>
 </footer>
 <script>
@@ -286,7 +288,7 @@
     ]
   }
 
-  document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);
+  /*document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);*/
 
   setTimeout("$.ajax({ url: '/air-plant', success: function(data) { $('#ajax-content').html(data);}});", 0);
 </script>
