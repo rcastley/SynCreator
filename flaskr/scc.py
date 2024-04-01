@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import time
 
 import requests
@@ -107,30 +108,32 @@ def view(username):
         (username,),
     ).fetchone()
     
+    if settings is not None:
     #print(settings[0])
     #print(settings[1])
     #print(settings[3])
     #print(settings[2])
     #print(settings[4])
 
-    if settings[0] == "404error":
-        resp = render_template("scc/" + settings[0] + ".html", settings=settings)
-        return (resp, 404)
-    elif settings[0] == "500error":
-        resp = render_template("scc/" + settings[0] + ".html", settings=settings)
-        return (resp, 500)
-    elif settings[0] == "timeout":
-        time.sleep(62)
-        return render_template("scc/" + settings[0] + ".html", settings=settings)
-    elif settings[0] == "cookies":
-        resp = make_response(
-            render_template("scc/" + settings[0] + ".html", settings=settings)
-        )
-        resp.set_cookie("SplunkSynthetic", "abc123")
-        return resp
+        if settings[0] == "404error":
+            resp = render_template("scc/" + settings[0] + ".html", settings=settings)
+            return (resp, 404)
+        elif settings[0] == "500error":
+            resp = render_template("scc/" + settings[0] + ".html", settings=settings)
+            return (resp, 500)
+        elif settings[0] == "timeout":
+            time.sleep(62)
+            return render_template("scc/" + settings[0] + ".html", settings=settings)
+        elif settings[0] == "cookies":
+            resp = make_response(
+                render_template("scc/" + settings[0] + ".html", settings=settings)
+            )
+            resp.set_cookie("SplunkSynthetic", "abc123")
+            return resp
+        else:
+            return render_template("scc/" + settings[0] + ".html", settings=settings)
     else:
-        return render_template("scc/" + settings[0] + ".html", settings=settings)
-
+        return render_template("scc/404error.html", settings=settings)
 
 @bp.route("/view/<string:username>/product/<string:productid>")
 def product(username, productid):
