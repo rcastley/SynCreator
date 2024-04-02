@@ -58,9 +58,9 @@
                     <h3>1 item in your cart</h3>
                 </div>
                 <div class="col text-right">
-                    <form method="POST" action="/cart/empty">
+                    <form method="GET" action="{{ url_for('scc.view', username=settings[4] )}}">
                         <button class="btn btn-secondary empty-btn" type="submit">Empty cart</button>
-                        <a class="btn btn-info" href="/" role="button">Keep browsing</a>
+                        <a class="btn btn-info" href="{{ url_for('scc.view', username=settings[4] )}}" role="button">Keep browsing</a>
                     </form>
 
                 </div>
@@ -185,7 +185,8 @@
 
                     <div class="col-md-3">
                         <div class="h-card card mb-3 box-shadow">
-                            <a href="/product/9SIQT8TOJO">
+                            
+                            <a href="{{ url_for('scc.view', username=settings[4] )}}/product/9SIQT8TOJO">
                                 <img alt="" style="width: 100%; height: auto;"
                                     src="{{ url_for('static', filename='img/products/city-bike.jpg') }}">
                                 <div class="card-hover"></div>
@@ -200,7 +201,7 @@
 
                     <div class="col-md-3">
                         <div class="h-card card mb-3 box-shadow">
-                            <a href="/product/LS4PSXUNUM">
+                            <a href="{{ url_for('scc.view', username=settings[4] )}}/product/LS4PSXUNUM">
                                 <img alt="" style="width: 100%; height: auto;"
                                     src="{{ url_for('static', filename='img/products/camp-mug.jpg') }}">
                                 <div class="card-hover"></div>
@@ -215,7 +216,7 @@
 
                     <div class="col-md-3">
                         <div class="h-card card mb-3 box-shadow">
-                            <a href="/product/1YMWWN1N4O">
+                            <a href="{{ url_for('scc.view', username=settings[4] )}}/product/1YMWWN1N4O">
                                 <img alt="" style="width: 100%; height: auto;"
                                     src="{{ url_for('static', filename='img/products/barista-kit.jpg') }}">
                                 <div class="card-hover"></div>
@@ -230,7 +231,7 @@
 
                     <div class="col-md-3">
                         <div class="h-card card mb-3 box-shadow">
-                            <a href="/product/66VCHSJNUP">
+                            <a href="{{ url_for('scc.view', username=settings[4] )}}/product/66VCHSJNUP">
                                 <img alt="" style="width: 100%; height: auto;"
                                     src="{{ url_for('static', filename='img/products/camera-lens.jpg') }}">
                                 <div class="card-hover"></div>
