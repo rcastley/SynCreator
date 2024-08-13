@@ -89,9 +89,16 @@ content %}
             />
         </div>
     </section>
-    <div style="background-color: black">
-        <h2>You have been hacked by Hacker McHackerson</h2>
-        <img src="{{ url_for('static', filename='font/blah.jpg')}}" />
+    <div class="container">
+        <div class="row">
+            <div style="background-color: black; width: 100%">
+            
+                <div style="margin: auto; width: 60%; border: 1px; border-color: #fff">
+                    <h2 style="color: #fff">You have been hacked by Hacker McHackerson</h2>
+                    <img src="{{ url_for('static', filename='font/blah.jpg')}}" />
+                </div>
+            </div>
+        </div>
     </div>
     <!--
     <div class="h-grid py-5 bg-light">
@@ -287,10 +294,12 @@ content %}
                 actual shop. This is not a Google product.
             </p>
         </div>
+        <!--
         <div style="margin: 10px">
             <h3>Splunk Synthetics Script</h3>
             <pre id="selenium_json"></pre>
         </div>
+        -->
     </div>
 </footer>
 <script>
