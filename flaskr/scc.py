@@ -1,12 +1,9 @@
 import json
 import os
-import re
 import time
 
-import requests
-from flask import jsonify  # type: ignore
-from flask import (Blueprint, abort, g, make_response, redirect,
-                   render_template, request, url_for)
+import requests  # type: ignore
+from flask import (Blueprint, abort, g, jsonify, make_response, redirect, render_template, request, url_for)  # type: ignore
 from werkzeug.exceptions import abort  # type: ignore
 
 from flaskr.auth import login_required
@@ -109,11 +106,6 @@ def view(username):
     ).fetchone()
     
     if settings is not None:
-    #print(settings[0])
-    #print(settings[1])
-    #print(settings[3])
-    #print(settings[2])
-    #print(settings[4])
 
         if settings[0] == "404error":
             resp = render_template("scc/" + settings[0] + ".html", settings=settings)
@@ -221,7 +213,7 @@ def create_browser_test():
         
         with open(document_path, "r") as f:
             data = json.load(f)
-            data['test']['name'] = f"[syncreator - {g.user['username']}] Home - Desktop US"
+            data['test']['name'] = f"[syncreator - {g.user['username']}] Home - Desktop {g.user['realm']}"
             data['test']['transactions'][0]['steps'][0]['url'] = "https://splunko11y.com/syncreator/view/" + g.user["username"]
             data['test']['transactions'][0]['steps'][0]['options']['url'] = "https://splunko11y.com/syncreator/view/" + g.user["username"]
 
