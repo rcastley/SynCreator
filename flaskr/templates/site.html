@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/cart.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/order.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
-    {% if settings[1] %}
+    {% if settings[2] %}
     {% include 'header.html' %}
     {% endif %}
     {% if settings[0] != "heroimage" %}
@@ -38,9 +38,7 @@
 <body>
     {% block content %}{% endblock %}
     <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous">
-        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </body>
 
 </html>
