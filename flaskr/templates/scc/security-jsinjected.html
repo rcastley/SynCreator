@@ -244,14 +244,14 @@
         <div class="container footer-social">
             <p class="footer-text">© 2020 Google Inc (<a href="https://github.com/signalfx/microservices-demo">Source
                     Code</a>) — </p>
-            <p class="footer-text"> This website is hosted for demo purposes only. It is not an actual shop. This is not
-                a
-                Google product.</p>
+            <p class="footer-text"> This website is hosted for demo purposes only. It is not an actual shop. This is not a Google product.</p>
         </div>
+        <!--
         <div style="margin: 10px;">
             <h3>Splunk Synthetics Script</h3>
             <pre id="selenium_json"></pre>
         </div>
+        -->
     </div>
 </footer>
 <script>
@@ -293,8 +293,17 @@
 
     /*document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);*/
 
-    setTimeout("$.ajax({ url: '/air-plant', success: function(data) { $('#ajax-content').html(data);}});", 0);
+    setTimeout("$.ajax({ url: '/air-plant', success: function(data) { $('#ajax-content').html(data);}});", 1000);
 </script>
+<!--
 <script src="https://drive.google.com/file/d/1rVPOA9R3KcPVZsvh3IXWraYab_vyW-GR/view?usp=sharing">
+</script>
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-replace-text/1.1.0/jquery-replace-text-min.js"></script>
+<script>
+    $('.container *').replaceText( /\bVintage Typewriter\b/gi, 'You have' );
+    $('.container *').replaceText( /\bVintage Camera Lens\b/gi, 'BEEN' );
+    $('.container *').replaceText( /\bHome Barista Kit\b/gi, 'Hacked!' );
 </script>
 {% endblock %}
