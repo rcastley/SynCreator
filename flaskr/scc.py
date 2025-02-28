@@ -67,6 +67,24 @@ def rum():
         return redirect(url_for("index"))
 
 
+@bp.route("/splunk/", methods=("GET", "POST"))
+def splunk():
+    if g.user is None:
+        return redirect(url_for("auth.login"))
+    else:
+        if request.method == "POST":
+            hec_url = request.form["hec_url"]
+            hec_token = request.form["hec_token"]
+
+        db = get_db()
+        db.execute(
+            "UPDATE scc" " SET hec_url = ?, hec_token = ? WHERE username = ?",
+            (hec_url, hec_token, g.user["username"]),
+        )
+        db.commit()
+        return redirect(url_for("index"))
+
+
 @bp.route("/set/<string:condition>", methods=("GET", "POST"))
 def set(condition):
     if g.user is None:
