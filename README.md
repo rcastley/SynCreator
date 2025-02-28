@@ -11,7 +11,7 @@ python3 -m venv venv
 pip3 install -e .
 export FLASK_APP=flaskr
 flask init-db
-nohup waitress-serve --call 'flaskr:create_app' > log.txt 2>&1 &
+nohup waitress-serve --threads=8 --call 'flaskr:create_app' > log.txt 2>&1 &
 ```
 
 Open [http://localhost:8080](http://localhost:8080) in a browser to use the SynCreator app to simulate conditions. You will need to initially register a username & password.
@@ -52,7 +52,7 @@ python3 -m venv venv
 pip3 install -e .
 export FLASK_APP=flaskr
 flask init-db
-nohup waitress-serve --call 'flaskr:create_app' > log.txt 2>&1 &
+nohup waitress-serve --threads=8 --call 'flaskr:create_app' > log.txt 2>&1 &
 ```
 
 Open `http://\<insertyourip\>:8080` in a browser.
