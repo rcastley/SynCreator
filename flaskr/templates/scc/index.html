@@ -60,8 +60,8 @@
                     <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="splunk fas fa-cog"></i>
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">&nbsp;Configure</span>
+                            <i class="splunk fas fa-cloud"></i>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">&nbsp;Observability Cloud</span>
                         </a>
                         <!-- Dropdown - Config -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -83,6 +83,32 @@
                                     <label for="rumtoken" class="form-label">RUM Token</label>
                                     <input type="password" class="form-control" id="rumtoken" name="rumtoken"
                                         value="{%if g.user['rum_token'] %}{{ g.user['rum_token'] }}{% endif %}">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="splunk fas fa-angle-right"></i>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">&nbsp;Splunk</span>
+                        </a>
+                        <!-- Dropdown - Config -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="messagesDropdown">
+                            <h6 class="dropdown-header">Splunk Cloud/Enterprise Configuration</h6>
+                            <form class="px-4 py-3" method="post" action="splunk">
+                                <div class="mb-3">
+                                    <label for="hec_url" class="form-label">HEC URL</label>
+                                    <input type="text" class="form-control" id="hec_url" name="hec_url"
+                                        placeholder="{{ g.user['hec_url'] }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="hec_token" class="form-label">HEC Token</label>
+                                    <input type="password" class="form-control" id="hec_token" name="hec_token"
+                                        value="{%if g.user['hec_token'] %}{{ g.user['hec_token'] }}{% endif %}">
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-sm">Save</button>
                             </form>
