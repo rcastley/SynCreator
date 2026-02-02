@@ -1,0 +1,125 @@
+{% extends 'site.html' %}
+{% set url_split = request.url.split('/') %}
+{% block content %}
+<header>
+  <div class="navbar">
+    <div class="container d-flex justify-content-between">
+      <div class="h-free-shipping">Splunk SynCreator - Current Condition: {{ settings[0]|upper }}</div>
+      <div class="h-controls">
+        <div class="h-control">
+          <img src="{{ url_for('static', filename='icons/Hipster_CurrencyIcon.svg') }}" alt="icon" class="icon" />
+          <form method="POST" class="controls-form" action="/setCurrency" id="currency_form">
+            <select name="currency_code" onchange="document.getElementById('currency_form').submit();">
+              <option value="EUR">EUR</option>
+              <option value="USD" selected="selected">USD</option>
+              <option value="JPY">JPY</option>
+              <option value="GBP">GBP</option>
+              <option value="TRY">TRY</option>
+              <option value="CAD">CAD</option>
+            </select>
+          </form>
+          <img src="{{ url_for('static', filename='icons/Hipster_DownArrow.svg') }}" alt="icon" class="icon arrow" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar sub-navbar">
+    <div class="container d-flex justify-content-between">
+      <a href="{{ settings[4] }}" class="navbar-brand d-flex align-items-center">
+        <img src="{{ url_for('static', filename='icons/Hipster_NavLogo.svg') }}" alt="logo" class="logo" />
+      </a>
+      <div class="controls">
+        <!-- Broken cart link -->
+        <a href="/cart-deleted-page">
+          <img src="{{ url_for('static', filename='icons/Hipster_CartIcon.svg') }}" alt="cart-icon" class="logo" />
+          <span>Cart</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main role="main" class="home">
+  <section class="jumbotron text-center mb-0 h-jumbotron">
+    <div class="container">
+      <img src="{{ url_for('static', filename='icons/Hipster_HeroLogo.svg') }}" alt="icon" class="icon search-icon" />
+    </div>
+  </section>
+
+  <div class="h-grid py-5 bg-light">
+    <div class="container">
+      <div class="row h-row">
+        <img src="{{ url_for('static', filename='icons/Hipster_HotProducts.svg') }}" alt="icon" class="icon search-icon" />
+      </div>
+      <div class="row">
+        <!-- All product links point to non-existent pages -->
+        <div class="col-md-4">
+          <div class="h-card card mb-4 box-shadow">
+            <a href="{{ settings[4]}}/product/DELETED-PRODUCT-1">
+              <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/typewriter.jpg') }}">
+              <div class="card-hover"></div>
+            </a>
+            <div class="card-body h-card-body">
+              <h5 class="card-title h-card-title">Vintage Typewriter</h5>
+              <div class="d-flex justify-content-center align-items-center">
+                <small class="text-muted">USD 67.98</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="h-card card mb-4 box-shadow">
+            <a href="{{ settings[4] }}/product/DELETED-PRODUCT-2">
+              <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/camera-lens.jpg') }}">
+              <div class="card-hover"></div>
+            </a>
+            <div class="card-body h-card-body">
+              <h5 class="card-title h-card-title">Vintage Camera Lens</h5>
+              <div class="d-flex justify-content-center align-items-center">
+                <small class="text-muted">USD 12.48</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="h-card card mb-4 box-shadow">
+            <a href="{{ settings[4] }}/product/DELETED-PRODUCT-3">
+              <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/barista-kit.jpg') }}">
+              <div class="card-hover"></div>
+            </a>
+            <div class="card-body h-card-body">
+              <h5 class="card-title h-card-title">Home Barista Kit</h5>
+              <div class="d-flex justify-content-center align-items-center">
+                <small class="text-muted">USD 123.99</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional broken navigation links -->
+      <div class="row mt-4">
+        <div class="col-12 text-center">
+          <p class="text-muted">Quick Links:</p>
+          <a href="/about-us-old" class="btn btn-outline-secondary btn-sm mx-1">About Us</a>
+          <a href="/contact-removed" class="btn btn-outline-secondary btn-sm mx-1">Contact</a>
+          <a href="/faq-deprecated" class="btn btn-outline-secondary btn-sm mx-1">FAQ</a>
+          <a href="/terms-archived" class="btn btn-outline-secondary btn-sm mx-1">Terms</a>
+          <a href="/shipping-info-deleted" class="btn btn-outline-secondary btn-sm mx-1">Shipping</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-5">
+    <div class="footer-top">
+      <div class="container footer-social">
+        <p class="footer-text">&copy; <script>document.write(new Date().getFullYear())</script> Splunk - a <b>CISCO</b> company</p>
+        <p class="footer-text">Demo site with intentionally broken links for testing link checkers.</p>
+      </div>
+    </div>
+  </footer>
+</main>
+{% endblock %}

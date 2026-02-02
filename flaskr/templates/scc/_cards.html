@@ -44,6 +44,11 @@
         'desc': 'Stylesheet fails to load - unstyled page',
         'details': 'Page content loads but CSS files return 404. Results in an unstyled, broken-looking page. Tests visual regression and resource loading monitoring.'
     },
+    'Missing JS': {
+        'icon': 'file-code',
+        'desc': 'JavaScript fails to load - broken functionality',
+        'details': 'Page renders but JavaScript files return 404. Interactive elements like buttons and forms stop working. Tests detection of silent JavaScript failures.'
+    },
     'Large Image': {
         'icon': 'image',
         'desc': 'Includes 5MB image to slow page load',
@@ -69,6 +74,21 @@
         'desc': 'Server delays 62s to trigger timeout',
         'details': 'Server sleeps for 62 seconds, exceeding typical 60-second timeouts. Verifies your tests properly detect and report timeout conditions.'
     },
+    'Redirect Loop': {
+        'icon': 'sync',
+        'desc': 'Infinite redirect loop',
+        'details': 'Server responds with 302 redirect to itself, creating an infinite loop. Tests detection of redirect chains and ensures monitoring fails gracefully.'
+    },
+    'Maintenance': {
+        'icon': 'tools',
+        'desc': 'Scheduled maintenance page (503)',
+        'details': 'Displays a friendly maintenance page with 503 status. Tests ability to distinguish planned downtime from unexpected outages in alerting rules.'
+    },
+    'Broken Links': {
+        'icon': 'unlink',
+        'desc': 'Page with links to non-existent pages',
+        'details': 'All navigation and product links point to 404 pages. Tests link checking capabilities and detection of broken user journeys.'
+    },
     'Cookies': {
         'icon': 'cookie-bite',
         'desc': 'Sets test cookie on response',
@@ -88,6 +108,11 @@
         'icon': 'mask',
         'desc': 'Simulated website defacement attack',
         'details': 'Page content is modified to show attacker messages. Tests visual monitoring and content integrity checks that detect unauthorized changes.'
+    },
+    'Security - Crypto': {
+        'icon': 'microchip',
+        'desc': 'Cryptominer script injection',
+        'details': 'Injects a fake cryptocurrency miner script (no actual mining). Tests detection of cryptojacking attacks that hijack visitor CPU resources.'
     }
 } %}
 {% set condition_names = {
@@ -100,15 +125,20 @@
     'validationerror': 'Validation Error',
     'contenterror': 'Content Error',
     'missingcss': 'Missing CSS',
+    'missingjs': 'Missing JS',
     'largeimage': 'Large Image',
     'heroimage': 'Hero Image',
     'contentdelay': 'Content Delay',
     'slowttfb': 'Slow TTFB',
     'timeout': 'Timeout',
+    'redirectloop': 'Redirect Loop',
+    'maintenance': 'Maintenance',
+    'brokenlinks': 'Broken Links',
     'cookies': 'Cookies',
     'security-jsinjected': 'Security - JS Injected',
     'security-eskimmer': 'Security - eskimmer',
-    'security-deface': 'Security - Deface'
+    'security-deface': 'Security - Deface',
+    'security-crypto': 'Security - Crypto'
 } %}
 
 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">

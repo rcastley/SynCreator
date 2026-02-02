@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="refresh" content="300">
+    <title>Scheduled Maintenance</title>
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/error.css') }}" rel="stylesheet">
+    {% if settings[1] %}
+    {% include 'header.html' %}
+    {% endif %}
+    <style>
+        .maintenance-icon { font-size: 4rem; color: #f0ad4e; }
+        .progress { height: 8px; margin: 20px auto; max-width: 300px; }
+        .eta { color: #666; font-size: 0.9rem; }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="page vertical-align text-center">
+            <div class="page-content vertical-align-middle">
+                <img src="{{ url_for('static', filename='icons/Hipster_HeroLogo.svg') }}" alt="icon" class="icon search-icon" />
+                <header>
+                    <h1 class="animation-slide-top" style="font-size: 2.5rem;">Scheduled Maintenance</h1>
+                    <p>We'll be back shortly</p>
+                </header>
+                <p class="error-advise">We're performing scheduled maintenance to improve your experience.</p>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 65%"></div>
+                </div>
+                <p class="eta">Estimated completion: 15 minutes</p>
+                <p class="text-muted mt-4"><small>This page will automatically refresh every 5 minutes.</small></p>
+                <footer class="page-copyright mt-5">
+                    <p>&copy; Splunk <script>document.write(new Date().getFullYear())</script> - a <b>CISCO</b> company</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+</body>
+
+</html>

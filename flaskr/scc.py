@@ -20,8 +20,9 @@ bp = Blueprint("scc", __name__)
 VALID_CONDITIONS = {
     "default", "404error", "500error", "502error", "503error", "429ratelimit",
     "validationerror", "contenterror", "largeimage", "heroimage",
-    "contentdelay", "slowttfb", "timeout", "cookies", "missingcss",
-    "security-jsinjected", "security-eskimmer", "security-deface"
+    "contentdelay", "slowttfb", "timeout", "cookies", "missingcss", "missingjs",
+    "redirectloop", "maintenance", "brokenlinks",
+    "security-jsinjected", "security-eskimmer", "security-deface", "security-crypto"
 }
 
 # Mock book data for API testing
@@ -272,6 +273,13 @@ def view(username):
     if condition == "slowttfb":
         time.sleep(3)  # 3 second delay before first byte
         return render_template("scc/default.html", settings=settings)
+
+    if condition == "redirectloop":
+        # Redirect to self, creating an infinite loop
+        return redirect(request.url)
+
+    if condition == "maintenance":
+        return render_template("scc/maintenance.html", settings=settings), 503
 
     if condition == "timeout":
         time.sleep(62)
