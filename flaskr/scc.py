@@ -18,8 +18,9 @@ bp = Blueprint("scc", __name__)
 
 # Valid conditions - single source of truth
 VALID_CONDITIONS = {
-    "default", "404error", "500error", "validationerror", "contenterror",
-    "largeimage", "heroimage", "contentdelay", "timeout", "cookies",
+    "default", "404error", "500error", "502error", "503error", "429ratelimit",
+    "validationerror", "contenterror", "largeimage", "heroimage",
+    "contentdelay", "slowttfb", "timeout", "cookies", "missingcss",
     "security-jsinjected", "security-eskimmer", "security-deface"
 }
 
@@ -257,12 +258,27 @@ def view(username):
     if condition == "500error":
         return render_template("scc/500error.html", settings=settings), 500
 
+    if condition == "502error":
+        return render_template("scc/502error.html", settings=settings), 502
+
+    if condition == "503error":
+        return render_template("scc/503error.html", settings=settings), 503
+
+    if condition == "429ratelimit":
+        resp = make_response(render_template("scc/429ratelimit.html", settings=settings))
+        resp.headers["Retry-After"] = "60"
+        return resp, 429
+
+    if condition == "slowttfb":
+        time.sleep(3)  # 3 second delay before first byte
+        return render_template("scc/default.html", settings=settings)
+
     if condition == "timeout":
         time.sleep(62)
         return render_template("scc/timeout.html", settings=settings)
 
     if condition == "cookies":
-        resp = make_response(render_template("scc/cookies.html", settings=settings))
+        resp = make_response(render_template("scc/cookie.html", settings=settings))
         resp.set_cookie("SplunkSynthetic", "abc123")
         return resp
 

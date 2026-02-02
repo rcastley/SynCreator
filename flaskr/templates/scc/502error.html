@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>502 | Bad Gateway</title>
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/error.css') }}" rel="stylesheet">
+    {% if settings[1] %}
+    {% include 'header.html' %}
+    {% endif %}
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="page vertical-align text-center">
+            <div class="page-content vertical-align-middle">
+                <img src="{{ url_for('static', filename='icons/Hipster_HeroLogo.svg') }}" alt="icon" class="icon search-icon" />
+                <header>
+                    <h1 class="animation-slide-top">502</h1>
+                    <p>Bad Gateway</p>
+                </header>
+                <p class="error-advise">The server received an invalid response from an upstream server.</p>
+                <a class="btn btn-splunk btn-round mb-5" href="/">GO TO HOME PAGE</a>
+                <footer class="page-copyright">
+                    <p>&copy; Splunk <script>document.write(new Date().getFullYear())</script> - a <b>CISCO</b> company</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+</body>
+
+</html>
