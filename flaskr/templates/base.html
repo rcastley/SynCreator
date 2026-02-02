@@ -23,7 +23,7 @@
     <link href="{{ url_for('static', filename='vendor/fontawesome/css/brands.min.css') }}" rel="stylesheet">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 
@@ -33,7 +33,7 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        'nunito': ['Nunito', 'sans-serif'],
+                        'inter': ['Inter', 'system-ui', 'sans-serif'],
                     },
                     colors: {
                         'splunk': {
@@ -60,7 +60,7 @@
     </script>
 
     <style>
-        body { font-family: 'Nunito', sans-serif; }
+        body { font-family: 'Inter', system-ui, sans-serif; }
 
         /* Hide Alpine.js elements until initialized */
         [x-cloak] { display: none !important; }
@@ -108,7 +108,7 @@
         }
     </style>
 </head>
-<body class="bg-splunk-gray-100 min-h-screen font-nunito">
+<body class="bg-splunk-gray-100 min-h-screen font-inter">
     {% block content %}{% endblock %}
 </body>
 </html>
