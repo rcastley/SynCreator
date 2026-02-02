@@ -1,0 +1,63 @@
+{% set conditions = {
+    'Default': {'icon': 'smile', 'desc': 'Healthy page with normal response time'},
+    '404 Error': {'icon': 'exclamation-circle', 'desc': 'Returns HTTP 404 Not Found status'},
+    '500 Error': {'icon': 'exclamation-triangle', 'desc': 'Returns HTTP 500 Internal Server Error'},
+    'Validation Error': {'icon': 'check-circle', 'desc': 'Form with client-side validation errors'},
+    'Content Error': {'icon': 'bug', 'desc': 'Page with broken images and missing resources'},
+    'Large Image': {'icon': 'image', 'desc': 'Includes 5MB image to slow page load'},
+    'Hero Image': {'icon': 'photo-video', 'desc': 'Large hero banner affecting LCP metrics'},
+    'Content Delay': {'icon': 'hourglass-start', 'desc': 'Server delays response by 5 seconds'},
+    'Timeout': {'icon': 'hourglass-end', 'desc': 'Server delays 62s to trigger timeout'},
+    'Security - JS Injected': {'icon': 'code', 'desc': 'Third-party script injection detected'},
+    'Security - eskimmer': {'icon': 'credit-card', 'desc': 'Simulated credit card skimmer script'},
+    'Security - Deface': {'icon': 'mask', 'desc': 'Simulated website defacement attack'}
+} %}
+{% set condition_names = {
+    'default': 'Default',
+    '404error': '404 Error',
+    '500error': '500 Error',
+    'validationerror': 'Validation Error',
+    'contenterror': 'Content Error',
+    'largeimage': 'Large Image',
+    'heroimage': 'Hero Image',
+    'contentdelay': 'Content Delay',
+    'timeout': 'Timeout',
+    'security-jsinjected': 'Security - JS Injected',
+    'security-eskimmer': 'Security - eskimmer',
+    'security-deface': 'Security - Deface'
+} %}
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+    {% for key, meta in conditions.items() %}
+    {% set newkey = key|lower|replace(' ', '') %}
+    {% set is_active = condition[0] == newkey %}
+    <button hx-get="set/{{ newkey }}"
+            hx-target="#condition-cards"
+            hx-swap="innerHTML transition:true"
+            class="group text-left bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 p-4
+                   {% if is_active %}ring-2 ring-splunk{% endif %}">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-colors
+                        {% if is_active %}bg-splunk text-white{% else %}bg-splunk-gray-100 text-splunk-gray-400 group-hover:bg-splunk group-hover:text-white{% endif %}">
+                <i class="fas fa-{{ meta.icon }} text-lg"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2">
+                    <h3 class="font-semibold text-splunk-gray-800 text-sm truncate">{{ key }}</h3>
+                    {% if is_active %}
+                    <span class="text-xs font-medium text-splunk bg-splunk/10 px-1.5 py-0.5 rounded">Active</span>
+                    {% endif %}
+                </div>
+                <p class="text-xs text-splunk-gray-500">{{ meta.desc }}</p>
+            </div>
+        </div>
+    </button>
+    {% endfor %}
+</div>
+
+{% if request.headers.get('HX-Request') %}
+<!-- Out-of-band swap to update the banner (only during HTMX requests) -->
+<p id="condition-name" hx-swap-oob="true" class="font-semibold text-splunk-gray-800">
+    {{ condition_names.get(condition[0], condition[0]) }}
+</p>
+{% endif %}

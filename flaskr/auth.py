@@ -1,19 +1,7 @@
 import functools
 
-from flask import (
-    Blueprint,
-    flash,
-    g,
-    redirect,  # type: ignore
-    render_template,
-    request,
-    session,
-    url_for,
-)
-from werkzeug.security import (
-    check_password_hash,  # type: ignore
-    generate_password_hash,
-)
+from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
 
@@ -25,8 +13,6 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        condition = "default"
-
         db = get_db()
         error = None
 
@@ -34,21 +20,20 @@ def register():
             error = "Username is required."
         elif not password:
             error = "Password is required."
-        elif (
-            db.execute("SELECT id FROM scc WHERE username = ?", (username,)).fetchone()
-            is not None
-        ):
-            error = "User {} is already registered.".format(username)
+        elif db.execute(
+            "SELECT id FROM scc WHERE username = ?", (username,)
+        ).fetchone() is not None:
+            error = f"User {username} is already registered."
 
         if error is None:
             db.execute(
                 "INSERT INTO scc (username, password, condition) VALUES (?, ?, ?)",
-                (username, generate_password_hash(password), condition),
+                (username, generate_password_hash(password), "default"),
             )
             db.commit()
             return redirect(url_for("auth.login"))
 
-        flash(error)
+        flash(error, "error")
 
     return render_template("auth/register.html")
 
@@ -58,7 +43,6 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-
         db = get_db()
         error = None
 
@@ -76,7 +60,7 @@ def login():
             session["user_id"] = user["id"]
             return redirect(url_for("index"))
 
-        flash(error)
+        flash(error, "error")
 
     return render_template("auth/login.html")
 
@@ -84,13 +68,12 @@ def login():
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get("user_id")
-
     if user_id is None:
         g.user = None
     else:
-        g.user = (
-            get_db().execute("SELECT * FROM scc WHERE id = ?", (user_id,)).fetchone()
-        )
+        g.user = get_db().execute(
+            "SELECT * FROM scc WHERE id = ?", (user_id,)
+        ).fetchone()
 
 
 @bp.route("/logout")
@@ -100,11 +83,10 @@ def logout():
 
 
 def login_required(view):
+    """Decorator that redirects unauthenticated users to the login page."""
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
             return redirect(url_for("auth.login"))
-
         return view(**kwargs)
-
     return wrapped_view

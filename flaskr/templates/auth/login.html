@@ -1,49 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
-    <!-- Outer Row -->
-    <div class="row justify-content-center">
-        <div class="col-xl-10 col-lg-12 col-md-9">
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
-                    <!-- Nested Row within Card Body -->
-                    <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                        <div class="col-lg-6">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <img src="{{ url_for('static', filename='img/splunk-logo-black.png') }}"
-                                        alt="Splunk logo">
-                                </div>
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">SynCreator</h1>
-                                </div>
-                                <form class="user" method="post">
-                                    <div class="form-group">
-                                        <input type="text" name="username" class="form-control form-control-user"
-                                            id="username" aria-describedby="usernameHelp" placeholder="Enter Username"
-                                            required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" class="form-control form-control-user"
-                                            id="inputPassword" placeholder="Password" required>
-                                    </div>
-                                    <button class="btn btn-primary btn-user btn-block">
-                                        Login
-                                    </button>
-                                </form>
-                                <hr>
-                                <div class="text-center">
-                                    <a class="small" href="{{ url_for('auth.register') }}">Create an Account!</a>
-                                </div>
-                                <div class="text-center">
-                                    <p class="small">&copy; Splunk 2024</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-splunk-gray-700 to-splunk-gray-900 p-4">
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
+        <div class="text-center mb-8">
+            <img src="{{ url_for('static', filename='img/splunk-logo-black.png') }}"
+                 alt="Splunk logo" class="h-10 mx-auto mb-4">
+            <h1 class="text-2xl font-bold text-splunk-gray-700">SynCreator</h1>
+        </div>
+
+        <form method="post" class="space-y-4">
+            <div>
+                <input type="text" name="username" id="username"
+                       placeholder="Enter Username"
+                       class="w-full px-4 py-3 rounded-full border border-splunk-gray-300 bg-white text-splunk-gray-700 placeholder-splunk-gray-400 focus:outline-none focus:ring-2 focus:ring-splunk focus:border-transparent"
+                       required>
             </div>
+
+            <div>
+                <input type="password" name="password" id="inputPassword"
+                       placeholder="Password"
+                       class="w-full px-4 py-3 rounded-full border border-splunk-gray-300 bg-white text-splunk-gray-700 placeholder-splunk-gray-400 focus:outline-none focus:ring-2 focus:ring-splunk focus:border-transparent"
+                       required>
+            </div>
+
+            <button type="submit" class="w-full py-3 px-4 bg-splunk hover:bg-splunk-dark text-white font-semibold rounded-full transition-colors">
+                Login
+            </button>
+        </form>
+
+        <div class="my-6 border-t border-splunk-gray-200"></div>
+
+        <div class="text-center space-y-2">
+            <a href="{{ url_for('auth.register') }}" class="text-splunk hover:text-splunk-dark text-sm">
+                Create an Account!
+            </a>
+            <p class="text-sm text-splunk-gray-400">&copy; Splunk <script>document.write(new Date().getFullYear())</script></p>
         </div>
     </div>
 </div>

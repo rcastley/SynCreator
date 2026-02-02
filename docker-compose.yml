@@ -5,4 +5,6 @@ services:
       - "8080:8080"
     volumes:
       - ./instance:/app/instance
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-change-me-in-production}
     restart: always

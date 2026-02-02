@@ -1,60 +1,54 @@
 # SynCreator
 
-## Local Installation
+A condition simulator for Splunk Synthetic Monitoring. Create test scenarios (errors, delays, security issues) and point your synthetic tests at them.
 
-``` bash
+## Quick Start
+
+```bash
 git clone https://github.com/rcastley/SynCreator
 cd SynCreator
-python3 -m venv venv
-. venv/bin/activate
-# On a Raspberry Pi run pip3 install wheel
-pip3 install -e .
-export FLASK_APP=flaskr
-flask init-db
-nohup waitress-serve --threads=8 --call 'flaskr:create_app' > log.txt 2>&1 &
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python app.py
 ```
 
-Open [http://localhost:8080](http://localhost:8080) in a browser to use the SynCreator app to simulate conditions. You will need to initially register a username & password.
+Open http://localhost:8080 and register a new account.
 
-To use the API test functionality click on **API** on menu bar to get your unique URL e.g. http://localhost:8080/api/v1/{username}/books/all. You can run both GET & POST test types. The POST test requires a JSON payload containing `{"title":"Read a book"}` to the endpoint http://localhost:8080/api/v1/{username}/books. You can GET individual ID's my using http://localhost:8080/api/v1/{username}/books?id=0. ID's 0-2 are supported, anything else will 404.
+The database is created automatically on first run.
 
-**NEW:** Support for Control Groups - https://help.rigor.com/hc/en-us/articles/115004817328-How-to-Create-an-Event-Annotation-. In the UI, under Control Groups dropdown, enter Control Group ID and post token. When you change condition an Event Annotation will fire and be visible on the scatter plot.
+## Production
 
-**NEW:** Support for Splunk RUM. Enter your realm and RUM token in the UI and set the condition to RUM and watch the metrics flow in from the Rigor test you have configured.
+```bash
+# Using waitress (recommended)
+waitress-serve --port=8080 --call flaskr:create_app
 
-The `venv` environment will persist at rest until you delete the venv file.
-
-## Docker
-
-``` bash
-docker run -d -p 8080:8080 rcastley/syncreator:1.4
+# Or with Docker
+docker compose up -d
 ```
 
-## Installation on AWS Free Tier
+Set `SECRET_KEY` environment variable in production:
 
-- Create a new Ubuntu 20.04 instance
-  - AMI link: aws-marketplace/ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20210129-aced0818-eef1-427a-9e04-8ba38bada306 
-  - Use the t2.micro instance within the AWS "free tier"
-  - When configuring the Security Group, add a rule to allow port 8080 on the TCP protocol
-  - Finally, choose an existing key pair, you will use this key to connect via SSH
-  - It takes a few minutes for AWS to provision the host
-  - Note the IP address you are given and use below in \<insertyourip>\
-  - Then at a terminal (answer y when prompted):
-
-``` bash
-ssh ubuntu@<insertyourip>
-sudo apt update
-sudo apt-get install python3-venv
-git clone https://github.com/rcastley/SynCreator
-cd SynCreator
-python3 -m venv venv
-. venv/bin/activate
-pip3 install -e .
-export FLASK_APP=flaskr
-flask init-db
-nohup waitress-serve --threads=8 --call 'flaskr:create_app' > log.txt 2>&1 &
+```bash
+export SECRET_KEY="your-secret-key-here"
 ```
 
-Open `http://\<insertyourip\>:8080` in a browser.
+## API Endpoints
 
-The `venv` environment will persist at rest until you delete the venv file.
+Once logged in, you get a unique URL for synthetic testing:
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/view/{username}` | GET | Your test page (shows current condition) |
+| `/api/v1/{username}/books/all` | GET | Returns all books |
+| `/api/v1/{username}/books?id=0` | GET | Returns book by ID (0-2) |
+| `/api/v1/{username}/books` | POST | Create book (mock - not persisted) |
+
+## Available Conditions
+
+- **Default** - Normal page
+- **404/500 Error** - HTTP error responses
+- **Content Delay** - 5 second delay
+- **Timeout** - 62 second delay
+- **Large/Hero Image** - Slow assets
+- **Security tests** - JS injection, e-skimmer, defacement

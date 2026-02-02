@@ -1,25 +1,114 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <title>Splunk | SynCreator</title>
+
+    <!-- Tailwind CSS + DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.14.8/dist/cdn.min.js"></script>
+
+    <!-- Font Awesome -->
     <link href="{{ url_for('static', filename='vendor/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='vendor/fontawesome/css/solid.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='vendor/fontawesome/css/brands.min.css') }}" rel="stylesheet">
-    <!--<link href="{{ url_for('static', filename='css/master.css') }}" rel="stylesheet">-->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/sb-admin-2.min.css') }}" rel="stylesheet">
-    <!--<link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">-->
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
+
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
+    <!-- Tailwind Config with Splunk colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'nunito': ['Nunito', 'sans-serif'],
+                    },
+                    colors: {
+                        'splunk': {
+                            DEFAULT: '#e20082',
+                            dark: '#c4006f',
+                            light: '#ff1a9b',
+                        },
+                        'splunk-gray': {
+                            50: '#f8f9fa',
+                            100: '#f1f2f4',
+                            200: '#e3e5e8',
+                            300: '#c3c7cc',
+                            400: '#8e949e',
+                            500: '#5a6d7a',
+                            600: '#3c4650',
+                            700: '#272b33',
+                            800: '#1a1c21',
+                            900: '#0d0e10',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Nunito', sans-serif; }
+
+        /* Hide Alpine.js elements until initialized */
+        [x-cloak] { display: none !important; }
+
+        /* Override DaisyUI primary color to Splunk pink */
+        :root {
+            --p: 332 100% 44%;
+            --pf: 332 100% 38%;
+            --pc: 0 0% 100%;
+        }
+
+        /* Force light backgrounds */
+        [data-theme="light"] {
+            --b1: 255 255 255;
+            --b2: 241 242 244;
+            --b3: 227 229 232;
+        }
+
+        /* HTMX loading indicator */
+        .htmx-request {
+            opacity: 0.5;
+            transition: opacity 200ms ease-in;
+        }
+
+        /* Smooth transitions for HTMX swaps */
+        .htmx-swapping {
+            opacity: 0;
+            transition: opacity 100ms ease-out;
+        }
+
+        .htmx-settling {
+            opacity: 1;
+            transition: opacity 200ms ease-in;
+        }
+
+        /* Pulsing animation for active indicator */
+        @keyframes ping {
+            75%, 100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        .animate-ping {
+            animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+    </style>
 </head>
-<body {% if request.path == '/auth/login' %}class="bg-gradient-primary"{% endif %}>
+<body class="bg-splunk-gray-100 min-h-screen font-nunito">
     {% block content %}{% endblock %}
-    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!--<script src="{{ url_for('static', filename='js/script.js') }}"></script>-->
-    <script src="{{ url_for('static', filename='js/sb-admin-2.min.js') }}"></script>
 </body>
 </html>
