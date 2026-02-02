@@ -8,4 +8,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["waitress-serve", "--port=8080", "--call", "flaskr:create_app"]
+CMD ["waitress-serve", "--port=8080", "--url-prefix=/syncreator", "--url-scheme=https", "--call", "flaskr:create_app"]
