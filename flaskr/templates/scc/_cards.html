@@ -1,22 +1,94 @@
 {% set conditions = {
-    'Default': {'icon': 'smile', 'desc': 'Healthy page with normal response time'},
-    '404 Error': {'icon': 'exclamation-circle', 'desc': 'Returns HTTP 404 Not Found status'},
-    '500 Error': {'icon': 'exclamation-triangle', 'desc': 'Returns HTTP 500 Internal Server Error'},
-    '502 Error': {'icon': 'server', 'desc': 'Bad Gateway - upstream server error'},
-    '503 Error': {'icon': 'power-off', 'desc': 'Service Unavailable - server overloaded'},
-    '429 Rate Limit': {'icon': 'tachometer-alt', 'desc': 'Too Many Requests - rate limited'},
-    'Validation Error': {'icon': 'check-circle', 'desc': 'Form with client-side validation errors'},
-    'Content Error': {'icon': 'bug', 'desc': 'Page with broken images and missing resources'},
-    'Missing CSS': {'icon': 'paint-brush', 'desc': 'Stylesheet fails to load - unstyled page'},
-    'Large Image': {'icon': 'image', 'desc': 'Includes 5MB image to slow page load'},
-    'Hero Image': {'icon': 'photo-video', 'desc': 'Large hero banner affecting LCP metrics'},
-    'Content Delay': {'icon': 'hourglass-start', 'desc': 'AJAX content delayed by 5 seconds'},
-    'Slow TTFB': {'icon': 'clock', 'desc': '3 second delay before first byte'},
-    'Timeout': {'icon': 'hourglass-end', 'desc': 'Server delays 62s to trigger timeout'},
-    'Cookies': {'icon': 'cookie-bite', 'desc': 'Sets test cookie on response'},
-    'Security - JS Injected': {'icon': 'code', 'desc': 'Third-party script injection detected'},
-    'Security - eskimmer': {'icon': 'credit-card', 'desc': 'Simulated credit card skimmer script'},
-    'Security - Deface': {'icon': 'mask', 'desc': 'Simulated website defacement attack'}
+    'Default': {
+        'icon': 'smile',
+        'desc': 'Healthy page with normal response time',
+        'details': 'Baseline scenario representing a fully functional website. Use this to verify your synthetic tests pass under normal conditions and to establish performance benchmarks.'
+    },
+    '404 Error': {
+        'icon': 'exclamation-circle',
+        'desc': 'Returns HTTP 404 Not Found status',
+        'details': 'Simulates a missing page or deleted resource. Tests should detect the 404 status code and alert when critical pages become unavailable.'
+    },
+    '500 Error': {
+        'icon': 'exclamation-triangle',
+        'desc': 'Returns HTTP 500 Internal Server Error',
+        'details': 'Simulates an unhandled server exception or application crash. This is a critical error that should trigger immediate alerts in your monitoring system.'
+    },
+    '502 Error': {
+        'icon': 'server',
+        'desc': 'Bad Gateway - upstream server error',
+        'details': 'Common with load balancers and reverse proxies when backend servers are unreachable. Often indicates deployment issues or backend service failures.'
+    },
+    '503 Error': {
+        'icon': 'power-off',
+        'desc': 'Service Unavailable - server overloaded',
+        'details': 'Indicates the server is temporarily unable to handle requests due to maintenance or capacity issues. Should be distinguished from other 5xx errors in alerting.'
+    },
+    '429 Rate Limit': {
+        'icon': 'tachometer-alt',
+        'desc': 'Too Many Requests - rate limited',
+        'details': 'Returns 429 status with Retry-After header. Tests API rate limiting behavior and ensures your monitoring handles throttling gracefully without false alerts.'
+    },
+    'Validation Error': {
+        'icon': 'check-circle',
+        'desc': 'Form with client-side validation errors',
+        'details': 'Page loads successfully but contains form validation errors. Tests ability to detect application-level errors that return 200 OK but indicate a problem.'
+    },
+    'Content Error': {
+        'icon': 'bug',
+        'desc': 'Page with broken images and missing resources',
+        'details': 'HTML loads but references non-existent images. Tests detection of partial failures where the page appears broken but returns 200 status.'
+    },
+    'Missing CSS': {
+        'icon': 'paint-brush',
+        'desc': 'Stylesheet fails to load - unstyled page',
+        'details': 'Page content loads but CSS files return 404. Results in an unstyled, broken-looking page. Tests visual regression and resource loading monitoring.'
+    },
+    'Large Image': {
+        'icon': 'image',
+        'desc': 'Includes 5MB image to slow page load',
+        'details': 'Contains an oversized image that significantly impacts page load time. Tests performance thresholds and LCP (Largest Contentful Paint) metrics.'
+    },
+    'Hero Image': {
+        'icon': 'photo-video',
+        'desc': 'Large hero banner affecting LCP metrics',
+        'details': 'Features a large above-the-fold hero image that dominates LCP calculations. Use to test Core Web Vitals monitoring and performance budgets.'
+    },
+    'Content Delay': {
+        'icon': 'hourglass-start',
+        'desc': 'AJAX content delayed by 5 seconds',
+        'details': 'Page shell loads immediately but AJAX content takes 5 seconds. Tests handling of dynamic content and ensures tests wait for full page load.'
+    },
+    'Slow TTFB': {
+        'icon': 'clock',
+        'desc': '3 second delay before first byte',
+        'details': 'Server waits 3 seconds before sending any response. Simulates slow database queries or backend processing. Tests TTFB (Time to First Byte) monitoring.'
+    },
+    'Timeout': {
+        'icon': 'hourglass-end',
+        'desc': 'Server delays 62s to trigger timeout',
+        'details': 'Server sleeps for 62 seconds, exceeding typical 60-second timeouts. Verifies your tests properly detect and report timeout conditions.'
+    },
+    'Cookies': {
+        'icon': 'cookie-bite',
+        'desc': 'Sets test cookie on response',
+        'details': 'Response includes Set-Cookie header with a test cookie. Use to verify cookie handling, session management, and consent banner testing.'
+    },
+    'Security - JS Injected': {
+        'icon': 'code',
+        'desc': 'Third-party script injection detected',
+        'details': 'Page includes an unauthorized external JavaScript file. Simulates Magecart-style attacks or compromised CDN resources. Tests security monitoring.'
+    },
+    'Security - eskimmer': {
+        'icon': 'credit-card',
+        'desc': 'Simulated credit card skimmer script',
+        'details': 'Injects a fake payment card skimmer targeting checkout forms. Tests detection of e-commerce skimming attacks that steal customer payment data.'
+    },
+    'Security - Deface': {
+        'icon': 'mask',
+        'desc': 'Simulated website defacement attack',
+        'details': 'Page content is modified to show attacker messages. Tests visual monitoring and content integrity checks that detect unauthorized changes.'
+    }
 } %}
 {% set condition_names = {
     'default': 'Default',
@@ -43,27 +115,39 @@
     {% for key, meta in conditions.items() %}
     {% set newkey = key|lower|replace(' ', '') %}
     {% set is_active = condition[0] == newkey %}
-    <button hx-get="set/{{ newkey }}"
-            hx-target="#condition-cards"
-            hx-swap="innerHTML transition:true"
-            class="group text-left bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 p-4
-                   {% if is_active %}ring-2 ring-splunk{% endif %}">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-colors
-                        {% if is_active %}bg-splunk text-white{% else %}bg-splunk-gray-100 text-splunk-gray-400 group-hover:bg-splunk group-hover:text-white{% endif %}">
-                <i class="fas fa-{{ meta.icon }} text-lg"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-                <div class="flex items-center gap-2">
-                    <h3 class="font-semibold text-splunk-gray-800 text-sm truncate">{{ key }}</h3>
-                    {% if is_active %}
-                    <span class="text-xs font-medium text-splunk bg-splunk/10 px-1.5 py-0.5 rounded">Active</span>
-                    {% endif %}
+    <div x-data="{ expanded: false }" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 {% if is_active %}ring-2 ring-splunk{% endif %}">
+        <button hx-get="set/{{ newkey }}"
+                hx-target="#condition-cards"
+                hx-swap="innerHTML transition:true"
+                class="w-full text-left p-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-colors shrink-0
+                            {% if is_active %}bg-splunk text-white{% else %}bg-splunk-gray-100 text-splunk-gray-400 group-hover:bg-splunk group-hover:text-white{% endif %}">
+                    <i class="fas fa-{{ meta.icon }} text-lg"></i>
                 </div>
-                <p class="text-xs text-splunk-gray-500">{{ meta.desc }}</p>
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2">
+                        <h3 class="font-semibold text-splunk-gray-800 text-sm">{{ key }}</h3>
+                        {% if is_active %}
+                        <span class="text-xs font-medium text-splunk bg-splunk/10 px-1.5 py-0.5 rounded">Active</span>
+                        {% endif %}
+                    </div>
+                    <p class="text-xs text-splunk-gray-500">{{ meta.desc }}</p>
+                </div>
+            </div>
+        </button>
+        <div class="px-4 pb-3">
+            <button @click.stop="expanded = !expanded"
+                    class="text-xs text-splunk-gray-400 hover:text-splunk flex items-center gap-1 transition-colors">
+                <i class="fas fa-info-circle"></i>
+                <span x-text="expanded ? 'Hide details' : 'Show details'"></span>
+                <i class="fas fa-chevron-down text-[10px] transition-transform duration-200" :class="expanded && 'rotate-180'"></i>
+            </button>
+            <div x-show="expanded" x-collapse>
+                <p class="text-xs text-splunk-gray-600 mt-2 leading-relaxed">{{ meta.details }}</p>
             </div>
         </div>
-    </button>
+    </div>
     {% endfor %}
 </div>
 
