@@ -174,33 +174,32 @@
     'security-crypto': 'Security - Crypto'
 } %}
 
-<div class="space-y-3">
+<div class="space-y-4">
     {% for cat_name, cat_meta in categories.items() %}
-    <div x-data="{ open: true }" class="bg-white rounded-xl shadow-sm overflow-hidden">
-        <button @click="open = !open" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-splunk-gray-50 transition-colors">
-            <div class="w-8 h-8 rounded-lg bg-splunk-gray-100 flex items-center justify-center">
-                <i class="fas fa-{{ cat_meta.icon }} text-splunk-gray-500"></i>
+    <div x-data="{ open: true }">
+        <button @click="open = !open" class="w-full flex items-center gap-2 mb-2 group">
+            <div class="w-7 h-7 rounded bg-splunk-gray-700 flex items-center justify-center">
+                <i class="fas fa-{{ cat_meta.icon }} text-white text-xs"></i>
             </div>
-            <div class="flex-1 text-left">
-                <h2 class="font-semibold text-splunk-gray-800 text-sm">{{ cat_name }}</h2>
-                <p class="text-xs text-splunk-gray-500">{{ cat_meta.desc }}</p>
-            </div>
-            <i class="fas fa-chevron-down text-splunk-gray-400 text-xs transition-transform duration-200" :class="open && 'rotate-180'"></i>
+            <h2 class="font-semibold text-splunk-gray-700 text-sm">{{ cat_name }}</h2>
+            <span class="text-xs text-splunk-gray-400">({{ cat_meta.conditions|length }})</span>
+            <i class="fas fa-chevron-down text-splunk-gray-400 text-[10px] transition-transform duration-200 ml-1" :class="open && 'rotate-180'"></i>
+            <div class="flex-1 h-px bg-splunk-gray-200 ml-2"></div>
         </button>
         <div x-show="open" x-collapse>
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 p-3 pt-0">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
                 {% for key in cat_meta.conditions %}
                 {% set meta = conditions[key] %}
                 {% set newkey = key|lower|replace(' ', '') %}
                 {% set is_active = condition[0] == newkey %}
-                <div x-data="{ expanded: false }" class="bg-splunk-gray-50 rounded-lg hover:bg-splunk-gray-100 transition-all duration-200 {% if is_active %}ring-2 ring-splunk bg-splunk/5{% endif %}">
+                <div x-data="{ expanded: false }" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 {% if is_active %}ring-2 ring-splunk{% endif %}">
                     <button hx-get="set/{{ newkey }}"
                             hx-target="#condition-cards"
                             hx-swap="innerHTML transition:true"
                             class="w-full text-left p-3">
                         <div class="flex items-center gap-3">
                             <div class="w-9 h-9 rounded-lg flex items-center justify-center transition-colors shrink-0
-                                        {% if is_active %}bg-splunk text-white{% else %}bg-white text-splunk-gray-400 shadow-sm{% endif %}">
+                                        {% if is_active %}bg-splunk text-white{% else %}bg-splunk-gray-100 text-splunk-gray-400{% endif %}">
                                 <i class="fas fa-{{ meta.icon }}"></i>
                             </div>
                             <div class="flex-1 min-w-0">

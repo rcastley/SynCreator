@@ -1,14 +1,13 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-    <title>Splunk | SynCreator</title>
+    <title>SynCreator</title>
 
-    <!-- Tailwind CSS + DaisyUI -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- HTMX -->
@@ -61,24 +60,13 @@
     </script>
 
     <style>
-        body { font-family: 'Inter', system-ui, sans-serif; }
+        html, body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: #f8f9fa;
+        }
 
         /* Hide Alpine.js elements until initialized */
         [x-cloak] { display: none !important; }
-
-        /* Override DaisyUI primary color to Splunk pink */
-        :root {
-            --p: 332 100% 44%;
-            --pf: 332 100% 38%;
-            --pc: 0 0% 100%;
-        }
-
-        /* Force light backgrounds */
-        [data-theme="light"] {
-            --b1: 255 255 255;
-            --b2: 241 242 244;
-            --b3: 227 229 232;
-        }
 
         /* HTMX loading indicator */
         .htmx-request {
