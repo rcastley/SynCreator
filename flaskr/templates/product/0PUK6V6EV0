@@ -35,7 +35,7 @@
                     <img src="{{ url_for('static', filename='icons/Hipster_NavLogo.svg') }}" alt="logo" class="logo" />
                 </a>
                 <div class="controls">
-                    <a href="/cart">
+                    <a href="{{ url_for('scc.cart', username=settings[4]) }}">
                         <img src="{{ url_for('static', filename='icons/Hipster_CartIcon.svg') }}" alt="cart-icon" class="logo" />
                         <span>Cart
                             

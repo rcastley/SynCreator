@@ -52,7 +52,7 @@
         <img src="{{ url_for('static', filename='icons/Hipster_NavLogo.svg') }}" alt="logo" class="logo" />
       </a>
       <div class="controls">
-        <a href="/cart" id="cart-link">
+        <a href="{{ url_for('scc.cart', username=settings[4]) }}" id="cart-link">
           <img src="{{ url_for('static', filename='icons/Hipster_CartIcon.svg') }}" alt="cart-icon" class="logo" />
           <span>Cart</span>
         </a>
@@ -146,7 +146,7 @@
 </main>
 
 <!-- Intentionally broken JavaScript references -->
-<script src="{{ url_for('static', filename='vendor/jquery/jquery-MISSING.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-MISSING.min.js"></script>
 <script src="{{ url_for('static', filename='js/app-MISSING.js') }}"></script>
 <script src="https://cdn.example.com/nonexistent-library.js"></script>
 </body>

@@ -17,13 +17,8 @@
     <script defer src="https://unpkg.com/@alpinejs/collapse@3.14.8/dist/cdn.min.js"></script>
     <script defer src="https://unpkg.com/alpinejs@3.14.8/dist/cdn.min.js"></script>
 
-    <!-- Font Awesome -->
-    <link href="{{ url_for('static', filename='vendor/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='vendor/fontawesome/css/solid.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='vendor/fontawesome/css/brands.min.css') }}" rel="stylesheet">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts + Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
 
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 
@@ -67,6 +62,18 @@
 
         /* Hide Alpine.js elements until initialized */
         [x-cloak] { display: none !important; }
+
+        /* Material Icons sizing */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-sm { font-size: 18px; }
+        .icon-xs { font-size: 14px; }
+        .icon-lg { font-size: 28px; }
 
         /* HTMX loading indicator */
         .htmx-request {

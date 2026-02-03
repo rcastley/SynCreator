@@ -1,113 +1,73 @@
-{% extends 'site.html' %}
-{% set url_split = request.url.split('/') %}
-{% block content %}
-<div class="wrapper">
-    <nav id="sidebar" class="inactive">
-        <div class="sidebar-header">
-            <img src="{{ url_for('static', filename='img/splunk-logo-black-small.png') }}" alt="bootraper logo" class="app-logo">
-        </div>
-        <ul class="list-unstyled components text-secondary">
-            <li>
-                <a href="/"><i class="fas fa-home"></i> Home</a>
-            </li>
-        </ul>
-    </nav>
-    <div id="body" class="active">
-        <nav class="navbar navbar-expand-lg navbar-white bg-white">
-            <button type="button" id="sidebarCollapse" class="btn btn-light"><i class="fas fa-bars"></i><span></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <div class="nav-dropdown">
-                            <span>Condition: {{ settings[0]|upper }}</span>
-                            <div class="dropdown-menu dropdown-menu-right nav-link-menu">
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cookie Condition | SynCreator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+    {% if settings[2] %}
+    {% include 'header.html' %}
+    {% endif %}
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'splunk': { DEFAULT: '#e20082', dark: '#c4006f' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center py-12" style="font-family: 'Inter', sans-serif;">
+    <div class="w-full max-w-xl px-4">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <img src="{{ url_for('static', filename='icons/Hipster_HeroLogo.svg') }}" alt="icon" class="w-32 h-32 mx-auto mb-6">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-splunk/10 rounded-full mb-4">
+                <span class="material-symbols-outlined text-splunk">cookie</span>
+                <span class="text-sm font-medium text-splunk">Cookie Condition Active</span>
             </div>
-        </nav>
-        <div class="content">
-            <div class="container">
-                <div class="page-title">
-                    <h3>Cookie Condition</h3>
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Cookie Test</h1>
+            <p class="text-gray-500">This condition sets a test cookie to verify cookie handling in synthetic tests.</p>
+        </div>
+
+        <!-- Cookie Info Card -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center gap-4 mb-4 pb-4 border-b border-gray-100">
+                <div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-green-600">check_circle</span>
                 </div>
-                <div class="box box-primary">
-                    <div class="box-body">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Test Description</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="script-tab" data-toggle="tab" href="#script" role="tab" aria-controls="script" aria-selected="false">Selenium Script</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade active show" id="description" role="tabpanel" aria-labelledby="description-tab">
-                                <div class="col-md-12">
-                                    <p class="text-muted">The test is looking for a DOM ID and a cookie value</p>
-                                    <p class="text-muted">As long as this is detected then the measurement will complete.</p>
-                                    <br/>
-                                    <div id="lorem"></div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="script" role="tabpanel" aria-labelledby="script-tab">
-                                <div class="col-md-12">
-                                    <pre id="selenium_json"></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                    <p class="text-sm text-gray-500">Cookie Set Successfully</p>
+                    <p class="font-mono text-sm font-medium text-gray-800">syncreator_test=abc123</p>
                 </div>
             </div>
+            <p class="text-sm text-gray-600">
+                A test cookie has been set on this response. Use this condition to verify that your synthetic monitoring can detect and validate cookies set by your application.
+            </p>
         </div>
+
+        <!-- Back Button -->
+        <div class="text-center mt-8">
+            <a href="/" class="inline-flex items-center gap-2 px-6 py-3 bg-splunk hover:bg-splunk-dark text-white font-semibold rounded-full transition-colors">
+                <span class="material-symbols-outlined text-base">home</span>
+                GO TO HOME PAGE
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-sm text-gray-500">
+            <p>&copy; Splunk <script>document.write(new Date().getFullYear())</script> - a <b>CISCO</b> company</p>
+        </footer>
     </div>
-</div>
-<script>
-data = {
-    "version":"1.1",
-    "name":"SynCreator",
-    "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
-    "urls":[
-       "{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/"
-    ],
-    "tests":[
-       {
-          "name":"SynCreator",
-          "url":"{{ url_split[0] }}//{{ url_split[1] }}{{ url_split[2] }}/",
-          "commands":[
-             {
-                "command":"open",
-                "target":"/{{ url_split[3] }}/{{ url_split[4] }}",
-                "value":"",
-                "comment":""
-             },
-             {
-                "comment":"Check Phrase",
-                "command":"waitForElementPresent",
-                "target":"id=ajax-div",
-                "value":"10000"
-             },
-             {
-                "comment":"Cookie Check",
-                "command":"executeScript",
-                "target":"var searchText = 'abc123'; var isTextPresent = document.documentElement.innerHTML.includes(searchText); if (isTextPresent != true) { var message = 'Assert text present failed: ' + searchText; throw(new Error(message)); }",
-                "value":"10000"
-             }
-          ]
-       }
-    ],
-    "suites":[
-       {
-          "name":"SynCreator",
-          "tests":[
-          ]         
-       }
-    ]
- }
-
-/*document.getElementById("selenium_json").innerHTML = JSON.stringify(data, undefined, 2);*/
-
-setTimeout("$.ajax({ url: '/lorem', success: function(data) { $('#lorem').html(data);}});", 0);
-</script>
-{% endblock %}
+</body>
+</html>

@@ -63,7 +63,7 @@ content %}
                 />
             </a>
             <div class="controls">
-                <a href="/cart">
+                <a href="{{ url_for('scc.cart', username=settings[4]) }}">
                     <img
                         src="{{ url_for('static', filename='icons/Hipster_CartIcon.svg') }}"
                         alt="cart-icon"
@@ -95,7 +95,7 @@ content %}
             
                 <div style="margin: auto; width: 60%; border: 1px; border-color: #fff">
                     <h2 style="color: #fff">You have been hacked by Hacker McHackerson</h2>
-                    <img src="{{ url_for('static', filename='font/blah.jpg')}}" />
+                    <img src="{{ url_for('static', filename='images/blah.jpg')}}" />
                 </div>
             </div>
         </div>

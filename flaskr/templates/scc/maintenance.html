@@ -1,47 +1,61 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="refresh" content="300">
     <title>Scheduled Maintenance</title>
-    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/error.css') }}" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     {% if settings[1] %}
     {% include 'header.html' %}
     {% endif %}
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'splunk': { DEFAULT: '#e20082', dark: '#c4006f' }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        .maintenance-icon { font-size: 4rem; color: #f0ad4e; }
-        .progress { height: 8px; margin: 20px auto; max-width: 300px; }
-        .eta { color: #666; font-size: 0.9rem; }
+        @keyframes progress {
+            0% { background-position: 1rem 0; }
+            100% { background-position: 0 0; }
+        }
+        .animate-stripes {
+            background-image: linear-gradient(
+                45deg,
+                rgba(255,255,255,.15) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255,255,255,.15) 50%,
+                rgba(255,255,255,.15) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 1rem 1rem;
+            animation: progress 1s linear infinite;
+        }
     </style>
 </head>
-
-<body>
-    <div class="wrapper">
-        <div class="page vertical-align text-center">
-            <div class="page-content vertical-align-middle">
-                <img src="{{ url_for('static', filename='icons/Hipster_HeroLogo.svg') }}" alt="icon" class="icon search-icon" />
-                <header>
-                    <h1 class="animation-slide-top" style="font-size: 2.5rem;">Scheduled Maintenance</h1>
-                    <p>We'll be back shortly</p>
-                </header>
-                <p class="error-advise">We're performing scheduled maintenance to improve your experience.</p>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 65%"></div>
-                </div>
-                <p class="eta">Estimated completion: 15 minutes</p>
-                <p class="text-muted mt-4"><small>This page will automatically refresh every 5 minutes.</small></p>
-                <footer class="page-copyright mt-5">
-                    <p>&copy; Splunk <script>document.write(new Date().getFullYear())</script> - a <b>CISCO</b> company</p>
-                </footer>
-            </div>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center" style="font-family: 'Inter', sans-serif;">
+    <div class="text-center px-4">
+        <img src="{{ url_for('static', filename='icons/Hipster_HeroLogo.svg') }}" alt="icon" class="w-64 h-64 mx-auto mb-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">Scheduled Maintenance</h1>
+        <p class="text-2xl uppercase tracking-wide text-gray-700 mb-4">We'll be back shortly</p>
+        <p class="text-gray-500 mb-6">We're performing scheduled maintenance to improve your experience.</p>
+        <div class="w-72 mx-auto h-2 bg-gray-200 rounded-full overflow-hidden mb-4">
+            <div class="h-full bg-yellow-500 animate-stripes rounded-full" style="width: 65%"></div>
         </div>
+        <p class="text-gray-600 mb-2">Estimated completion: 15 minutes</p>
+        <p class="text-gray-400 text-sm mb-8">This page will automatically refresh every 5 minutes.</p>
+        <footer class="mt-12 text-sm text-gray-500">
+            <p>&copy; Splunk <script>document.write(new Date().getFullYear())</script> - a <b>CISCO</b> company</p>
+        </footer>
     </div>
-    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 </body>
-
 </html>
