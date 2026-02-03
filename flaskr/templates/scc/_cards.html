@@ -12,12 +12,12 @@
     'Content & Resources': {
         'icon': 'description',
         'desc': 'Page content issues',
-        'conditions': ['Validation Error', 'Content Error', 'Missing CSS', 'Missing JS', 'Broken Links']
+        'conditions': ['Validation Error', 'Content Error', 'Missing CSS', 'Missing JS', 'Broken Links', 'Uncaught Exception']
     },
     'Performance': {
         'icon': 'speed',
         'desc': 'Speed and timing',
-        'conditions': ['Large Image', 'Hero Image', 'Content Delay', 'Slow TTFB', 'Timeout']
+        'conditions': ['Large Image', 'Hero Image', 'Content Delay', 'Slow TTFB', 'Timeout', 'Layout Shift']
     },
     'Server Behavior': {
         'icon': 'dns',
@@ -122,6 +122,16 @@
         'desc': 'Page with links to non-existent pages',
         'details': 'All navigation and product links point to 404 pages. Tests link checking capabilities and detection of broken user journeys.'
     },
+    'Uncaught Exception': {
+        'icon': 'error',
+        'desc': 'JavaScript throws uncaught errors on load',
+        'details': 'Page triggers multiple JavaScript errors including thrown exceptions, reference errors, and type errors. Tests RUM error tracking and JavaScript error monitoring.'
+    },
+    'Layout Shift': {
+        'icon': 'flip_to_front',
+        'desc': 'Content injected causing poor CLS score',
+        'details': 'Elements are dynamically injected after page load, pushing content around. Simulates poor Cumulative Layout Shift (CLS) scores for Core Web Vitals testing.'
+    },
     'Cookies': {
         'icon': 'cookie',
         'desc': 'Sets test cookie on response',
@@ -167,6 +177,8 @@
     'redirectloop': 'Redirect Loop',
     'maintenance': 'Maintenance',
     'brokenlinks': 'Broken Links',
+    'uncaughtexception': 'Uncaught Exception',
+    'layoutshift': 'Layout Shift',
     'cookies': 'Cookies',
     'security-jsinjected': 'Security - JS Injected',
     'security-eskimmer': 'Security - eskimmer',

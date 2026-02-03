@@ -1,0 +1,127 @@
+{% extends 'site.html' %}
+{% block content %}
+<header>
+  <div class="navbar">
+    <div class="container d-flex justify-content-between">
+      <div class="h-free-shipping">Splunk SynCreator - Current Condition: {{ settings[0]|upper }}</div>
+      <div class="h-controls">
+        <div class="h-control">
+          <img src="{{ url_for('static', filename='icons/Hipster_CurrencyIcon.svg') }}" alt="icon" class="icon" />
+          <form method="POST" class="controls-form" action="/setCurrency" id="currency_form">
+            <select name="currency_code" onchange="document.getElementById('currency_form').submit();">
+              <option value="EUR">EUR</option>
+              <option value="USD" selected="selected">USD</option>
+              <option value="JPY">JPY</option>
+              <option value="GBP">GBP</option>
+              <option value="TRY">TRY</option>
+              <option value="CAD">CAD</option>
+            </select>
+          </form>
+          <img src="{{ url_for('static', filename='icons/Hipster_DownArrow.svg') }}" alt="icon" class="icon arrow" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar sub-navbar">
+    <div class="container d-flex justify-content-between">
+      <a href="{{ settings[4] }}" class="navbar-brand d-flex align-items-center">
+        <img src="{{ url_for('static', filename='icons/Hipster_NavLogo.svg') }}" alt="logo" class="logo" />
+      </a>
+      <div class="controls">
+        <a href="{{ url_for('scc.cart', username=settings[4]) }}">
+          <img src="{{ url_for('static', filename='icons/Hipster_CartIcon.svg') }}" alt="cart-icon" class="logo" />
+          <span>Cart</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main role="main" class="home">
+  <section class="jumbotron text-center mb-0 h-jumbotron">
+    <div class="container">
+      <img src="{{ url_for('static', filename='icons/Hipster_HeroLogo.svg') }}" alt="icon" class="icon search-icon" />
+    </div>
+  </section>
+
+  <div class="h-grid py-5 bg-light">
+    <div class="container">
+      <div class="row h-row">
+        <img src="{{ url_for('static', filename='icons/Hipster_HotProducts.svg') }}" alt="icon" class="icon search-icon" />
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="h-card card mb-4 box-shadow">
+            <a href="{{ settings[4]}}/product/OLJCESPC7Z">
+              <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/typewriter.jpg') }}">
+              <div class="card-hover"></div>
+            </a>
+            <div class="card-body h-card-body">
+              <h5 class="card-title h-card-title">Vintage Typewriter</h5>
+              <div class="d-flex justify-content-center align-items-center">
+                <small class="text-muted">USD 67.98</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="h-card card mb-4 box-shadow">
+            <a href="{{ settings[4] }}/product/66VCHSJNUP">
+              <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/camera-lens.jpg') }}">
+              <div class="card-hover"></div>
+            </a>
+            <div class="card-body h-card-body">
+              <h5 class="card-title h-card-title">Vintage Camera Lens</h5>
+              <div class="d-flex justify-content-center align-items-center">
+                <small class="text-muted">USD 12.48</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="h-card card mb-4 box-shadow">
+            <a href="{{ settings[4]}}/product/1YMWWN1N4O">
+              <img alt="" style="width: 100%; height: auto;" src="{{ url_for('static', filename='img/products/barista-kit.jpg') }}">
+              <div class="card-hover"></div>
+            </a>
+            <div class="card-body h-card-body">
+              <h5 class="card-title h-card-title">Home Barista Kit</h5>
+              <div class="d-flex justify-content-center align-items-center">
+                <small class="text-muted">USD 123.99</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-5">
+    <div class="footer-top">
+      <div class="container footer-social">
+        <p class="footer-text">&copy; <script>document.write(new Date().getFullYear())</script> Splunk - a <b>CISCO</b> company</p>
+        <p class="footer-text">This is a demo site. Uncaught JavaScript exception simulates client-side errors.</p>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<!-- Intentional uncaught JavaScript errors -->
+<script>
+// Error 1: Thrown immediately on page load
+throw new Error('SynCreator Test: Uncaught exception on page load');
+</script>
+<script>
+// Error 2: Reference error - accessing undefined variable
+console.log(undefinedVariable.property);
+</script>
+<script>
+// Error 3: Type error - calling method on null
+setTimeout(function() {
+    var element = document.getElementById('non-existent-element');
+    element.click();
+}, 500);
+</script>
+{% endblock %}

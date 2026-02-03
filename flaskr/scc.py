@@ -21,7 +21,7 @@ VALID_CONDITIONS = {
     "default", "404error", "500error", "502error", "503error", "429ratelimit",
     "validationerror", "contenterror", "largeimage", "heroimage",
     "contentdelay", "slowttfb", "timeout", "cookies", "missingcss", "missingjs",
-    "redirectloop", "maintenance", "brokenlinks",
+    "redirectloop", "maintenance", "brokenlinks", "uncaughtexception", "layoutshift",
     "security-jsinjected", "security-eskimmer", "security-deface", "security-crypto"
 }
 

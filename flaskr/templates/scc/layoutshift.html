@@ -1,0 +1,192 @@
+{% extends 'site.html' %}
+{% block content %}
+<style>
+  /* Banner that will be injected causing layout shift */
+  .injected-banner {
+    background: linear-gradient(135deg, #e20082 0%, #ff6b35 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  /* Ad container that loads late */
+  .late-ad {
+    background: #f0f0f0;
+    border: 2px dashed #ccc;
+    padding: 40px;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  /* Image without dimensions - classic CLS cause */
+  .no-dimensions img {
+    max-width: 100%;
+  }
+</style>
+
+<header>
+  <div class="navbar">
+    <div class="container d-flex justify-content-between">
+      <div class="h-free-shipping">Splunk SynCreator - Current Condition: {{ settings[0]|upper }}</div>
+      <div class="h-controls">
+        <div class="h-control">
+          <img src="{{ url_for('static', filename='icons/Hipster_CurrencyIcon.svg') }}" alt="icon" class="icon" />
+          <form method="POST" class="controls-form" action="/setCurrency" id="currency_form">
+            <select name="currency_code" onchange="document.getElementById('currency_form').submit();">
+              <option value="EUR">EUR</option>
+              <option value="USD" selected="selected">USD</option>
+              <option value="JPY">JPY</option>
+              <option value="GBP">GBP</option>
+              <option value="TRY">TRY</option>
+              <option value="CAD">CAD</option>
+            </select>
+          </form>
+          <img src="{{ url_for('static', filename='icons/Hipster_DownArrow.svg') }}" alt="icon" class="icon arrow" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar sub-navbar">
+    <div class="container d-flex justify-content-between">
+      <a href="{{ settings[4] }}" class="navbar-brand d-flex align-items-center">
+        <img src="{{ url_for('static', filename='icons/Hipster_NavLogo.svg') }}" alt="logo" class="logo" />
+      </a>
+      <div class="controls">
+        <a href="{{ url_for('scc.cart', username=settings[4]) }}">
+          <img src="{{ url_for('static', filename='icons/Hipster_CartIcon.svg') }}" alt="cart-icon" class="logo" />
+          <span>Cart</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Placeholder for late-loading banner that causes layout shift -->
+<div id="late-banner"></div>
+
+<main role="main" class="home">
+  <section class="jumbotron text-center mb-0 h-jumbotron">
+    <div class="container">
+      <img src="{{ url_for('static', filename='icons/Hipster_HeroLogo.svg') }}" alt="icon" class="icon search-icon" />
+    </div>
+  </section>
+
+  <div class="h-grid py-5 bg-light">
+    <div class="container">
+      <!-- Late-loading ad placeholder -->
+      <div id="late-ad-container"></div>
+
+      <div class="row h-row">
+        <img src="{{ url_for('static', filename='icons/Hipster_HotProducts.svg') }}" alt="icon" class="icon search-icon" />
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="h-card card mb-4 box-shadow">
+            <a href="{{ settings[4]}}/product/OLJCESPC7Z">
+              <!-- Image without explicit dimensions - causes CLS when loaded -->
+              <div class="no-dimensions">
+                <img alt="Vintage Typewriter" src="{{ url_for('static', filename='img/products/typewriter.jpg') }}">
+              </div>
+              <div class="card-hover"></div>
+            </a>
+            <div class="card-body h-card-body">
+              <h5 class="card-title h-card-title">Vintage Typewriter</h5>
+              <div class="d-flex justify-content-center align-items-center">
+                <small class="text-muted">USD 67.98</small>
+              </div>
+              <!-- Late-injected content that shifts the price -->
+              <div id="product-badge-1"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="h-card card mb-4 box-shadow">
+            <a href="{{ settings[4] }}/product/66VCHSJNUP">
+              <div class="no-dimensions">
+                <img alt="Vintage Camera Lens" src="{{ url_for('static', filename='img/products/camera-lens.jpg') }}">
+              </div>
+              <div class="card-hover"></div>
+            </a>
+            <div class="card-body h-card-body">
+              <h5 class="card-title h-card-title">Vintage Camera Lens</h5>
+              <div class="d-flex justify-content-center align-items-center">
+                <small class="text-muted">USD 12.48</small>
+              </div>
+              <div id="product-badge-2"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="h-card card mb-4 box-shadow">
+            <a href="{{ settings[4]}}/product/1YMWWN1N4O">
+              <div class="no-dimensions">
+                <img alt="Home Barista Kit" src="{{ url_for('static', filename='img/products/barista-kit.jpg') }}">
+              </div>
+              <div class="card-hover"></div>
+            </a>
+            <div class="card-body h-card-body">
+              <h5 class="card-title h-card-title">Home Barista Kit</h5>
+              <div class="d-flex justify-content-center align-items-center">
+                <small class="text-muted">USD 123.99</small>
+              </div>
+              <div id="product-badge-3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Another late-loading element -->
+      <div id="newsletter-popup"></div>
+    </div>
+  </div>
+
+  <footer class="py-5">
+    <div class="footer-top">
+      <div class="container footer-social">
+        <p class="footer-text">&copy; <script>document.write(new Date().getFullYear())</script> Splunk - a <b>CISCO</b> company</p>
+        <p class="footer-text">This is a demo site. Layout shifts simulate poor CLS (Cumulative Layout Shift) scores.</p>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<script>
+// Simulate multiple layout shifts at different times
+
+// Shift 1: Inject banner at top after 500ms
+setTimeout(function() {
+    document.getElementById('late-banner').innerHTML =
+        '<div class="injected-banner">LIMITED TIME OFFER: Free shipping on orders over $50!</div>';
+}, 500);
+
+// Shift 2: Inject ad container after 1 second
+setTimeout(function() {
+    document.getElementById('late-ad-container').innerHTML =
+        '<div class="late-ad"><strong>ADVERTISEMENT</strong><br>Shop our partner stores for great deals!</div>';
+}, 1000);
+
+// Shift 3: Inject product badges after 1.5 seconds
+setTimeout(function() {
+    document.getElementById('product-badge-1').innerHTML =
+        '<span class="badge badge-danger" style="display:block;margin-top:10px;padding:8px;">SALE - 20% OFF</span>';
+    document.getElementById('product-badge-2').innerHTML =
+        '<span class="badge badge-success" style="display:block;margin-top:10px;padding:8px;">BESTSELLER</span>';
+    document.getElementById('product-badge-3').innerHTML =
+        '<span class="badge badge-warning" style="display:block;margin-top:10px;padding:8px;">LOW STOCK</span>';
+}, 1500);
+
+// Shift 4: Inject newsletter popup after 2.5 seconds
+setTimeout(function() {
+    document.getElementById('newsletter-popup').innerHTML =
+        '<div style="background:#333;color:white;padding:30px;margin:20px 0;text-align:center;border-radius:8px;">' +
+        '<h4 style="margin:0 0 10px 0;">Subscribe to our newsletter!</h4>' +
+        '<p style="margin:0;">Get 10% off your first order</p>' +
+        '</div>';
+}, 2500);
+</script>
+{% endblock %}
