@@ -117,6 +117,16 @@ def send_condition_event(user, condition):
 
 
 # =============================================================================
+# Health Check (No Authentication)
+# =============================================================================
+
+@bp.route("/health")
+def health():
+    """Health check endpoint for container orchestration."""
+    return jsonify({"status": "healthy"}), 200
+
+
+# =============================================================================
 # Dashboard Routes (Authenticated)
 # =============================================================================
 
