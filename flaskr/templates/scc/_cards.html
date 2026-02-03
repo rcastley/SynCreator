@@ -1,3 +1,36 @@
+{% set categories = {
+    'Baseline': {
+        'icon': 'check-circle',
+        'desc': 'Normal operation',
+        'conditions': ['Default']
+    },
+    'HTTP Errors': {
+        'icon': 'exclamation-triangle',
+        'desc': 'Server response codes',
+        'conditions': ['404 Error', '500 Error', '502 Error', '503 Error', '429 Rate Limit']
+    },
+    'Content & Resources': {
+        'icon': 'file-alt',
+        'desc': 'Page content issues',
+        'conditions': ['Validation Error', 'Content Error', 'Missing CSS', 'Missing JS', 'Broken Links']
+    },
+    'Performance': {
+        'icon': 'tachometer-alt',
+        'desc': 'Speed and timing',
+        'conditions': ['Large Image', 'Hero Image', 'Content Delay', 'Slow TTFB', 'Timeout']
+    },
+    'Server Behavior': {
+        'icon': 'server',
+        'desc': 'Server-side scenarios',
+        'conditions': ['Redirect Loop', 'Maintenance', 'Cookies']
+    },
+    'Security': {
+        'icon': 'shield-alt',
+        'desc': 'Attack simulations',
+        'conditions': ['Security - JS Injected', 'Security - eskimmer', 'Security - Deface', 'Security - Crypto']
+    }
+} %}
+
 {% set conditions = {
     'Default': {
         'icon': 'smile',
@@ -141,41 +174,57 @@
     'security-crypto': 'Security - Crypto'
 } %}
 
-<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-    {% for key, meta in conditions.items() %}
-    {% set newkey = key|lower|replace(' ', '') %}
-    {% set is_active = condition[0] == newkey %}
-    <div x-data="{ expanded: false }" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 {% if is_active %}ring-2 ring-splunk{% endif %}">
-        <button hx-get="set/{{ newkey }}"
-                hx-target="#condition-cards"
-                hx-swap="innerHTML transition:true"
-                class="w-full text-left p-4">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-colors shrink-0
-                            {% if is_active %}bg-splunk text-white{% else %}bg-splunk-gray-100 text-splunk-gray-400 group-hover:bg-splunk group-hover:text-white{% endif %}">
-                    <i class="fas fa-{{ meta.icon }} text-lg"></i>
-                </div>
-                <div class="flex-1 min-w-0">
-                    <div class="flex items-center gap-2">
-                        <h3 class="font-semibold text-splunk-gray-800 text-sm">{{ key }}</h3>
-                        {% if is_active %}
-                        <span class="text-xs font-medium text-splunk bg-splunk/10 px-1.5 py-0.5 rounded">Active</span>
-                        {% endif %}
+<div class="space-y-6">
+    {% for cat_name, cat_meta in categories.items() %}
+    <div>
+        <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded-lg bg-splunk-gray-100 flex items-center justify-center">
+                <i class="fas fa-{{ cat_meta.icon }} text-splunk-gray-500"></i>
+            </div>
+            <div>
+                <h2 class="font-semibold text-splunk-gray-800">{{ cat_name }}</h2>
+                <p class="text-xs text-splunk-gray-500">{{ cat_meta.desc }}</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+            {% for key in cat_meta.conditions %}
+            {% set meta = conditions[key] %}
+            {% set newkey = key|lower|replace(' ', '') %}
+            {% set is_active = condition[0] == newkey %}
+            <div x-data="{ expanded: false }" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 {% if is_active %}ring-2 ring-splunk{% endif %}">
+                <button hx-get="set/{{ newkey }}"
+                        hx-target="#condition-cards"
+                        hx-swap="innerHTML transition:true"
+                        class="w-full text-left p-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-colors shrink-0
+                                    {% if is_active %}bg-splunk text-white{% else %}bg-splunk-gray-100 text-splunk-gray-400 group-hover:bg-splunk group-hover:text-white{% endif %}">
+                            <i class="fas fa-{{ meta.icon }} text-lg"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2">
+                                <h3 class="font-semibold text-splunk-gray-800 text-sm">{{ key }}</h3>
+                                {% if is_active %}
+                                <span class="text-xs font-medium text-splunk bg-splunk/10 px-1.5 py-0.5 rounded">Active</span>
+                                {% endif %}
+                            </div>
+                            <p class="text-xs text-splunk-gray-500">{{ meta.desc }}</p>
+                        </div>
                     </div>
-                    <p class="text-xs text-splunk-gray-500">{{ meta.desc }}</p>
+                </button>
+                <div class="px-4 pb-3">
+                    <button @click.stop="expanded = !expanded"
+                            class="text-xs text-splunk-gray-400 hover:text-splunk flex items-center gap-1 transition-colors">
+                        <i class="fas fa-info-circle"></i>
+                        <span x-text="expanded ? 'Hide details' : 'Show details'"></span>
+                        <i class="fas fa-chevron-down text-[10px] transition-transform duration-200" :class="expanded && 'rotate-180'"></i>
+                    </button>
+                    <div x-show="expanded" x-collapse>
+                        <p class="text-xs text-splunk-gray-600 mt-2 leading-relaxed">{{ meta.details }}</p>
+                    </div>
                 </div>
             </div>
-        </button>
-        <div class="px-4 pb-3">
-            <button @click.stop="expanded = !expanded"
-                    class="text-xs text-splunk-gray-400 hover:text-splunk flex items-center gap-1 transition-colors">
-                <i class="fas fa-info-circle"></i>
-                <span x-text="expanded ? 'Hide details' : 'Show details'"></span>
-                <i class="fas fa-chevron-down text-[10px] transition-transform duration-200" :class="expanded && 'rotate-180'"></i>
-            </button>
-            <div x-show="expanded" x-collapse>
-                <p class="text-xs text-splunk-gray-600 mt-2 leading-relaxed">{{ meta.details }}</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
     {% endfor %}
