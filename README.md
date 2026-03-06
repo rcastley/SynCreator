@@ -21,7 +21,7 @@ The database is created automatically on first run.
 
 ```bash
 # Using waitress (recommended)
-waitress-serve --port=8080 --call flaskr:create_app
+waitress-serve --port=8080 --call app:create_app
 
 # Or with Docker
 docker compose up -d

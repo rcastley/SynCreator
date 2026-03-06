@@ -11,8 +11,8 @@ import time
 import requests
 from flask import Blueprint, flash, g, jsonify, make_response, redirect, render_template, request, url_for
 
-from flaskr.auth import login_required
-from flaskr.db import get_db
+from app.auth import login_required
+from app.db import get_db
 
 bp = Blueprint("scc", __name__)
 
